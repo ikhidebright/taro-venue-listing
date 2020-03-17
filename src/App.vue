@@ -1,32 +1,49 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+    <v-app>
+      <Header />
+        <v-content transition="slide-x-transition">
+            <router-view></router-view>
+        </v-content>
+        <Footer />
+    </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Header from "@/components/SiteComponents/Header.vue"
+import Footer from "@/components/SiteComponents/Footer.vue"
+
+export default {
+    name: 'App',
+    components: {
+      Header,
+      Footer
+    }
+};
+</script>
+
+<style>
+.subheading {
+  /* border-left: 0.3vmin solid red; */
+  padding-left: 1vmin;
+  font-weight: bold;
+font-family: 'Merriweather Sans';
 }
 
-#nav {
-  padding: 30px;
+.innercom {
+  background-color: rgb(243, 242, 250);
+  padding: 4vmin;
+  /* border-top-left-radius: 5vmin;
+  border-top-right-radius: 5vmin; */
+  margin: 5vmin;
+  border-bottom: 2px solid #fff6f6;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+p {
+font-family: 'Open Sans';
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.logo {
+  font-family: 'Righteous';
+  font-size: 4.5vmin
 }
 </style>

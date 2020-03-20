@@ -9,7 +9,7 @@
       <template v-slot:activator="{ on }">
 <br>
 <br>
-    <v-btn color="#001F90" dark class="ml-5" v-on="on">Write a Review</v-btn>
+    <v-btn color="#001F90" outlined class="ml-5" v-on="on">Write a Review</v-btn>
       </template>
       <v-card>
         <v-card-title>

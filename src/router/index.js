@@ -6,7 +6,6 @@ import Register from "../views/Register.vue";
 import Venue from "../views/Venue.vue";
 import ManageVenue from "../views/ManageVenue.vue";
 import Bookings from "../views/Bookings.vue";
-import HowItWorks from "../views/HowItWorks.vue";
 import Privacy from "../views/Privacy.vue";
 import Terms from "../views/Terms.vue";
 import Event from "../views/Event.vue";
@@ -29,11 +28,6 @@ const routes = [
     path: "/terms",
     name: "Terms",
     component: Terms
-  },
-  {
-    path: "/howitworks",
-    name: "HowItWorks",
-    component: HowItWorks
   },
   {
     path: "/bookings",

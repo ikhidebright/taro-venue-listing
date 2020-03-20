@@ -1,5 +1,6 @@
 <template>
-    <div class="venuePage">
+    <div class="venuePage mt-9">
+    <br>
     <v-container>
   <v-card
     max-width="804"
@@ -15,7 +16,7 @@
     </h1>
 
     <p class="ml-2 mt-1">
-       Ikeja, Lagos
+       <router-link :to="`/cities/ikeja`" class="li">Ikeja</router-link>, <router-link :to="`/cities/lagos`" class="li">Lagos</router-link>
     </p>
 
     <v-rating
@@ -148,18 +149,12 @@
   </v-card>
   </v-container>
   <Amenities />
+  <GetPrice />
   <VenueFAQs />
   <CustomersReview />
   <NearbyVenues />
         <!-- <h2>{{ $route.params.id }}</h2>
         <h2>{{ $route.params.name }}</h2> -->
-  <v-btn color="#001F90"
-  class="d-lg-none price"
-  fixed = true
-  flat
-  tile
-  bottom>
-  Get Price Estimates</v-btn>
     </div>
 </template>
 
@@ -168,6 +163,7 @@ import NearbyVenues from '@/components/VenuePageComponents/NearbyVenues.vue'
 import CustomersReview from '@/components/VenuePageComponents/CustomersReview.vue'
 import Amenities from '@/components/VenuePageComponents/Amenities.vue'
 import VenueFAQs from '@/components/VenuePageComponents/VenueFAQs.vue'
+import GetPrice from '@/components/VenuePageComponents/GetPrice.vue'
 
 export default {
  data: () => ({
@@ -187,7 +183,8 @@ export default {
         NearbyVenues,
         CustomersReview,
         Amenities,
-        VenueFAQs
+        VenueFAQs,
+        GetPrice
     },
 
     computed: {

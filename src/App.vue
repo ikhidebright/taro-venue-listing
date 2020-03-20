@@ -30,12 +30,11 @@ font-family: 'Merriweather Sans';
 }
 
 .innercom {
-  background-color: rgb(243, 242, 250);
-  padding: 4vmin;
   /* border-top-left-radius: 5vmin;
   border-top-right-radius: 5vmin; */
-  margin: 5vmin;
-  border-bottom: 2px solid #fff6f6;
+  padding: 5vmin 0 0 0;
+  margin: 5vmin 0 5vmin 0;
+  border-top: 1px solid #f2f2f2;
 }
 
 p {

@@ -10,7 +10,7 @@
 
     <v-card flat
             color="black"
-            class="foot">
+            class="foot hidden-sm-and-down">
          <ul>
              <li>
          <h2>Get More Bookings For Yor Venue</h2></li>
@@ -85,7 +85,7 @@ people. It’s free and convinient</p>
              <li>
          <h4>Events</h4></li>
              <li v-for="topevent in topEvents" :key="topevent">
-                 <router-link :to="`/cities/${topevent.toLowerCase()}`" class="li">{{ topevent }}</router-link>
+                 <router-link :to="`/event/${topevent.toLowerCase()}`" class="li">{{ topevent }}</router-link>
              </li>
          </ul>
             </v-card>
@@ -183,7 +183,7 @@ export default {
 <style scoped>
 .footer {
 width: 100%;
-height: 65vh;
+height: auto;
 box-sizing: border-box;
 padding: 5vmin 0 5vmin 5vmin;
 background-color: black;

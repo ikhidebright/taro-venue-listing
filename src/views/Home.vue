@@ -3,7 +3,7 @@
     <Hero />
     <br>
     <br>
-    <div class="d-flex flex-direction.flex-xl-row mb-6">
+    <div class="d-sm-flex flex-sm-column d-lg-flex flex-lg-row mb-6">
     <div v-for="item in items" :key="item.id">
     <VenueCard :item="item"/>
     </div>

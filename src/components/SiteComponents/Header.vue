@@ -9,10 +9,6 @@
       <v-toolbar-title class='logo'>taro</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      
-      <v-btn text class="hidden-sm-and-down" to='/howitworks'>
-      How it works
-      </v-btn>
 
       <v-btn text class="hidden-sm-and-down" to='/addvenue'>
       List your venue

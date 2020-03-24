@@ -1,25 +1,29 @@
 <template>
   <v-card
     :loading="loading"
-    class="mx-auto my-12 hidden-sm-and-down"
+    class="my-12 hidden-sm-and-down"
     max-width="374"
     color="#f0f1f1"
+    tile
+    dense
   >
-  <v-card-title>Filter</v-card-title>
+  <v-card-title><h3>Filter</h3></v-card-title>
 
 <v-col cols="12">
 
-<p>Tell us your budget</p>
+<h5>Tell us your budget</h5>
 
       <v-text-field
             type="number"
-            label="Budget"
+            prefix= '₦'
+            class='mt-4'
+            label=""
             single-line
             outlined
           ></v-text-field>
 
 
-<p>How many guests are you expecting</p>
+<h5>How many guests are you expecting</h5>
           <v-radio-group v-model="radioGroup">
       <v-radio
         v-for="n in 5"
@@ -29,7 +33,7 @@
       ></v-radio>
     </v-radio-group>
 
-<p>Venue Types</p>
+<h5>Venue Types</h5>
     <v-checkbox
               v-model="ex4"
               v-for="n in 5"
@@ -41,7 +45,7 @@
             ></v-checkbox>
             <br>
 
-            <p>Event Type</p>
+            <h5>Event Type</h5>
           <v-radio-group v-model="radioGroup">
       <v-radio
         v-for="n in 5"
@@ -55,8 +59,8 @@
     <v-card-actions>
       <v-btn
         color="red lighten-2"
-        text
         outlined
+        tile
         @click="reserve"
       >
         Reset
@@ -64,7 +68,7 @@
 
       <v-btn
         color="#001F90"
-        dark
+        outlined
         tile
         @click="reserve"
       >

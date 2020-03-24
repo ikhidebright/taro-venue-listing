@@ -1,12 +1,23 @@
 <template>
+<div class='head'>
     <v-app-bar
-      color="white"
+      color="gray"
       fixed
-      elevate-on-scroll
+      flat
       height = '60'
     >
 
-      <v-toolbar-title class='logo'>taro</v-toolbar-title>
+      <v-toolbar-title class='logo mr-12'>taro</v-toolbar-title>
+
+      <v-text-field
+        hide-details
+        append-icon="search"
+        label='Search venue, location'
+        class='ml-12'
+        dense
+        single-line
+        outlined
+      ></v-text-field>
 
       <v-spacer></v-spacer>
 
@@ -68,6 +79,7 @@
         </v-list>
       </v-menu> -->
     </v-app-bar>
+    </div>
 </template>
 
 <script>
@@ -77,3 +89,9 @@
     }),
   }
 </script>
+
+<style scoped>
+.head {
+border-bottom: 5px solid green;
+}
+</style>

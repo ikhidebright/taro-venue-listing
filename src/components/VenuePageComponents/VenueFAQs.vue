@@ -1,6 +1,6 @@
 <template>
 <v-container>
-    <h3 class="subheading">FAQs For Landmark Event Center</h3>
+    <h3 class="subheading">FAQs For {{ items[0].name }}</h3>
     <br>
     <v-card 
     max-width="804">
@@ -24,7 +24,8 @@
 
 <script>
 export default {
-    name: 'VenueFAQs'
+    name: 'VenueFAQs',
+    props: ["items"]
 }
 </script>
 

@@ -23,7 +23,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Book Top western road trips</span>
+          <span class="headline">Book {{ items[0].name }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -83,12 +83,26 @@
             </v-row>
           <small>*indicates required field</small>
           </v-container>
-        </v-card-text>
+        </v-card-text> 
+        <v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">See Price</v-btn>
+          <v-btn 
+        color="red lighten-2"
+        outlined
+        tile
+        @click="dialog = false">
+        Close
+        </v-btn>
+          <v-btn 
+        color="#001F90"
+        outlined
+        tile 
+        @click="dialog = false">
+        See Price
+        </v-btn>
         </v-card-actions>
+         </v-container>
       </v-card>
     </v-dialog>
   </v-row>
@@ -97,6 +111,7 @@
 
 <script>
   export default {
+    props: ['items'],
     data: vm => ({
       date: new Date().toISOString().substr(0, 10),
       dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),

@@ -12,17 +12,17 @@
     ></v-img>
 
     <h1 class="mt-1">
-     Top western road trips
+     {{ items[0].name }}
     </h1>
 
     <p class="ml-2 mt-1">
-       <router-link :to="`/cities/ikeja`" class="li">Ikeja</router-link>, <router-link :to="`/cities/lagos`" class="li">Lagos</router-link>
+       <router-link :to="`/cities/${items[0].city}`" class="li"> {{ items[0].city }}</router-link>, <router-link :to="`/cities/${items[0].state}`" class="li"> {{ items[0].state }}</router-link>
     </p>
 
     <v-rating
       background-color="orange lighten-3"
       readonly = true
-      :value="4.5"
+      :value="`${items[0].rating}`"
       color="amber"
       dense
       half-increments
@@ -45,9 +45,10 @@
     <v-btn
     class="ma" outlined color="#001F90"
     text
+    :to="`/event/${items[0].type.toLowerCase()}`"
     small> 
     <v-icon class="mr-2" dense>home</v-icon>
-    Meeting Room
+    {{ items[0].type }}
 </v-btn>
 
       <v-btn
@@ -55,7 +56,7 @@
     text
     small> 
     <v-icon class="mr-2" dense>mdi-account-multiple</v-icon>
-    400 Capacity
+    {{ items[0].capacity }} Capacity
 </v-btn>
 
     <v-card-actions>
@@ -148,11 +149,11 @@
     </v-expand-transition>
   </v-card>
   </v-container>
-  <Amenities />
-  <GetPrice />
-  <VenueFAQs />
-  <CustomersReview />
-  <NearbyVenues />
+  <Amenities :items="items"/>
+  <GetPrice :items="items"/>
+  <VenueFAQs :items="items"/>
+  <CustomersReview :items="items"/>
+  <NearbyVenues :items="items"/>
         <!-- <h2>{{ $route.params.id }}</h2>
         <h2>{{ $route.params.name }}</h2> -->
     </div>
@@ -164,6 +165,7 @@ import CustomersReview from '@/components/VenuePageComponents/CustomersReview.vu
 import Amenities from '@/components/VenuePageComponents/Amenities.vue'
 import VenueFAQs from '@/components/VenuePageComponents/VenueFAQs.vue'
 import GetPrice from '@/components/VenuePageComponents/GetPrice.vue'
+import axios from 'axios'
 
 export default {
  data: () => ({
@@ -177,6 +179,7 @@ export default {
       bottom: true,
       left: false,
       transition: 'slide-y-reverse-transition',
+      items: []
     }),
 
     components: {
@@ -197,6 +200,13 @@ export default {
         }
       },
     },
+
+    created () {
+      axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
+      .then((res) => {
+        this.items = res.data.result
+      })
+    }
 
     // watch: {
     //   top (val) {

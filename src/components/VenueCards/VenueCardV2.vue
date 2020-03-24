@@ -2,7 +2,7 @@
   <v-card
     class=""
     max-width="250"
-    to="/venue/23-Landmark-Event-Center"
+    :to="`/venue/${ite.venue_id}-${ite.name}`"
   >
     <v-img
       src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -10,11 +10,11 @@
     ></v-img>
 
     <v-card-title>
-      Landmark Event Center
+    {{ ite.name }}
     </v-card-title>
 
     <v-card-subtitle>
-      Ikeja, Lagos
+      {{ ite.city}}, {{ ite.state }}
     </v-card-subtitle>
 
   </v-card>
@@ -22,7 +22,8 @@
 
 <script>
 export default {
-    name: 'VenueCard'
+    name: 'VenueCard',
+    props: ['ite']
 }
 </script>
 

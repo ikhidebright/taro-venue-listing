@@ -28,6 +28,7 @@
 import VenueCard from "@/components/VenueCards/VenueCard.vue";
 import Sort from "@/components/SiteComponents/Sort.vue";
 import Sort2 from "@/components/SiteComponents/Sort2.vue";
+import axios from 'axios'
 
 export default {
   name: "Home",
@@ -38,31 +39,16 @@ export default {
   },
   data () {
     return {
-    items: [
-      {
-        id: 1,
-        name: "Spring Fields Center",
-        capacity: 300,
-        city: "Lugbe",
-        state: "Abuja"
-      },
-      {
-        id: 2,
-        name: "Glory Dome House",
-        capacity: 1200,
-        city: "Gwagwalada",
-        state: "Abuja"
-      },
-      {
-        id: 3,
-        name: "The Civic Center",
-        capacity: 4000,
-        city: "Ikoyi",
-        state: "Lagos"
-      }
-    ]
+    items: []
   }
- }
+ },
+
+  created () {
+      axios.get(`http://localhost:8000/places/${this.$route.params.name}`)
+      .then((res) => {
+        this.items = res.data.result
+      })
+    }
 };
 </script>
 

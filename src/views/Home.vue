@@ -3,9 +3,11 @@
     <Hero />
     <br>
     <br>
-    <div class="d-sm-flex flex-sm-column d-lg-flex flex-lg-row mb-6">
+    <div class="col-lg-9 mx-auto col-sm-3">
+    <div class="d-sm-flex flex-sm-column d-lg-flex flex-lg-row mb-auto flex-wrap justify-space-around">
     <div v-for="item in items" :key="item.id">
     <VenueCard :item="item"/>
+    </div>
     </div>
     </div>
     <br>
@@ -16,6 +18,7 @@
 // @ is an alias to /src
 import Hero from "@/components/Hero.vue";
 import VenueCard from "@/components/VenueCards/VenueCard.vue";
+import axios from 'axios'
 
 export default {
   name: "Home",
@@ -25,30 +28,14 @@ export default {
   },
   data () {
     return {
-    items: [
-      {
-        id: 1,
-        name: "Spring Fields Center",
-        capacity: 300,
-        city: "Lugbe",
-        state: "Abuja"
-      },
-      {
-        id: 2,
-        name: "Glory Dome House",
-        capacity: 1200,
-        city: "Gwagwalada",
-        state: "Abuja"
-      },
-      {
-        id: 3,
-        name: "The Civic Center",
-        capacity: 4000,
-        city: "Ikoyi",
-        state: "Lagos"
-      }
-    ]
+    items: []
   }
+ },
+ created () {
+   axios.get('http://localhost:8000/venues')
+   .then((res) => {
+     this.items = res.data.result
+   })
  }
 };
 </script>

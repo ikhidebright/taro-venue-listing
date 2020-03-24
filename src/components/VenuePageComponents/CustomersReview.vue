@@ -1,8 +1,8 @@
 <template>
     <div class="innercom">
         <v-container>
-        <h3 class="subheading">Reviews for Landmark Event Center</h3>     
-    <p class="ml-2 mt-5">There are no reviews for Mayakorp Boardroom yet.
+        <h3 class="subheading">Reviews for {{ items[0].name }}</h3>     
+    <p class="ml-2 mt-5">There are no reviews for {{ items[0].name }} yet.
       Be the first to write a review.</p>
   <v-row justify="left">
     <v-dialog v-model="dialog" persistent max-width="500px">
@@ -13,7 +13,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <!-- <span class="headline">Add a Review</span> -->
+          <span class="headline">Review {{ items[0].name }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -42,8 +42,20 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="red" text @click="dialog = false">Close</v-btn>
-          <v-btn color="#001F90" text @click="dialog = false">Rate</v-btn>
+          <v-btn 
+        color="red lighten-2"
+        outlined
+        tile
+        @click="dialog = false">
+        Close
+        </v-btn>
+          <v-btn 
+        color="#001F90"
+        outlined
+        tile 
+        @click="dialog = false">
+        Rate
+        </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -58,6 +70,7 @@ Be the first to write a review.</p>
 <script>
 export default {
     name: 'CustomersReview',
+    props: ['items'],
     data () {
       return {
           dialog: false,

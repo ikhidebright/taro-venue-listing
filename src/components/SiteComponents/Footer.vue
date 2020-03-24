@@ -97,7 +97,7 @@ people. It’s free and convinient</p>
              <li>
          <h4>Top Cities</h4></li>
              <li v-for="topcity in topCities" :key="topcity">
-                 <router-link :to="`/cities/${topcity.toLowerCase()}`" class="li">{{ topcity }}</router-link>
+                 <router-link :to="`/cities/${topcity}`" class="li">{{ topcity }}</router-link>
              </li>
          </ul>
             </v-card>

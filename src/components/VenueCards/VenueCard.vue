@@ -1,8 +1,8 @@
 <template>
   <v-card
-    class="mx-auto ml-4"
+    class="mx-auto ml-4 mb-9"
     max-width="280"
-    :to="`/venue/${item.id}-${item.name.replace(/[' ']+/g,'-').toLowerCase()}`"
+    :to="`/venue/${item.venue_id}-${item.name.replace(/[' ']+/g,'-').toLowerCase()}`"
   >
     <v-img
       src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -26,7 +26,7 @@
         class="mx-0"
       >
         <v-rating
-          :value="4.5"
+          :value="`${item.rating}`"
           color="amber"
           dense
           half-increments
@@ -50,7 +50,7 @@
         text
         color="#001F90"
         class="moredetailsbutton"
-        :to="`/venue/${item.id}-${item.name.replace(/[' ']+/g,'-').toLowerCase()}`"
+        :to="`/venue/${item.venue_id}-${item.name.replace(/[' ']+/g,'-').toLowerCase()}`"
       >
         More Details
       </v-btn>

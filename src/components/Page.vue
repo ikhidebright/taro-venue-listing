@@ -1,4 +1,4 @@
-<template>
+<0000ftemplate>
     <div class="page">
     </div>
 </template>

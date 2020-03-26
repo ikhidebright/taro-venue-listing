@@ -10,6 +10,7 @@ import Privacy from "../views/Privacy.vue";
 import Terms from "../views/Terms.vue";
 import Event from "../views/Event.vue";
 import Cities from "../views/Cities.vue";
+import Dashboard from "../views/Dashboard.vue";
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,11 @@ const routes = [
     path: "/event/:name",
     name: "Event",
     component: Event
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard
   },
   {
     path: "/login",

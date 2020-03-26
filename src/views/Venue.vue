@@ -10,6 +10,23 @@
       src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       height="60vh"
     ></v-img>
+<div class="d-flex mb-auto flex-wrap mt-1">
+<v-slide-group show-arrows>
+ <v-slide-item
+        v-for="item in 8" 
+        :key="item.id"
+        class="ma-1"
+      >
+    <v-img
+      class='ml-1'
+      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      height="7vh"
+      width='70'
+      @click='changePic()'
+    ></v-img>
+     </v-slide-item>
+    </v-slide-group>
+    </div>
 
     <h1 class="mt-1">
      {{ items[0].name }}
@@ -29,18 +46,6 @@
       medium
     >
     </v-rating>
-
-    <!-- <v-card-title>
-          <v-rating
-            :value="4"
-            dense
-            color="orange"
-            background-color="orange"
-            hover
-            class="mr-2"
-          ></v-rating>
-          <span class="primary--text subtitle-2">64 Reviews</span>
-        </v-card-title> -->
 
     <v-btn
     class="ma" outlined color="#001F90"
@@ -188,6 +193,12 @@ export default {
         Amenities,
         VenueFAQs,
         GetPrice
+    },
+
+    methods: {
+      changePic () {
+        alert('clicked')
+      }
     },
 
     computed: {

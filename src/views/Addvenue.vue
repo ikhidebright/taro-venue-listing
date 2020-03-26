@@ -85,6 +85,19 @@ spaces, yachts, gallerias and convention centres.</p>
         </v-col>
       </v-row>
 
+      <v-row>
+        <v-col
+          cols="12"
+          md="6"
+        >
+          <v-text-field
+            v-model="email"
+            label="Email"
+            outlined
+            required
+          ></v-text-field>
+        </v-col>
+</v-row>
 
       <v-row>
         <v-col
@@ -92,9 +105,9 @@ spaces, yachts, gallerias and convention centres.</p>
           md="3"
         >
           <v-text-field
-            v-model="email"
+            v-model="password"
             :rules="emailRules"
-            label="E-mail"
+            label="Password"
             outlined
             required
           ></v-text-field>
@@ -105,8 +118,8 @@ spaces, yachts, gallerias and convention centres.</p>
           md="3"
         >
           <v-text-field
-            v-model="phone"
-            label="Phone"
+            v-model="confirmpassword"
+            label="Confirm password"
             type="tel"
             outlined
             required
@@ -114,64 +127,12 @@ spaces, yachts, gallerias and convention centres.</p>
         </v-col>
       </v-row>
 
-      <v-row>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-text-field
-            v-model="venuename"
-            label="Venue Name"
-            outlined
-            required
-          ></v-text-field>
-        </v-col>
-</v-row>
-
-<v-row>
-<v-col cols="12"
-          md="3">
-        <v-select
-          :items="states"
-          label="State"
-          outlined
-          single-line
-        ></v-select>
-      </v-col>
-
-       <v-col
-          cols="12"
-          md="3"
-        >
-          <v-text-field
-            v-model="city"
-            outlined
-            label="City/Town"
-            hint='e.g. Ikoyi'
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-text-field
-            v-model="venueaddress"
-            outlined
-            label="Venue Address"
-            required
-          ></v-text-field>
-        </v-col>
-</v-row>
  <v-row>
         <v-col
           cols="12"
           md="6"
         >
- <v-btn x-large color="#001F90" dark block>Submit</v-btn>
+ <v-btn x-large color="#001F90" dark block @click='register'>Join now!</v-btn>
   </v-col>
 </v-row>
   </v-form>
@@ -181,10 +142,16 @@ spaces, yachts, gallerias and convention centres.</p>
 
 <script>
 import HeroAddVenue from '@/components/HeroAddVenue.vue'
+import axios from 'axios'
+
 export default {
     name: "",
     data: () => ({
-      states: [
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+    states: [
 "Abia",
 'Abuja',
 "Adamawa",
@@ -224,6 +191,19 @@ export default {
 "Zamfara",
        ]
     }),
+    methods: {
+      register () {
+        axios.post('http://localhost:8000/join', {
+          first_name: this.firstname,
+          last_name: this.lastname,
+          email: this.email,
+          password: this.password
+        })
+        .then((res) => {
+        console.log(res)
+        })
+      }
+    },
     components: {
         HeroAddVenue
     }

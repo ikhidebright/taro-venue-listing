@@ -2,7 +2,7 @@
   <v-card
     class=""
     max-width="250"
-    :to="`/venue/${ite.venue_id}-${ite.name}`"
+    :to="`/venue/${ite.venue_id}-${ite.name.replace(/[' ']+/g,'-').toLowerCase()}`"
   >
     <v-img
       src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"

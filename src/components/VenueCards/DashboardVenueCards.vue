@@ -1,7 +1,7 @@
 <template>
 <div class='main'>
 <v-row dense>
-        <v-col cols="9" sm='12' lg='9'>
+        <v-col cols="12" sm='12' lg='9'>
           <v-card
             color="#385F73"
             dark
@@ -21,6 +21,7 @@
       >
         <v-icon>mdi-eye</v-icon> 25K
       </v-btn>
+      <v-switch v-model="message" color="purple"></v-switch>
             </v-card-actions>
           </v-card>
         </v-col>

@@ -40,7 +40,7 @@ Stay informed and follow advice given by your healthcare provider</p>
 
 
 
-       <v-card max-width='400'>
+       <v-card width='600'>
       <v-col cols='3'
       >
          <i class="fas fa-sort-amount-down"></i>

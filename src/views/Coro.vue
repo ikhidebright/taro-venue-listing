@@ -40,7 +40,7 @@ Stay informed and follow advice given by your healthcare provider</p>
 
 
 
-       <v-card>
+       <v-card max-width='400'>
       <v-col cols='3'
       >
          <i class="fas fa-sort-amount-down"></i>
@@ -52,15 +52,15 @@ Stay informed and follow advice given by your healthcare provider</p>
          Cases in Nigeria
           </div>
           <p>Total Cases</p>
-          {{ total }}
+          210
 
           
           <p>Total Deaths</p>
-          {{ total }}
+          4
 
           
           <p>Recovered</p>
-          {{ total }}
+         25
              </v-col>
        </v-card>
     </v-row>

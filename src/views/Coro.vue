@@ -1,6 +1,7 @@
 <template>
   <div class="">
   <v-container class="">
+  <img class='img' src='https://ptracker.netlify.com/img/TIIDELogo1.c3d9c176.png' />
    <div class="display-1 font-weight-bold mb-5">
           Coronavirus disease
           </div>
@@ -36,10 +37,7 @@ If you have fever, cough and difficulty breathing, seek medical care early</p>
 Stay informed and follow advice given by your healthcare provider</p>
              </v-col>
        </v-card>
-
-
-
-       <v-card width='600' class='mt-5'>
+  <v-card width='600' class='mt-5'>
       <v-col cols='3'
       >
          <i class="fas fa-sort-amount-down"></i>
@@ -88,5 +86,10 @@ Stay informed and follow advice given by your healthcare provider</p>
 <style scoped>
 i {
     font-size: 8rem
+}
+
+.img {
+    width: 15rem;
+    height: 7rem
 }
 </style>

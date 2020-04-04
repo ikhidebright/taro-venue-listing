@@ -96,7 +96,7 @@ people. It’s free and convinient</p>
          <ul>
              <li>
          <h4>Top Cities</h4></li>
-             <li v-for="topcity in topCities" :key="topcity">
+             <li v-for="topcity in topCities" :key="topcity" @click="city(topcity)">
                  <router-link :to="`/cities/${topcity}`" class="li">{{ topcity }}</router-link>
              </li>
          </ul>
@@ -170,12 +170,23 @@ people. It’s free and convinient</p>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Footer',
     data () {
         return {
             topCities: this.$store.state.topCities,
             topEvents: this.$store.state.topEvents
+        }
+    },
+    methods: {
+        city (topcity) {
+        axios.get(`http://localhost:8000/places/${topcity}`)
+        .then((res) => {
+            this.$store.commit('setVenue', res.data.result)
+            this.$store.commit('setItem', res.data.result)
+      })
         }
     }
 }

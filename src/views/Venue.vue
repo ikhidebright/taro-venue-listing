@@ -183,8 +183,7 @@ export default {
       right: true,
       bottom: true,
       left: false,
-      transition: 'slide-y-reverse-transition',
-      items: []
+      transition: 'slide-y-reverse-transition'
     }),
 
     components: {
@@ -195,6 +194,13 @@ export default {
         GetPrice
     },
 
+    created () {
+      axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
+        .then((res) => {
+            this.$store.commit('setVenueD', res.data.result)
+      })
+    },
+
     methods: {
       changePic () {
         alert('clicked')
@@ -202,6 +208,9 @@ export default {
     },
 
     computed: {
+      items () {
+        return this.$store.state.venued
+      },
       activeFab () {
         switch (this.tabs) {
           case 'one': return { class: 'purple', icon: 'account_circle' }
@@ -210,13 +219,6 @@ export default {
           default: return {}
         }
       },
-    },
-
-    created () {
-      axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
-      .then((res) => {
-        this.items = res.data.result
-      })
     }
 
     // watch: {
@@ -244,6 +246,7 @@ export default {
 
 .desc {
     width: 60%;
+    font-size: 1rem
 }
 
 .price {

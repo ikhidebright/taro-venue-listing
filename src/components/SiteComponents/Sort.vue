@@ -10,7 +10,7 @@
           v-model="toggle_exclusive"
           mandatory
         >
-          <v-btn small>
+          <v-btn small @click='bestmatch'>
             Best match
           </v-btn>
           <v-btn small>
@@ -22,10 +22,7 @@
           <v-btn small>
             Trending
           </v-btn>
-          <v-btn small>
-           Price
-          </v-btn>
-          <v-btn small>
+          <v-btn small @click='rated'>
             Best rated
           </v-btn>
         </v-btn-toggle>
@@ -38,8 +35,20 @@
   export default {
     data () {
       return {
-        toggle_exclusive: undefined,
-      }
+        toggle_exclusive: undefined
+        }
     },
+    methods: {
+      rated () {
+        let rate = this.$store.state.venues.sort((a,b) => {
+          return b.rating - a.rating
+        })
+        this.$store.commit('setItem', rate)
+      },
+
+      bestmatch () {
+        this.$store.commit('setItem', this.$store.state.venues)
+      }
+    }
   }
 </script>

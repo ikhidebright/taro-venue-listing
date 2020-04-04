@@ -26,19 +26,19 @@
 <h5>How many guests are you expecting</h5>
           <v-radio-group v-model="radioGroup">
       <v-radio
-        v-for="n in 5"
-        :key="n"
-        :label="`Radio ${n}`"
-        :value="n"
+        v-for="num in this.$store.state.numberOfGuestFilter"
+        :key="num"
+        :label="num"
+        :value="num"
       ></v-radio>
     </v-radio-group>
 
 <h5>Venue Types</h5>
     <v-checkbox
               v-model="ex4"
-              v-for="n in 5"
-              :key="n"
-              :label="`Radio ${n}`"
+              v-for="vt in this.$store.state.venueTypeFilter"
+              :key="vt"
+              :label="vt"
               color="indigo darken-3"
               value="indigo darken-3"
               hide-details
@@ -48,10 +48,10 @@
             <h5>Event Type</h5>
           <v-radio-group v-model="radioGroup">
       <v-radio
-        v-for="n in 5"
-        :key="n"
-        :label="`Radio ${n}`"
-        :value="n"
+        v-for="et in this.$store.state.eventTypeFilter"
+        :key="et"
+        :label="et"
+        :value="et"
       ></v-radio>
     </v-radio-group>
     </v-col>

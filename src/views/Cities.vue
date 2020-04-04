@@ -39,15 +39,24 @@ export default {
   },
   data () {
     return {
-    items: []
   }
  },
 
-  created () {
+ methods: {
+ },
+
+ created () {
       axios.get(`http://localhost:8000/places/${this.$route.params.name}`)
-      .then((res) => {
-        this.items = res.data.result
+        .then((res) => {
+            this.$store.commit('setVenue', res.data.result)
+            this.$store.commit('setItem', res.data.result)
       })
+    },
+
+    computed: {
+      items () {
+        return this.$store.state.items
+      }
     }
 };
 </script>

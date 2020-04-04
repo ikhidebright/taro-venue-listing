@@ -1,5 +1,6 @@
 <template>
   <v-card
+    @click='vcard(ite.venue_id)'
     class=""
     max-width="250"
     :to="`/venue/${ite.venue_id}-${ite.name.replace(/[' ']+/g,'-').toLowerCase()}`"
@@ -21,9 +22,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'VenueCard',
-    props: ['ite']
+    props: ['ite'],
+    methods: {
+        vcard (venue_id) {
+        axios.get(`http://localhost:8000/venues/${venue_id}`)
+        .then((res) => {
+            this.$store.commit('setVenueD', res.data.result)
+      })
+        }
+    }
 }
 </script>
 

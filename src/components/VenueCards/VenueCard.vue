@@ -1,5 +1,6 @@
 <template>
   <v-card
+    @click="vcard(item.venue_id)"
     class="mx-auto ml-4 mb-9"
     max-width="280"
     :to="`/venue/${item.venue_id}-${item.name.replace(/[' ']+/g,'-').toLowerCase()}`"
@@ -48,6 +49,7 @@
     <v-card-actions>
       <v-btn
         text
+        @click="vcard(item.venue_id)"
         color="#001F90"
         class="moredetailsbutton"
         :to="`/venue/${item.venue_id}-${item.name.replace(/[' ']+/g,'-').toLowerCase()}`"
@@ -79,9 +81,15 @@
 </template>
 
 <script>
+
 export default {
     name: 'VenueCard',
-    props: ["item"]
+    props: ["item"],
+    methods: {
+        vcard (venue_id) {
+         alert(venue_id)
+      }
+  }
 }
 </script>
 

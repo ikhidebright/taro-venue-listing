@@ -17,75 +17,15 @@
   fixed = true
   flat
   tile
+  block
   bottom>
   Request Reservation</v-btn>
         
       </template>
       <v-card>
-        <v-card-title>
-          <span class="headline">Book {{ items[0].name }}</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6">
-        <v-menu
-          ref="menu1"
-          v-model="menu1"
-          :close-on-content-click="false"
-          transition="scale-transition"
-          offset-y
-          max-width="290px"
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="dateFormatted"
-              label="*Event Date"
-              outlined
-              @blur="date = parseDate(dateFormatted)"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
-        </v-menu>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-          :items="venuetype"
-          label="*Event Type"
-          single-line
-          outlined
-        ></v-select>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                label="*Full Name"
-                required
-                outlined
-              ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                type='number'
-                label="*Phone Number"
-                required
-                outlined
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                label="*Email"
-                required
-                outlined
-              ></v-text-field>
-              </v-col>
-            </v-row>
-          <small>*indicates required field</small>
-          </v-container>
-        </v-card-text> 
+        <Form :items="items" :bookdetails='bookdetails'/>
         <v-container>
-        <v-card-actions>
+      <!--  <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn 
         color="red lighten-2"
@@ -101,7 +41,7 @@
         @click="dialog = false">
         See Price
         </v-btn>
-        </v-card-actions>
+        </v-card-actions> -->
          </v-container>
       </v-card>
     </v-dialog>
@@ -110,6 +50,8 @@
 </template>
 
 <script>
+import Form from '@/components/VenuePageComponents/Form.vue'
+
   export default {
     props: ['items'],
     data: vm => ({
@@ -121,7 +63,15 @@
       venuetype: ['Wedding reception', 'Meeting', 'Training', 'Conference', 'Get Together', 'Product Lunch', 'Corporate Party', 'Wedding Anniversery', 'Engagement Party', 'Birthday Party', 'Class Reunion', 'Brand Promotion', 'Fashion Show', 'Pool Party', 'Award Show', 'Exhibition', 'Bachelor Party', 'Other']
     }),
 
+    components: {
+      Form
+    },
+
     computed: {
+      bookdetails () {
+          return this.$store.state.booking
+      },
+
       computedDateFormatted () {
         return this.formatDate(this.date)
       },
@@ -160,6 +110,7 @@
 }
 
 .price2 {
+    width: 50%;
     color: white;
     margin: 0 0 0 3vmin;
 }

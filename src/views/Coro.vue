@@ -26,7 +26,7 @@ The disease causes respiratory illness (like the flu) with symptoms such as a co
        <v-col cols='12'
       >
         <div class="display-1 font-weight-bold mb-5">
-          Preventive and Safety measures
+          Prevention and Safety measures
           </div>
           <p>Wash your hands frequently</p>
           <p>Maintain social distancing</p>  

@@ -16,7 +16,7 @@ The disease causes respiratory illness (like the flu) with symptoms such as a co
     <v-row
       no-gutters
     >    
-    <v-card>
+    <v-card class='mt-5'>
       <v-col cols='3'
       >
           <i class="fas fa-shield-virus"></i>
@@ -39,8 +39,7 @@ Stay informed and follow advice given by your healthcare provider</p>
 
 
 
-
-       <v-card width='600'>
+       <v-card width='600' class='mt-5'>
       <v-col cols='3'
       >
          <i class="fas fa-sort-amount-down"></i>

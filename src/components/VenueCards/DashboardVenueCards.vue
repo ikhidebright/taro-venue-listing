@@ -7,9 +7,23 @@
             dark
             dense
           >
-            <v-card-title class="headline">Digworths services</v-card-title>
-            <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-            <v-card-actions>
+          <div class="d-flex flex-no-wrap">
+          <div>
+          <v-avatar
+                class="ma-3"
+                size="125"
+                tile
+              >
+                <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
+              </v-avatar>
+             </div>
+              <div>
+              <v-card-title class="headline">Digworths services</v-card-title>
+            <v-card-subtitle>Ikoyi, Lagos</v-card-subtitle>
+            <p class="ml-4 body-2">A Conference Hall perfect for presentations or conferences for 15 guests (boardroom) fully equipped with Modern multimedia facilities to make your conference or meeting memorable.</p>
+               </div>
+         </div>
+             <v-card-actions>
               <v-btn text>Manage</v-btn>
               <v-spacer></v-spacer>
          <v-btn
@@ -21,7 +35,7 @@
       >
         <v-icon>mdi-eye</v-icon> 25K
       </v-btn>
-      <v-switch v-model="message" color="purple"></v-switch>
+      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Vacant'}`" v-model="message" color="red"></v-switch>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -31,7 +45,12 @@
 
 <script>
 export default {
-    name: 'VenueCard'
+    name: 'VenueCard',
+    data () {
+      return {
+        message: false
+      }
+    }
 }
 </script>
 

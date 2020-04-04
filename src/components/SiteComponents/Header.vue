@@ -3,7 +3,7 @@
     <v-app-bar
       color="white"
       fixed
-      elevate-on-scroll
+      elevate
       height = '60'
     >
 
@@ -22,13 +22,21 @@
         outlined
       ></v-text-field>
 
-      <v-btn text class="hidden-sm-and-down mr-5" to='/'>
-      Login
-      </v-btn>
+        <v-toolbar-items>
 
-      <v-btn text class="hidden-sm-and-down mr-5" to='/addvenue'>
-      List your venue
-      </v-btn>
+        <v-divider :inset="inset" vertical></v-divider>
+
+        <v-btn text>
+          Login
+        </v-btn>
+
+        <v-divider :inset="inset" vertical></v-divider>
+
+        <v-btn text to='/addvenue'>
+         List your venue
+        </v-btn>
+
+      </v-toolbar-items>
 
        <v-app-bar-nav-icon @click="drawer = true" class='d-lg-none'></v-app-bar-nav-icon>
 

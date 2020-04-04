@@ -74,7 +74,7 @@
       >
         Explore
       </v-btn> -->
-      <p class="desc">
+      <p class="font-weight-light">
           A Conference Hall perfect for presentations or conferences for 15 guests (boardroom) fully equipped with Modern multimedia facilities to make your conference or meeting memorable.
       </p>
       

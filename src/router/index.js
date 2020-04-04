@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Coro from "../views/Coro.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Venue from "../views/Venue.vue";
@@ -17,8 +17,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "Coro",
+    component: Coro
   },
   {
     path: "/privacy",

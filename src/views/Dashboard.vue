@@ -1,6 +1,10 @@
 <template>
     <div class="dashboard mt-12">
     <v-container>
+    <div class='headline font-weight-light mb-1 mt-1'>Ikhide Bright's venues</div>
+    </v-container>
+    <v-divider></v-divider>
+    <v-container class="mt-5">
     <DashboardVenueCards />
     </v-container>
     </div>
@@ -20,5 +24,6 @@ export default {
 <style scoped>
 .dashboard {
     background-color: #f1f1f1;
+    height: 90vh;
 }
 </style>

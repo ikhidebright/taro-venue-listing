@@ -132,7 +132,18 @@ spaces, yachts, gallerias and convention centres.</p>
           cols="12"
           md="6"
         >
- <v-btn x-large color="#001F90" dark block @click='register'>Join now!</v-btn>
+         <div class="text-center">
+    <v-btn
+      x-large color="#001F90" dark block
+      @click="overlay = !overlay"
+    >
+     Join now!
+    </v-btn>
+
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+  </div>
   </v-col>
 </v-row>
   </v-form>
@@ -147,6 +158,7 @@ import axios from 'axios'
 export default {
     name: "",
     data: () => ({
+      overlay: false,
       firstname: '',
       lastname: '',
       email: '',
@@ -191,6 +203,13 @@ export default {
 "Zamfara",
        ]
     }),
+     watch: {
+      overlay (val) {
+        val && setTimeout(() => {
+          this.overlay = false
+        }, 10000)
+      },
+    },
     methods: {
       register () {
         axios.post('http://localhost:8000/join', {

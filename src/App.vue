@@ -1,22 +1,23 @@
 <template>
     <v-app>
-      <Header />
+      <!--<Header />-->
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
-        <Footer />
+       <!-- <Footer /> -->
     </v-app>
 </template>
 
 <script>
+/**
 import Header from "@/components/SiteComponents/Header.vue"
-import Footer from "@/components/SiteComponents/Footer.vue"
+import Footer from "@/components/SiteComponents/Footer.vue" **/
 
 export default {
     name: 'App',
     components: {
-      Header,
-      Footer
+     /** Header,
+      Footer **/
     }
 };
 </script>

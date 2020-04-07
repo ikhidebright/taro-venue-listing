@@ -5,10 +5,52 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+  url: 'http://localhost:8000',
   booking: null,
   venued: null,
   items: null,
+  reviews: null,
   venues: null,
+  logindetails: null,
+  states: [
+    'Abia',
+    'Abuja',
+'Adamawa',
+'Akwa Ibom',
+'Anambra',
+'Bauchi',
+'Bayelsa',
+'Benue',
+'Borno',
+'Cross River',
+'Delta',
+'Ebonyi',
+'Enugu',
+'Edo',
+'Ekiti',
+'Gombe',
+'Imo',
+'Jigawa',
+'Kaduna',
+'Kano',
+'Katsina',
+'Kebbi',
+'Kogi',
+'Kwara',
+'Lagos',
+'Nasarawa',
+'Niger',
+'Ogun',
+'Ondo',
+'Osun',
+'Oyo',
+'Plateau',
+'Rivers',
+'Sokoto',
+'Taraba',
+'Yobe',
+'Zamfara',
+  ],
   numberOfGuestFilter: [
       'Less than 100 Guests',
 '100 - 200 Guests',
@@ -44,8 +86,16 @@ export default new Vuex.Store({
       state.booking = item
     },
 
+    setLogin (state, item) {
+      state.logindetails = item
+    },
+
     setVenueD (state, item) {
       state.venued = item
+    },
+
+    setReview (state, item) {
+      state.reviews = item
     },
     
     setItem (state, item) {

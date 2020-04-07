@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Coro from "../views/Coro.vue";
+import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Venue from "../views/Venue.vue";
@@ -11,14 +12,22 @@ import Terms from "../views/Terms.vue";
 import Event from "../views/Event.vue";
 import Cities from "../views/Cities.vue";
 import Dashboard from "../views/Dashboard.vue";
+import AddNewVenue from "../views/AddNewVenue.vue";
+import axios from 'axios'
+import store from '@/store'
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Coro",
-    component: Coro
+    name: "Home",
+    component: Home
+  },
+  {
+    path: "/propose",
+    name: "AddNewVenue",
+    component: AddNewVenue
   },
   {
     path: "/privacy",
@@ -43,7 +52,18 @@ const routes = [
   {
     path: "/venue/:id-:name",
     name: "Venue",
-    component: Venue
+    component: Venue,
+    beforeEnter: (to, from, next) => {
+      axios.get(`http://localhost:8000/venues/${to.params.id}`)
+        .then((res) => {
+          store.commit('setVenueD', res.data.result)
+          next()
+      })
+      axios.get(`${store.state.url}/reviews/${to.params.id}`)
+        .then((res) => {
+          store.commit("setReview", res.data.result)
+        })
+    }
   },
   {
     path: "/cities/:name",
@@ -71,13 +91,13 @@ const routes = [
     component: Register
   },
   {
-    path: "/addvenue",
-    name: "Addvenue",
+    path: "/owner",
+    name: "OwnersJoin",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Addvenue.vue")
+      import(/* webpackChunkName: "about" */ "../views/OwnersJoin.vue")
   }
 ];
 

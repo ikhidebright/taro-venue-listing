@@ -22,6 +22,12 @@
           <v-btn small>
             Trending
           </v-btn>
+           <v-btn small>
+            Highest likes
+          </v-btn>
+           <v-btn small>
+            Available
+          </v-btn>
           <v-btn small @click='rated'>
             Best rated
           </v-btn>

@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard mt-12">
     <v-container>
-    <div class='headline font-weight-light mb-1 mt-1'>Ikhide Bright's venues</div>
+    <div class='headline font-weight-light mb-1 mt-4'>Ikhide Bright's venues</div>
     </v-container>
     <v-divider></v-divider>
     <v-container class="mt-5">

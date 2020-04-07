@@ -9,7 +9,27 @@
     <v-img
       src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       height="60vh"
-    ></v-img>
+    > <v-col cols="12" sm="12">
+     <v-btn
+        small
+        dark
+        color='red'
+        class="mr-4 transperent"
+        :title="`Like ${items[0].name}`"
+      >
+        <v-icon>mdi-heart</v-icon> 25K
+      </v-btn>   
+          <v-btn
+        small
+        dark
+        color='#325567'
+        class="mr-4 transperent"
+        :title="`${items[0].name} is available`"
+      >
+      Available
+      </v-btn>
+          </v-col>
+          </v-img>
 <div class="d-flex mb-auto flex-wrap mt-1">
 <v-slide-group show-arrows>
  <v-slide-item
@@ -54,9 +74,8 @@
     small> 
     <v-icon class="mr-2" dense>home</v-icon>
     {{ items[0].type }}
-</v-btn>
-
-      <v-btn
+</v-btn>     
+<v-btn
     class="ma-2" outlined color="#001F90"
     text
     small> 
@@ -65,25 +84,10 @@
 </v-btn>
 
     <v-card-actions>
-      <!-- <v-btn text>Meeting Room
-</v-btn>
-
-      <v-btn
-        color="purple"
-        text
-      >
-        Explore
-      </v-btn> -->
       <p class="font-weight-light">
           A Conference Hall perfect for presentations or conferences for 15 guests (boardroom) fully equipped with Modern multimedia facilities to make your conference or meeting memorable.
       </p>
-      
-
       <v-spacer></v-spacer>
-      <!-- <v-btn icon color="red">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn> -->
-      
       <v-speed-dial
       v-model="fab"
       :top="top"
@@ -112,8 +116,12 @@
         color="indigo"
         title="Share on Facebook"
       >
-        <v-icon>mdi-facebook</v-icon>
-      </v-btn>
+      <div data-href="https://developers.facebook.com/docs/plugins/" 
+data-layout="button_count" data-size="small"><a target="_blank" 
+:href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost:8080${$route.path}&amp;src=sdkpreparse`" class="fb-xfbml-parse-ignore">
+<v-icon>mdi-facebook</v-icon></a>
+</div>
+</v-btn>
       <v-btn
         fab
         dark
@@ -145,11 +153,9 @@
       </v-btn>
     </v-speed-dial>
     </v-card-actions>
-
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-
       </div>
     </v-expand-transition>
   </v-card>
@@ -157,10 +163,8 @@
   <Amenities :items="items"/>
   <GetPrice :items="items"/>
   <VenueFAQs :items="items"/>
-  <CustomersReview :items="items"/>
+  <CustomersReview :items="items" :reviews="reviews"/>
   <NearbyVenues :items="items"/>
-        <!-- <h2>{{ $route.params.id }}</h2>
-        <h2>{{ $route.params.name }}</h2> -->
     </div>
 </template>
 
@@ -193,23 +197,31 @@ export default {
         VenueFAQs,
         GetPrice
     },
-
-    created () {
-      axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
-        .then((res) => {
-            this.$store.commit('setVenueD', res.data.result)
-      })
-    },
-
     methods: {
       changePic () {
         alert('clicked')
       }
     },
-
+    watch: {
+      '$route.params.id' () {
+        axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
+        .then((res) => {
+          console.log(res)
+           this.$store.commit('setVenueD', res.data.result)
+      })
+      axios.get(`${this.$store.state.url}/reviews/${this.$route.params.id}`)
+        .then((res) => {
+          console.log(res)
+          this.$store.commit("setReview", res.data.result)
+        })
+      }
+    },
     computed: {
       items () {
         return this.$store.state.venued
+      },
+      reviews () {
+        return this.$store.state.reviews
       },
       activeFab () {
         switch (this.tabs) {
@@ -220,21 +232,6 @@ export default {
         }
       },
     }
-
-    // watch: {
-    //   top (val) {
-    //     this.bottom = !val
-    //   },
-    //   right (val) {
-    //     this.left = !val
-    //   },
-    //   bottom (val) {
-    //     this.top = !val
-    //   },
-    //   left (val) {
-    //     this.right = !val
-    //   },
-    // },
 }
 </script>
 

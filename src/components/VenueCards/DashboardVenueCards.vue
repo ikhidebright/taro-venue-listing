@@ -24,7 +24,7 @@
                </div>
          </div>
              <v-card-actions>
-              <v-btn text>Manage</v-btn>
+              <v-btn text to='/manage'>Manage</v-btn>
               <v-spacer></v-spacer>
          <v-btn
         small
@@ -35,7 +35,7 @@
       >
         <v-icon>mdi-eye</v-icon> 25K
       </v-btn>
-      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Vacant'}`" v-model="message" color="red"></v-switch>
+      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green"></v-switch>
             </v-card-actions>
           </v-card>
         </v-col>

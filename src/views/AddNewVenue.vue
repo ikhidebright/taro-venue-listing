@@ -1,8 +1,11 @@
 <template>
     <div class="manage mt-12">
       <v-container>
-      <br>
-<v-col cols="12" sm="9" md="9">
+       <v-col cols="12" sm="12" md="9">
+      <p class='mt-6 mb-6'>Our platform boost of 100,000+ visitors monthly who are in need of event centers, spaces for meetings, weddings, outdoor occassions and more. Add your venue now and start connecting!</p>
+ </v-col>
+
+ <v-col cols="12" sm="8" md="8">
       <v-alert
       text
       dense
@@ -10,7 +13,7 @@
       icon="mdi-clock-fast"
       border="left"
     >
-     <b> Edits to Digworths Services Limited are subjected to Review from taro.ng team before approval </b>
+     <b> New venues are subjected to Review from taro.ng team before approval</b>
         <br>
         </v-alert>
         </v-col>
@@ -18,12 +21,12 @@
       <v-col cols="12" sm="6" md="6">
           <v-text-field
             label="Venue name"
-            value="Digworths services"
+            v-model='venuename'
             outlined
           ></v-text-field>
           </v-col>
 
- <v-col cols="12" sm="6" md="6">
+          <v-col cols="12" sm="6" md="6">
           <v-row class=''>
           <v-col cols="12" sm="6" md="6">
            <v-select
@@ -105,8 +108,8 @@
           no-resize
           name="input-7-4"
           label="Venue Description"
-          value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-        ></v-textarea>
+          v-model='description'
+          ></v-textarea>
       </v-col>
 
     <!-- adding images -->
@@ -197,11 +200,17 @@
 
 <script>
 export default {
-    name: 'ManageVenue',
+    name: 'AddVenue',
     data: () => ({
       overlay: false,
       files: [],
-      state: ['Abia', 'Edo']
+      venuename: '',
+      venuetype: '',
+      capacity: '',
+      city: '',
+      address: '',
+      state: '',
+      description: ''
     }),
 }
 </script>

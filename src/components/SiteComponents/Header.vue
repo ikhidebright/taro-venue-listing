@@ -26,13 +26,13 @@
 
         <v-divider :inset="inset" vertical></v-divider>
 
-        <v-btn text>
+        <v-btn text to='/login'>
           Login
         </v-btn>
 
         <v-divider :inset="inset" vertical></v-divider>
 
-        <v-btn text to='/addvenue'>
+        <v-btn text to='/owner'>
          List your venue
         </v-btn>
 
@@ -152,8 +152,7 @@
       item: 0,
       items: [
         { text: 'Manage venue', icon: 'mdi-folder', link: '/dashboard' },
-        { text: 'Add a venue', icon: 'mdi-account-multiple', link: '/add' },
-        { text: 'Booking History', icon: 'mdi-history', link: '/history' },
+        { text: 'Add a venue', icon: 'mdi-account-multiple', link: '/propose' },
         { text: 'Account settings', icon: 'mdi-cogs', link: '/settings' }
       ],
     }),

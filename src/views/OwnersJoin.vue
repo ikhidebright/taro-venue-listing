@@ -64,7 +64,6 @@ spaces, yachts, gallerias and convention centres.</p>
         >
           <v-text-field
             v-model="firstname"
-            :rules="nameRules"
             outlined
             label="First Name"
             required
@@ -77,7 +76,6 @@ spaces, yachts, gallerias and convention centres.</p>
         >
           <v-text-field
             v-model="lastname"
-            :rules="nameRules"
             outlined
             label="Last Name"
             required
@@ -93,6 +91,7 @@ spaces, yachts, gallerias and convention centres.</p>
           <v-text-field
             v-model="email"
             label="Email"
+            type="email"
             outlined
             required
           ></v-text-field>
@@ -106,8 +105,8 @@ spaces, yachts, gallerias and convention centres.</p>
         >
           <v-text-field
             v-model="password"
-            :rules="emailRules"
             label="Password"
+            type="password"
             outlined
             required
           ></v-text-field>
@@ -120,12 +119,28 @@ spaces, yachts, gallerias and convention centres.</p>
           <v-text-field
             v-model="confirmpassword"
             label="Confirm password"
-            type="tel"
+            type="password"
             outlined
             required
           ></v-text-field>
         </v-col>
       </v-row>
+
+      <v-row>
+        <v-col
+          cols="12"
+          md="6"
+        >
+          <v-text-field
+            v-model="phone"
+            type="number"
+            label="Phone number"
+            hint="e.g 08064513824"
+            outlined
+            required
+          ></v-text-field>
+        </v-col>
+</v-row>
 
  <v-row>
         <v-col
@@ -135,7 +150,7 @@ spaces, yachts, gallerias and convention centres.</p>
          <div class="text-center">
     <v-btn
       x-large color="#001F90" dark block
-      @click="overlay = !overlay"
+      @click="register"
     >
      Join now!
     </v-btn>
@@ -163,6 +178,7 @@ export default {
       lastname: '',
       email: '',
       password: '',
+      phone: '',
     states: [
 "Abia",
 'Abuja',
@@ -212,14 +228,23 @@ export default {
     },
     methods: {
       register () {
+        this.overlay = !this.overlay
         axios.post('http://localhost:8000/join', {
           first_name: this.firstname,
           last_name: this.lastname,
           email: this.email,
-          password: this.password
+          password: this.password,
+          phone_number: this.phone
         })
         .then((res) => {
-        console.log(res)
+          if (res.status == 200) {
+            let logindetails = {
+              email: this.email,
+              password: this.password
+            }
+            this.$store.commit("setLogin", logindetails)
+            this.$router.push('/login')
+          }
         })
       }
     },

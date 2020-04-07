@@ -21,7 +21,14 @@
             @click:append="show2 = !show2"
           ></v-text-field>
 
-          <v-btn x-large color="#001F90" dark>Sign in</v-btn>
+          <v-checkbox
+      v-model="checkbox"
+      input-value="checkbox"
+      label="Remember password"
+        ></v-checkbox>
+
+          <v-btn x-large color="#001F90" dark block @click='login'
+          >Login</v-btn>
 
         </v-col>
   </div>
@@ -32,9 +39,40 @@
     data () {
       return {
         show2: false,
-        password: null,
-        email: null
+        password: this.$store.state.logindetails.password,
+        email: this.$store.state.logindetails.email,
+        checkbox: false
       }
     },
+    methods: {
+      login () {
+        if (this.checkbox) {
+          localStorage.setItem("email", this.email)
+          localStorage.setItem("password", this.password)
+          localStorage.setItem("checkbox", this.checkbox)
+        } else {
+          localStorage.removeItem("checkbox")
+          localStorage.removeItem("email")
+          localStorage.removeItem("password")
+        this.$store.commit("setLogin", null)
+        }
+      }
+    },
+    created () {
+      if (localStorage.getItem("checkbox")) {
+     let logindetails = {
+       email: localStorage.getItem("email"),
+       password: localStorage.getItem("password"),
+       checkbox: localStorage.getItem("checkbox")
+     } 
+        this.$store.commit("setLogin", logindetails)
+        this.password = this.$store.state.logindetails.password
+        this.email = this.$store.state.logindetails.email
+        this.checkbox = this.$store.state.logindetails.checkbox
+    }
+        this.password = this.$store.state.logindetails.password
+        this.email = this.$store.state.logindetails.email
+        console.log(this.$store.state.logindetails.email)
   }
+}
 </script>

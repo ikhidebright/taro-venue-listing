@@ -63,7 +63,7 @@ people. It’s free and convinient</p>
                  <router-link to='/howitworks' class="li">How it works</router-link>
              </li>
              <li>
-                 <router-link to='/addvenue' class="li">List your venue</router-link>
+                 <router-link to='/owner' class="li">List your venue</router-link>
              </li>
              <li>
                  <router-link to='/contact' class="li">Contact</router-link>

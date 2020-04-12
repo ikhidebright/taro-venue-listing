@@ -2,7 +2,7 @@
 <div class='head'>
     <v-app-bar
       color="white"
-      fixed
+      fixed = true
       elevate
       height = '60'
     >
@@ -11,38 +11,36 @@
       <v-toolbar-title class='logo mr-12' to='/'>taro</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
       <v-text-field
         hide-details
         color="#001F90"
         prepend-inner-icon="search"
         label='Search venue, location'
-        class='mr-12'
+        class='mr-lg-12 mr-sm-2'
         @keyup="search"
         dense
         v-model='src'
-        rounded
         single-line
         outlined
       ></v-text-field>
 
-        <v-toolbar-items>
+        <v-toolbar-items class='hidden-sm-and-down'>
 
-        <v-divider :inset="inset" vertical></v-divider>
+        <v-divider :inset="inset" vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
 
-        <v-btn text to='/login'>
+        <v-btn text to='/login' v-if="!this.$store.state.isLoggedIn">
           Login
         </v-btn>
 
-        <v-divider :inset="inset" vertical></v-divider>
+        <v-divider :inset="inset" vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
 
-        <v-btn text to='/owner'>
+        <v-btn text to='/owner' v-if="!this.$store.state.isLoggedIn" class="mr-n5">
          List your venue
         </v-btn>
 
       </v-toolbar-items>
 
-       <v-app-bar-nav-icon @click="drawer = true" class='d-lg-none'></v-app-bar-nav-icon>
+       <v-app-bar-nav-icon @click="drawer = true" class='hidden-lg-and-up'></v-app-bar-nav-icon>
 
        <v-menu
       v-model="menu"
@@ -51,6 +49,7 @@
       :nudge-width="200"
       offset-x
       transition="scale-transition"
+      v-if="this.$store.state.isLoggedIn"
     >
       <template v-slot:activator="{ on }">
         
@@ -193,5 +192,15 @@ import axios from 'axios'
 <style scoped>
 .head {
 border-bottom: 5px solid green;
+}
+
+/deep/ .v-text-field{
+      width: 180px;
+}
+
+@media only screen and (min-width: 600px) {
+/deep/ .v-text-field{
+      width: 2px;
+}
 }
 </style>

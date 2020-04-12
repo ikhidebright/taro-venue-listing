@@ -1,7 +1,7 @@
 <template>
-    <div class="footer">
+    <div class="footer pa-lg-5 pt-5">
        <v-card
-            class="d-flex flex-row justify-space-between ml-3"
+            class="d-flex flex-row justify-space-between ml-lg-3 ml-sm-n9 mb-12 mb-lg-0"
             max-width="1100px"
             flat
             color="black"
@@ -163,7 +163,7 @@ people. It’s free and convinient</p>
         <v-icon>mdi-whatsapp</v-icon>
       </v-btn>
 
-         <p class="mt-6"> Copyright © Taro.ng 2020. All rights reserved</p>
+         <p class="mt-6 caption mb-12 mb-lg-0 font-weight-light"> Copyright © Taro.ng 2020. All rights reserved</p>
 
             </v-card>
     </div>
@@ -196,7 +196,6 @@ export default {
 width: 100%;
 height: auto;
 box-sizing: border-box;
-padding: 5vmin 0 5vmin 5vmin;
 background-color: black;
 }
 
@@ -209,24 +208,24 @@ ul {
 .foot {
     color: white;
     background-color: black;
-font-family: 'Open Sans';
+    font-family: 'Open Sans';
 }
 
 .foot p {
     color: white;
-font-family: 'Open Sans';
+    font-family: 'Open Sans';
 }
 
 .foot i {
     color: white;
     font-size: 4vmin;
-font-family: 'Open Sans';
+    font-family: 'Open Sans';
 }
 
 router-link {
     color: white;
     background-color: black;
-font-family: 'Open Sans';
+    font-family: 'Open Sans';
 }
 
 .li {

@@ -2,16 +2,21 @@
   <div class="login mt-5">
   <br>
   <br>
-  <br>
-  <v-card
-    :loading="loading"
-    class="mx-auto my-12 mt-5"
-    max-width="374"
-    sm='flat'
-  >
-      <v-col cols="12" sm="12" md="12">
-      <v-alert
-      text
+  <v-container>
+  <v-col cols="12" sm="12" md="12">
+  <v-alert
+      color="green"
+      dark
+      class="pa-5"
+      icon="mdi-firework"
+      dense
+    >
+      Registration Succesfull Login your account now to add venues!
+    </v-alert>
+
+     <v-alert
+      dark
+      class="pa-5"
       dense
       color="red"
       border="left"
@@ -20,6 +25,16 @@
      {{ alert }}
         <br>
         </v-alert>
+
+        </v-col>
+        </v-container>
+  <v-card
+    :loading="loading"
+    class="mx-auto my-12 mt-1"
+    max-width="374"
+    sm='flat'
+  >
+      <v-col cols="12" sm="12" md="12">
 
       <h2>Login</h2>
 
@@ -50,9 +65,6 @@
           >Login</v-btn>
         </v-col>
     </v-card>
-     <v-overlay :value="overlay">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
-    </v-overlay>
   </div>
 </template>
 
@@ -62,11 +74,11 @@ import axios from 'axios'
   export default {
     data: () => ({
       loading: false,
-      overlay: false,
       show2: false,
       checkbox: false,
       alert: null,
       password: '',
+      status: '',
       email: '',
       id: ''
     }),
@@ -92,11 +104,10 @@ import axios from 'axios'
           email: this.email,
           password: this.password
         }).then((res) => {
-          if (res.status === 201) {
+          if (res.status == 201) {
            console.log(res)
+           this.status = res.status
            this.$store.commit("setUser", res.data.result)
-           this.overlay = !this.overlay
-           this.loading = false
           } else {
           this.alert = res.data.message
           this.loading = false
@@ -121,12 +132,16 @@ import axios from 'axios'
         console.log(this.$store.state.logindetails.email)
   },
   watch: {
-      overlay (val) {
+      loading (val) {
         let getOwnerVenues = this.$store.getters.myvenues
         getOwnerVenues.then(x => this.$store.commit("setLoggedinOwnerVenues", x.data.result))
         val && setTimeout(() => {
-          this.overlay = false
+          if (this.status == 201) {
+          this.loading = false
           this.$router.push('/dashboard')
+          } else {
+             this.loading = false
+          }
         }, 10000)
       },
     },

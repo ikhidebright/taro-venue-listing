@@ -177,6 +177,7 @@ data-layout="button_count" data-size="small"><a target="_blank"
   <Amenities :items="items"/>
   <GetPrice :items="items"/>
   <VenueFAQs :items="items"/>
+  <Map :items="items"/>
   <CustomersReview :items="items" :reviews="reviews"/>
   <NearbyVenues :items="items"/>
     </div>
@@ -188,6 +189,7 @@ import CustomersReview from '@/components/VenuePageComponents/CustomersReview.vu
 import Amenities from '@/components/VenuePageComponents/Amenities.vue'
 import VenueFAQs from '@/components/VenuePageComponents/VenueFAQs.vue'
 import GetPrice from '@/components/VenuePageComponents/GetPrice.vue'
+import Map from '@/components/VenuePageComponents/Map.vue'
 import axios from 'axios'
 
 export default {
@@ -210,7 +212,8 @@ export default {
         CustomersReview,
         Amenities,
         VenueFAQs,
-        GetPrice
+        GetPrice,
+        Map
     },
     methods: {
       view () {

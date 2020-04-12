@@ -1,11 +1,18 @@
 <template>
 <v-container>
-    <h3 class="subheading">FAQs For {{ items[0].name }}</h3>
+    <h3 class="subheading mt-9">FAQs For {{ items[0].name }}</h3>
     <br>
     <v-card 
-    max-width="804">
+    max-width="804"
+    text
+    flat>
   <v-row justify="center">
-    <v-expansion-panels accordion>
+    <v-expansion-panels 
+      inset
+      focusable
+      tile
+      text
+      >
       <v-expansion-panel
         v-for="(item,i) in 5"
         :key="i"

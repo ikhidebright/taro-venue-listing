@@ -10,7 +10,7 @@ export default new Vuex.Store({
   booking: null,
   user: null,
   loggedInOwnerVenues: null,
-  isLoggedIn: null,
+  isLoggedIn: false,
   venued: null,
   items: null,
   reviews: null,

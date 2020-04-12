@@ -1,7 +1,7 @@
 <template>
     <div class="innerco">
         <v-container>
-            <h3 class="subheading">Amenities</h3>
+            <h3 class="subheading">Amenities at {{ items[0].name }}</h3>
             <br>
             <v-card
             class="d-flex flex-row justify-space-between ml-3"
@@ -56,6 +56,7 @@
 <script>
 export default {
     name: 'Amenities',
+    props: ["items"],
     components: {
     }
 }

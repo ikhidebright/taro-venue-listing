@@ -113,6 +113,26 @@
           v-model='description'
           ></v-textarea>
       </v-col>
+<v-container>
+      <v-row>
+        <v-col cols="12" sm="6" md="6">
+         <div class="text-center">
+    <v-btn
+      x-large color="#001F90" dark block
+      @click="addvenue"
+    >
+     Save
+    </v-btn>
+
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+  </div>
+  </v-col>
+</v-row>
+</v-container>
+
+<h3 class="subheading mb-5">Now Answer some FAQ's abut your venue and upload Images</h3>
 
            <v-col cols="12" sm="6">
     <v-expansion-panels
@@ -125,9 +145,19 @@
         :key="i"
       >
         <v-expansion-panel-header>Item</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </v-expansion-panel-content>
+        <v-expansion-panel-content class="mt-4">
+        <v-text-field
+            label="Answer"
+            hint='Answer with Yes/No and explain your answers further'
+            v-model='city'
+            outlined
+          ></v-text-field> <v-btn
+      color="#001F90" dark
+      @click="addvenue"
+    >
+     Save
+    </v-btn>
+         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
   </v-col>
@@ -142,7 +172,7 @@
     counter
     label="Add images"
     multiple
-    placeholder="Select your files"
+    placeholder="Select Image"
     append-icon="mdi-camera"
     prepend-icon=""
     outlined
@@ -169,7 +199,7 @@
   </v-file-input>
     </v-col>
 
-<v-col cols="12" sm="6">
+<!-- <v-col cols="12" sm="6">
     <div class="d-flex mb-auto flex-wrap mt-1">
  <div
         v-for="item in 8" 
@@ -181,9 +211,8 @@
       src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       height="14vh"
       width='140'
-      @click='changePic()'
     > 
-    <v-col cols="12" sm="3">
+    <v-col cols="3" sm="3">
             <v-btn fab
         dark
         small
@@ -197,24 +226,7 @@
            </v-img>
      </div>
     </div>
-     </v-col>
-
-<v-row>
-        <v-col cols="12" sm="6" md="6">
-         <div class="text-center">
-    <v-btn
-      x-large color="#001F90" dark block
-      @click="addvenue"
-    >
-     Save
-    </v-btn>
-
-    <v-overlay :value="overlay">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
-    </v-overlay>
-  </div>
-  </v-col>
-</v-row>
+     </v-col> -->
      
       </v-container>
     </div>

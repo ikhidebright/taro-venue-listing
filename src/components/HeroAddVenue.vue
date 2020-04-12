@@ -1,5 +1,5 @@
 <template>
-<div class="addvenue">
+<div class="addvenue mt-12">
   <v-carousel hide-delimiters :show-arrows="false" touchless="true">
     <v-carousel-item
       v-for="(item,i) in items"
@@ -8,9 +8,10 @@
       transition="fade-transition"
     >
       <v-container>
-        <div class="word">
-        <h1>Reach out to millions of Nigerians Daily</h1>
-        <p>Use tora.ng to showcase your venue, skills and
+      
+        <div class="word mt-12">
+        <h1 class="display-2 font-weight-bold mt-12">Reach out to millions of Nigerians Daily</h1>
+        <p class="subtitle-1 font-weight-light">Use tora.ng to showcase your venue and
 event centers to millions. Make money faster</p>
         </div>
       </v-container>
@@ -46,8 +47,6 @@ event centers to millions. Make money faster</p>
 <style scoped>
 .word {
 color: white;
-margin: 10% 0 14% 0;
-width: 60%
 }
 
 .src {

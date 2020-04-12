@@ -8,7 +8,7 @@
     <div class="d-flex flex-row mb-1">
   <Sort2 />
   <div>
-    <h1 class="ml-5 mb-2">Venues for {{ $route.params.name.replace(/[-]+/g," ") }}</h1>
+    <h1 class="ml-5 mb-2">Your search for "{{ $route.query.q }}"</h1>
     <Sort />
     <div class="d-sm-flex flex-sm-column d-lg-flex flex-lg-row mb-6">
     <div v-for="item in items" :key="item.id">
@@ -39,16 +39,25 @@ export default {
   },
   data () {
     return {
-    items: []
   }
+ },
+
+ methods: {
  },
 
  created () {
       let id = this.$route.params.name.replace(/[-]+/g," ").toLowerCase()
-      axios.get(`http://localhost:8000/event/${id}`)
-      .then((res) => {
-        this.items = res.data.result
+      axios.get(`http://localhost:8000/places/${id}`)
+        .then((res) => {
+            this.$store.commit('setVenue', res.data.result)
+            this.$store.commit('setItem', res.data.result)
       })
+    },
+
+    computed: {
+      items () {
+        return this.$store.state.items
+      }
     }
 };
 </script>

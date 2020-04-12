@@ -59,8 +59,7 @@
     <v-card-actions>
       <v-btn
         color="red lighten-2"
-        outlined
-        tile
+        text 
         @click="reserve"
       >
         Reset
@@ -68,8 +67,8 @@
 
       <v-btn
         color="#001F90"
-        outlined
         tile
+        text 
         @click="reserve"
       >
         Apply Filter

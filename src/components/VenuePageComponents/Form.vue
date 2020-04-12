@@ -9,7 +9,22 @@
     <v-window v-model="step">
       <v-window-item :value="1">
       <v-card-title>
+      <v-row>
      <span class="headline ml-3">Book {{items[0].name}}</span>
+     <v-spacer></v-spacer>
+        <v-btn
+        fab
+        dark
+        color='red'
+        small
+        class="mr-4"
+        title="close"
+        @click="$emit('closemodal')"
+      >
+        <v-icon> mdi-close-circle</v-icon>
+      </v-btn>
+    
+     </v-row>
     </v-card-title>
 
         <v-card-text>
@@ -88,7 +103,22 @@
 
       <v-window-item :value="2">
       <v-card-title>
+      <v-row>
      <span class="headline ml-3">Price of {{items[0].name}}</span>
+     <v-spacer></v-spacer>
+        <v-btn
+        fab
+        dark
+        color='red'
+        small
+        class="mr-4"
+        title="close"
+        @click="$emit('closemodal')"
+      >
+        <v-icon> mdi-close-circle</v-icon>
+      </v-btn>
+    
+     </v-row>
     </v-card-title>
         <v-card-text> 
         <v-alert
@@ -136,7 +166,7 @@
          Venue Price
         </v-col>
         <v-col>
-         ₦300, 000
+         ₦{{items[0].price}}
         </v-col>
         </v-row>
         
@@ -177,9 +207,10 @@
         v-on="on"
         v-if="step === 2"
         flat
+        :value="halfprice"
         @click="payWithRave"
         >
-        Pay now
+        Pay ₦{{halfprice}} now
         </v-btn>
 
     </v-card-actions>
@@ -191,7 +222,6 @@
 
   export default {
     data: vm => ({
-      mainprice: 20000,
       email: '',
       phone: '',
       first_name: '',
@@ -220,7 +250,7 @@
       },
 
       halfprice () {
-          return this.mainprice/2
+          return this.items[0].price/2
       },
 
       computedDateFormatted () {
@@ -241,7 +271,7 @@
          window.getpaidSetup({
             PBFPubKey: "FLWPUBK_TEST-657128b0c9bc70a7e7ffbc030f57caaf-X",
             customer_email: this.email,
-            amount: 2000,
+            amount: this.items[0].price/2,
             customer_firstname: this.first_name,
             customer_lastname: this.last_name,
             customer_phone: this.phone,

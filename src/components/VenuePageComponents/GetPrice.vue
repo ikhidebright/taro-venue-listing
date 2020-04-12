@@ -23,7 +23,7 @@
         
       </template>
       <v-card>
-        <Form :items="items" :bookdetails='bookdetails'/>
+        <Form :items="items" :bookdetails='bookdetails' @closemodal='closemodal'/>
         <v-container>
       <!--  <v-card-actions>
           <v-spacer></v-spacer>
@@ -84,6 +84,9 @@ import Form from '@/components/VenuePageComponents/Form.vue'
     },
 
     methods: {
+      closemodal () {
+        this.dialog = false
+      },
       formatDate (date) {
         if (!date) return null
 

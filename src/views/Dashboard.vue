@@ -1,11 +1,28 @@
 <template>
     <div class="dashboard mt-12">
     <v-container>
-    <div class='headline font-weight-light mb-1 mt-4'>Ikhide Bright's venues</div>
+    <v-row class='mb-1 mt-4'>
+    <div class='headline font-weight-light text-capitalize'>{{ this.$store.state.user[0].last_name }}'s venues</div>
+    <v-spacer></v-spacer>
+    <v-btn color="#001F90" dark to='/propose'>Add Venue</v-btn>
+    </v-row>
     </v-container>
     <v-divider></v-divider>
     <v-container class="mt-5">
-    <DashboardVenueCards />
+
+     <!--if no venues starts -->
+   
+      <v-col cols="12" sm="12" md="12">
+      <p class="font-weight-light text-center mx-auto my-12 mt-12" v-if='venues.length < 1'>
+      Seems you don't have any Venue added yet, <router-link to='/propose'>Add one now!</router-link>
+      </p>
+      </v-col>
+
+    <!--if no venues end -->
+
+    <div v-for="venue in venues" :key="venue.id">
+    <DashboardVenueCards :venue="venue"/>
+    </div>
     </v-container>
     </div>
 </template>
@@ -17,6 +34,11 @@ export default {
     name: 'Dashboard',
     components: {
         DashboardVenueCards
+    },
+    computed: {
+        venues () {
+            return this.$store.state.loggedInOwnerVenues
+        }
     }
 }
 </script>
@@ -24,6 +46,7 @@ export default {
 <style scoped>
 .dashboard {
     background-color: #f1f1f1;
-    height: 90vh;
+    height: auto;
+   padding-bottom: 10vh;
 }
 </style>

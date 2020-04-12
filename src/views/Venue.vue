@@ -14,16 +14,24 @@
         small
         dark
         color='red'
-        class="mr-4 transperent"
-        :title="`Like ${items[0].name}`"
+        class="mr-4 transperent caption"
+        :title="liked ? `You already liked ${items[0].name}` : `Like ${items[0].name}`"
+        @click="like(items[0])"
       >
-        <v-icon>mdi-heart</v-icon> 25K
-      </v-btn>   
+        <v-icon>mdi-heart</v-icon> <span class="subheading caption">{{ items[0].likes }}</span>
+      </v-btn>  
+       <v-btn
+        small
+        :title="`${items[0].views} people has seen ${items[0].name}`"
+        class="mr-4 transperent caption"
+      >
+        <v-icon>mdi-eye</v-icon> <span class="subheading caption">{{ items[0].views }}</span>
+      </v-btn> 
           <v-btn
         small
         dark
         color='#325567'
-        class="mr-4 transperent"
+        class="mr-4 transperent subheading caption"
         :title="`${items[0].name} is available`"
       >
       Available
@@ -53,7 +61,7 @@
     </h1>
 
     <p class="ml-2 mt-1">
-       <router-link :to="`/cities/${items[0].city}`" class="li"> {{ items[0].city }}</router-link>, <router-link :to="`/cities/${items[0].state}`" class="li"> {{ items[0].state }}</router-link>
+       <router-link :to="`/cities/${items[0].city.replace(/[' ']+/g,'-').toLowerCase()}`" class="li"> {{ items[0].city }}</router-link>, <router-link :to="`/cities/${items[0].state.replace(/[' ']+/g,'-').toLowerCase()}`" class="li"> {{ items[0].state }}</router-link>
     </p>
 
     <v-rating
@@ -70,7 +78,7 @@
     <v-btn
     class="ma" outlined color="#001F90"
     text
-    :to="`/event/${items[0].type.toLowerCase()}`"
+    :to="`/event/${items[0].type.replace(/[' ']+/g,'-').toLowerCase()}`"
     small> 
     <v-icon class="mr-2" dense>home</v-icon>
     {{ items[0].type }}
@@ -84,9 +92,9 @@
 </v-btn>
 
     <v-card-actions>
-      <p class="font-weight-light">
-          A Conference Hall perfect for presentations or conferences for 15 guests (boardroom) fully equipped with Modern multimedia facilities to make your conference or meeting memorable.
-      </p>
+      <p class="font-weight-light mr-2">
+      {{ items[0].description }}
+        </p>
       <v-spacer></v-spacer>
       <v-speed-dial
       v-model="fab"
@@ -109,30 +117,33 @@
           <v-icon v-else title="Share venue">mdi-share-variant</v-icon>
         </v-btn>
       </template>
-      <v-btn
+       <div data-href="https://developers.facebook.com/docs/plugins/" 
+data-layout="button_count" data-size="small"><a target="_blank" 
+:href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost:8080${$route.path}&amp;src=sdkpreparse`" class="fb-xfbml-parse-ignore"> 
+<v-btn
         fab
         dark
         small
         color="indigo"
         title="Share on Facebook"
       >
-      <div data-href="https://developers.facebook.com/docs/plugins/" 
-data-layout="button_count" data-size="small"><a target="_blank" 
-:href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost:8080${$route.path}&amp;src=sdkpreparse`" class="fb-xfbml-parse-ignore">
-<v-icon>mdi-facebook</v-icon></a>
+    
+<v-icon>mdi-facebook</v-icon>
+</v-btn></a>
 </div>
-</v-btn>
+<a :href="`mailto:?subject=Check out ${items[0].name}&amp;body=Check out this site localhost:8080${$route.path}`"
+   title="Share by Email">
       <v-btn
         fab
         dark
         small
         color="black"
         title="Share via e-mail"
-        :to="`http://email.com`"
       >
         <v-icon>mdi-email</v-icon>
       </v-btn>
-      <v-btn
+      </a>
+     <!-- <v-btn
         fab
         dark
         small
@@ -141,7 +152,9 @@ data-layout="button_count" data-size="small"><a target="_blank"
         :to="`http://slack.com/${$route.params.name}`"
       >
         <v-icon>mdi-slack</v-icon>
-      </v-btn>
+      </v-btn> -->
+      <a class="twitter-share-button"
+  :href="`https://twitter.com/intent/tweet?text=Hello guys check out ${items[0].name}`">
       <v-btn
         fab
         dark
@@ -151,6 +164,7 @@ data-layout="button_count" data-size="small"><a target="_blank"
       >
         <v-icon>mdi-twitter</v-icon>
       </v-btn>
+      </a>
     </v-speed-dial>
     </v-card-actions>
     <v-expand-transition>
@@ -187,7 +201,8 @@ export default {
       right: true,
       bottom: true,
       left: false,
-      transition: 'slide-y-reverse-transition'
+      liked: false,
+      transition: 'slide-y-reverse-transition',
     }),
 
     components: {
@@ -198,8 +213,35 @@ export default {
         GetPrice
     },
     methods: {
-      changePic () {
-        alert('clicked')
+      view () {
+        axios.patch(`${this.$store.state.url}/view/${this.items[0].venue_id}`, {
+          view: this.items[0].views +1
+        }).then((res) => {
+         console.log(res)
+        })
+      },
+      checklike () {
+         let item = this.items[0].venue_id
+         let liked = localStorage.getItem(item)
+       if (liked == item) {
+         this.liked = true
+       } else {
+         this.liked = false
+       }
+      },
+      like (item) {
+        if (!this.liked) {
+        axios.patch(`${this.$store.state.url}/like/${item.venue_id}`, {
+          like: item.likes +1
+        }).then((res) => {
+          if (res.status == 200) {
+            this.liked = true
+            localStorage.setItem(item.venue_id, item.venue_id)
+          } else {
+            alert("Sorry an error occured")
+          }
+        })
+        }
       }
     },
     watch: {
@@ -214,6 +256,8 @@ export default {
           console.log(res)
           this.$store.commit("setReview", res.data.result)
         })
+      this.checklike()
+      this.view()
       }
     },
     computed: {
@@ -231,6 +275,10 @@ export default {
           default: return {}
         }
       },
+    },
+    created () {
+      this.checklike()
+      this.view()
     }
 }
 </script>
@@ -254,5 +302,9 @@ export default {
 
 .venuePage {
     background-color: #ffffff;
+}
+
+a {
+  text-decoration: none
 }
 </style>

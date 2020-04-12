@@ -30,7 +30,7 @@
           <v-row class=''>
           <v-col cols="12" sm="6" md="6">
            <v-select
-          :items="state"
+          :items="this.$store.state.venueTypeFilter"
           label="Venue type"
           v-model='venuetype'
           single-line
@@ -41,8 +41,30 @@
           <v-col cols="12" sm="6" md="6">
           <v-text-field
           type='number'
-            label="Capacity"
+            prefix= '₦'
+            label="Venue price"
+            v-model='price'
+            outlined
+          ></v-text-field>
+          </v-col>
+          </v-row>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="6">
+          <v-row class=''>
+          <v-col cols="12" sm="6" md="6">
+           <v-text-field
+          type='number'
+            label="Venue capacity"
             v-model='capacity'
+            outlined
+          ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="6">
+           <v-text-field
+            label="Street"
+            v-model='street'
             outlined
           ></v-text-field>
           </v-col>
@@ -82,6 +104,16 @@
           </v-row>
           </v-col>
 
+          <v-col cols="12" md="6">
+        <v-textarea
+          outlined
+          no-resize
+          name="input-7-4"
+          label="Venue Description"
+          v-model='description'
+          ></v-textarea>
+      </v-col>
+
            <v-col cols="12" sm="6">
     <v-expansion-panels
       inset
@@ -101,16 +133,6 @@
   </v-col>
 
   <br>
-
-          <v-col cols="12" md="6">
-        <v-textarea
-          outlined
-          no-resize
-          name="input-7-4"
-          label="Venue Description"
-          v-model='description'
-          ></v-textarea>
-      </v-col>
 
     <!-- adding images -->
 <v-col cols="12" sm="6" md="6">
@@ -182,9 +204,9 @@
          <div class="text-center">
     <v-btn
       x-large color="#001F90" dark block
-      @click="overlay = !overlay"
+      @click="addvenue"
     >
-     Submit Change Request
+     Save
     </v-btn>
 
     <v-overlay :value="overlay">
@@ -199,6 +221,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'AddVenue',
     data: () => ({
@@ -207,11 +231,34 @@ export default {
       venuename: '',
       venuetype: '',
       capacity: '',
+      price: '',
+      street: '',
       city: '',
       address: '',
       state: '',
       description: ''
     }),
+    methods: {
+      addvenue () {
+        this.overlay = !this.overlay
+        axios.post(`${this.$store.state.url}/addvenue`, {
+          name: this.venuename, 
+          description: this.description, 
+          street: this.street, 
+          city: this.city, 
+          state: this.state, 
+          type: this.venuetype, 
+          capacity: this.capacity, 
+          price: this.price,
+          address: this.address, 
+          lat: 0, 
+          log: 0, 
+          owner_id: this.$store.state.user[0].id
+        }).then((res) => {
+          console.log(res)
+        })
+      }
+    }
 }
 </script>
 

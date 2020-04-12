@@ -12,7 +12,7 @@
         small
         dark
         color='#325567'
-        class="mr-4 transperent"
+        class="mr-4 transperent subheading caption"
         title="Venue Status"
       >
       Available

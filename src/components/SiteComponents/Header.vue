@@ -8,16 +8,20 @@
     >
 
 
-      <v-toolbar-title class='logo mr-12'>taro</v-toolbar-title>
+      <v-toolbar-title class='logo mr-12' to='/'>taro</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-text-field
         hide-details
-        append-icon="search"
+        color="#001F90"
+        prepend-inner-icon="search"
         label='Search venue, location'
         class='mr-12'
+        @keyup="search"
         dense
+        v-model='src'
+        rounded
         single-line
         outlined
       ></v-text-field>
@@ -71,7 +75,7 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>Ikhide Bright</v-list-item-title>
+              <v-list-item-title>Ikhide Bright </v-list-item-title>
               <!-- <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle> -->
             </v-list-item-content>
 
@@ -146,16 +150,43 @@
 </template>
 
 <script>
+import store from '@/store'
+import axios from 'axios'
+
   export default {
     data: () => ({
       drawer: false,
+      src: '',
       item: 0,
       items: [
         { text: 'Manage venue', icon: 'mdi-folder', link: '/dashboard' },
         { text: 'Add a venue', icon: 'mdi-account-multiple', link: '/propose' },
-        { text: 'Account settings', icon: 'mdi-cogs', link: '/settings' }
+        { text: 'Account settings', icon: 'mdi-cogs', link: '/settings' },
+        { text: 'Log out', icon: 'mdi-power-plug-off', link: '/' }
       ],
     }),
+    computed: {
+      first_name () {
+        return store.state.user[0].first_name
+      },
+
+      last_name () {
+        return store.state.user[0].last_name
+      }
+    },
+    methods: {
+      search (e) {
+        if (e.keyCode === 13) {
+          axios.get(`http://localhost:8000/search/${this.src}`)
+        .then((res) => {
+            this.$store.commit('setVenue', res.data.result)
+            this.$store.commit('setItem', res.data.result)
+      })
+          this.$router.push({ path: 'search', query: { q: this.src } })
+          this.src = ''
+        }
+      }
+    }
   }
 </script>
 

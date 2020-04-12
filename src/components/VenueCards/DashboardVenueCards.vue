@@ -1,5 +1,5 @@
 <template>
-<div class='main'>
+<div class='main mb-9'>
 <v-row dense>
         <v-col cols="12" sm='12' lg='9'>
           <v-card
@@ -18,23 +18,30 @@
               </v-avatar>
              </div>
               <div>
-              <v-card-title class="headline">Digworths services</v-card-title>
-            <v-card-subtitle>Ikoyi, Lagos</v-card-subtitle>
-            <p class="ml-4 body-2">A Conference Hall perfect for presentations or conferences for 15 guests (boardroom) fully equipped with Modern multimedia facilities to make your conference or meeting memorable.</p>
+              <v-card-title class="headline">{{venue.name}}</v-card-title>
+            <v-card-subtitle>{{venue.city}}, {{venue.state}}</v-card-subtitle>
+            <p class="ml-4 body-2">{{ venue.description }}</p>
                </div>
          </div>
              <v-card-actions>
-              <v-btn text to='/manage'>Manage</v-btn>
+              <v-btn text :to="`/manage/${venue.venue_id}-${venue.name.replace(/[' ']+/g,'-').toLowerCase()}`">Manage</v-btn>
               <v-spacer></v-spacer>
-         <v-btn
+          <v-btn
         small
+        dark
         color='#325567'
-        class="mr-4 transperent"
-        mailto="http://facebook.com/taro"
-        title="views"
+        class="mr-4 transperent caption"
       >
-        <v-icon>mdi-eye</v-icon> 25K
-      </v-btn>
+        <v-icon>mdi-eye</v-icon> <span class="subheading caption">{{ venue.views }}</span>
+      </v-btn> 
+       <v-btn
+        small
+        dark
+        color='#325567'
+        class="mr-4 transperent caption"
+      >
+        <v-icon>mdi-heart</v-icon> <span class="subheading caption">{{ venue.likes }}</span>
+      </v-btn> 
       <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green"></v-switch>
             </v-card-actions>
           </v-card>
@@ -46,6 +53,7 @@
 <script>
 export default {
     name: 'VenueCard',
+    props: ["venue"],
     data () {
       return {
         message: false

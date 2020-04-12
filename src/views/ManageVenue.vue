@@ -17,8 +17,8 @@
 
       <v-col cols="12" sm="6" md="6">
           <v-text-field
-            label="Venue name"
-            value="Digworths services"
+            :label="venue.name"
+            :value="venue.name"
             outlined
           ></v-text-field>
           </v-col>
@@ -203,6 +203,13 @@ export default {
       files: [],
       state: ['Abia', 'Edo']
     }),
+    computed: {
+      venue () {
+        return this.$store.state.loggedInOwnerVenues.filter((item) => {
+          item.id == parseInt(this.$route.params.id)
+        })
+      }
+    }
 }
 </script>
 

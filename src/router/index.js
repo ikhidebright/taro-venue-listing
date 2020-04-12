@@ -13,6 +13,7 @@ import Event from "../views/Event.vue";
 import Cities from "../views/Cities.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AddNewVenue from "../views/AddNewVenue.vue";
+import HeadSearch from "../views/HeadSearch.vue";
 import axios from 'axios'
 import store from '@/store'
 
@@ -23,6 +24,20 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/search",
+    name: "HeadSearch ",
+    component: HeadSearch,
+    props: (route) => ({ query: route.query.q }),
+    beforeEnter: (to, from, next) => {
+      axios.get(`http://localhost:8000/search/${to.query.q}`)
+        .then((res) => {
+          store.commit('setVenue', res.data.result)
+          store.commit('setItem', res.data.result)
+          next()
+      })
+    }
   },
   {
     path: "/propose",
@@ -45,7 +60,7 @@ const routes = [
     component: Bookings
   },
   {
-    path: "/manage",
+    path: "/manage/:id-:name",
     name: "ManageVenue",
     component: ManageVenue
   },

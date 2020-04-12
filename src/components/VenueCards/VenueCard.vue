@@ -11,8 +11,8 @@
         small
         dark
         color='#325567'
-        class="mr-4 transperent"
-        title="Venue Status"
+        class="mr-4 transperent subheading caption"
+        :title="`${item.name} is Available`"
       >
       Available
       </v-btn></v-img>

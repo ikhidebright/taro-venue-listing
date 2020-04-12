@@ -85,7 +85,7 @@ people. It’s free and convinient</p>
              <li>
          <h4>Events</h4></li>
              <li v-for="topevent in topEvents" :key="topevent">
-                 <router-link :to="`/event/${topevent.toLowerCase()}`" class="li">{{ topevent }}</router-link>
+                 <router-link :to="`/event/${topevent.replace(/[' ']+/g,'-').toLowerCase()}`" class="li">{{ topevent }}</router-link>
              </li>
          </ul>
             </v-card>
@@ -97,7 +97,7 @@ people. It’s free and convinient</p>
              <li>
          <h4>Top Cities</h4></li>
              <li v-for="topcity in topCities" :key="topcity" @click="city(topcity)">
-                 <router-link :to="`/cities/${topcity}`" class="li">{{ topcity }}</router-link>
+                 <router-link :to="`/cities/${topcity.replace(/[' ']+/g,'-').toLowerCase()}`" class="li">{{ topcity }}</router-link>
              </li>
          </ul>
             </v-card>

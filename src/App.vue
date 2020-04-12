@@ -45,4 +45,8 @@ font-family: 'Open Sans';
   font-family: 'Righteous';
   font-size: 4.5vmin
 }
+
+a {
+  text-decoration: none
+}
 </style>

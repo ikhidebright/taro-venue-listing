@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from 'axios'
 
 Vue.use(Vuex);
 
@@ -7,6 +8,9 @@ export default new Vuex.Store({
   state: {
   url: 'http://localhost:8000',
   booking: null,
+  user: null,
+  loggedInOwnerVenues: null,
+  isLoggedIn: null,
   venued: null,
   items: null,
   reviews: null,
@@ -86,6 +90,17 @@ export default new Vuex.Store({
       state.booking = item
     },
 
+    setLoggedinOwnerVenues (state, item) {
+      state.loggedInOwnerVenues = item
+    },
+
+    setUser (state, item) {
+      state.user = item
+      if(state.user) {
+        state.isLoggedIn = true
+      }
+    },
+
     setLogin (state, item) {
       state.logindetails = item
     },
@@ -100,6 +115,12 @@ export default new Vuex.Store({
     
     setItem (state, item) {
       state.items = item
+    }
+  },
+  getters: {
+    myvenues: async (state) => {
+      let x = axios.get(`${state.url}/ownervenue/${state.user[0].id}`)
+              return x
     }
   },
   actions: {},

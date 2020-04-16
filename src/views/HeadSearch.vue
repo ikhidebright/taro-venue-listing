@@ -31,7 +31,7 @@ import Sort2 from "@/components/SiteComponents/Sort2.vue";
 import axios from 'axios'
 
 export default {
-  name: "Home",
+  name: "HeadSearch",
   components: {
     VenueCard,
     Sort,

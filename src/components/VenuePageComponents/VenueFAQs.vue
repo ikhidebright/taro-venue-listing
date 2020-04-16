@@ -1,6 +1,7 @@
 <template>
+<div class="innercom mt-5">
 <v-container>
-    <h3 class="subheading mt-9">FAQs For {{ items[0].name }}</h3>
+    <h3 class="subheading">FAQs For {{ items[0].name }}</h3>
     <br>
     <v-card 
     max-width="804"
@@ -27,6 +28,7 @@
   </v-row>
     </v-card>
 </v-container>
+</div>
 </template>
 
 <script>

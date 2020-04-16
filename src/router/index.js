@@ -78,6 +78,11 @@ const routes = [
         .then((res) => {
           store.commit("setReview", res.data.result)
         })
+
+        this.$store.dispatch({
+          type: 'getAmenities',
+          id: to.params.id
+    })
     }
   },
   {

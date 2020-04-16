@@ -7,7 +7,6 @@
   class="d-none d-lg-flex d-xl-flex mr-3 price2"
   v-on="on"
   flat
-  tile
   >
   Request Reservation</v-btn>
 
@@ -25,23 +24,6 @@
       <v-card>
         <Form :items="items" :bookdetails='bookdetails' @closemodal='closemodal'/>
         <v-container>
-      <!--  <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn 
-        color="red lighten-2"
-        outlined
-        tile
-        @click="dialog = false">
-        Close
-        </v-btn>
-          <v-btn 
-        color="#001F90"
-        outlined
-        tile 
-        @click="dialog = false">
-        See Price
-        </v-btn>
-        </v-card-actions> -->
          </v-container>
       </v-card>
     </v-dialog>

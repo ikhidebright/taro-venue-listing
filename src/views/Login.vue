@@ -1,10 +1,10 @@
 <template>
-  <div class="login mt-5">
+  <div class="login mt-5 mbb-12">
   <br>
   <br>
   <v-container>
-  <v-col cols="12" sm="12" md="12">
-  <v-alert
+  <v-col cols="12" sm="6" md="6">
+ <!-- <v-alert
       color="green"
       dark
       class="pa-5"
@@ -12,7 +12,7 @@
       dense
     >
       Registration Succesfull Login your account now to add venues!
-    </v-alert>
+    </v-alert> -->
 
      <v-alert
       dark
@@ -30,14 +30,15 @@
         </v-container>
   <v-card
     :loading="loading"
-    class="mx-auto my-12 mt-1"
+    shaped
+    class="mx-auto my-12 mt-1 mb-12"
     max-width="374"
     sm='flat'
   >
       <v-col cols="12" sm="12" md="12">
-
-      <h2>Login</h2>
-
+<div class="text-center ma-2">
+      <i class="fas fa-user-circle text-center"></i>
+</div>
       <br>
 
           <v-text-field
@@ -65,6 +66,7 @@
           >Login</v-btn>
         </v-col>
     </v-card>
+    <br>
   </div>
 </template>
 
@@ -82,10 +84,6 @@ import axios from 'axios'
       email: '',
       id: ''
     }),
-    /**data: () => ({
-        password: this.$store.state.logindetails.password || this.password,
-        email: this.$store.state.logindetails.email || this.email,
-    }), **/
     methods: {
       login () {
         this.loading = true
@@ -150,6 +148,10 @@ import axios from 'axios'
 
 <style scoped>
 .login {
-  height: 90vh
+  height: auto
+}
+
+i {
+  font-size: 12vmin
 }
 </style>

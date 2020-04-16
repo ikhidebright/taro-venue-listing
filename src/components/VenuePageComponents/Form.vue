@@ -45,6 +45,7 @@
               v-model="dateFormatted"
               label="*Event Date"
               outlined
+              :allowed-dates="allowedDates"
               @blur="date = parseDate(dateFormatted)"
               v-on="on"
             ></v-text-field>
@@ -181,13 +182,13 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-btn
+    <!--  <v-btn
         :disabled="step === 1"
         text
         @click="step--"
       >
         Back
-      </v-btn>
+      </v-btn> -->
       <v-spacer></v-spacer>
       <v-btn
         :disabled="step === 2 || email.length < 5 || first_name.length < 2 || last_name.length < 2 || phone.length < 9 || event === ''"
@@ -219,6 +220,7 @@
 
 <script>
 /* eslint-disable no-unused-vars */
+import axios from 'axios'
 
   export default {
     data: vm => ({
@@ -314,6 +316,7 @@
       },
     
         next () {
+          this.book()
           let book = {
           email: this.email,
           phone: this.phone,
@@ -325,7 +328,22 @@
             this.step++
             this.$store.commit("setBook", book)
         },
-        
+
+        book () {
+          axios.post(`${this.$store.state.url}/book`, {
+          email: this.email,
+          phone_number: this.phone,
+          first_name: this.first_name,
+          last_name: this.last_name,
+          event_date: this.dateFormatted,
+          event_type: this.event,
+          venue_id: this.items[0].venue_id
+          }).then((res) => {
+            console.log(res)
+          })
+        },
+
+        allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
     }
   }
 </script>

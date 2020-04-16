@@ -7,6 +7,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
   url: 'http://localhost:8000',
+  insertvenueid: null,
+  insertvenuename: null,
+  insertquestionid: null,
   booking: null,
   user: null,
   loggedInOwnerVenues: null,
@@ -15,7 +18,27 @@ export default new Vuex.Store({
   items: null,
   reviews: null,
   venues: null,
+  displayamenities: [],
   logindetails: null,
+  amenities: [
+'Air Conditioner',
+'Chairs',
+'Changing Room',
+'Cold Room',
+'Drums',
+'Fans',
+'Internet',
+'Lighting',
+'Parking Space',
+'Power supply',
+'Projector',
+'Rest Room',
+'Security',
+'Sound System',
+'Stage',
+'Tables',
+'Television',
+'Writing Board'],
   states: [
     'Abia',
     'Abuja',
@@ -86,8 +109,17 @@ export default new Vuex.Store({
       state.venues = item
     },
 
+    setAmenities (state, item) {
+      state.displayamenities = item
+    },
+
     setBook (state, item) {
       state.booking = item
+    },
+
+    setInsertVenue (state, item) {
+      state.insertvenueid = item.id
+      state.insertvenuename = item.name
     },
 
     setLoggedinOwnerVenues (state, item) {
@@ -103,6 +135,10 @@ export default new Vuex.Store({
 
     setLogin (state, item) {
       state.logindetails = item
+    },
+
+    setQuestionId (state, item) {
+      state.insertquestionid = item
     },
 
     setVenueD (state, item) {
@@ -121,8 +157,25 @@ export default new Vuex.Store({
     myvenues: async (state) => {
       let x = axios.get(`${state.url}/ownervenue/${state.user[0].id}`)
               return x
+    },
+    addamenities: (state) => (arr, id) => {
+      let x;
+      arr.forEach((item) => {
+        axios.post(`${state.url}/amenities`, {
+          indexer: item,
+          venue_id: id
+        }).then((res) => {
+          x = res
+        })
+      })
+      return x
     }
   },
-  actions: {},
+  actions: {
+     async getAmenities ({ state, commit }, id) {
+      let item = await axios.get(`${state.url}/amenities/${id.id}`)
+      commit('setAmenities', item.data.result)
+    }
+  },
   modules: {}
 });

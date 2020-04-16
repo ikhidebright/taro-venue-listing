@@ -16,7 +16,7 @@
         color="#001F90"
         prepend-inner-icon="search"
         label='Search venue, location'
-        class='mr-lg-12 mr-sm-2'
+        class='mr-lg-12 mr-2'
         @keyup="search"
         dense
         v-model='src'
@@ -38,55 +38,46 @@
          List your venue
         </v-btn>
 
+<v-divider :inset="inset" vertical v-if="this.$store.state.isLoggedIn" class='hidden-sm-and-down'></v-divider>
+          <v-btn text to='/propose' class='hidden-sm-and-down mr-0' v-if="this.$store.state.isLoggedIn">
+         Add a venue
+        </v-btn>
+        <v-divider :inset="inset" vertical v-if="this.$store.state.isLoggedIn" class='hidden-sm-and-down'></v-divider>
+
       </v-toolbar-items>
 
-       <v-app-bar-nav-icon @click="drawer = true" class='hidden-lg-and-up'></v-app-bar-nav-icon>
+       <v-app-bar-nav-icon @click="drawer = true" class='hidden-lg-and-up' v-if="!this.$store.state.isLoggedIn"></v-app-bar-nav-icon>
 
        <v-menu
       v-model="menu"
-      :close-on-content-click="false"
-      open-on-hover
+      :close-on-content-click="true"
+      open-on-click
       :nudge-width="200"
       offset-x
+      class="mr-lg-9"
       transition="scale-transition"
       v-if="this.$store.state.isLoggedIn"
     >
       <template v-slot:activator="{ on }">
-        
-          <v-avatar color="indigo"
-          dark
-          v-on="on">
-      <v-icon dark>mdi-account-circle</v-icon>
-    </v-avatar>
+        <v-toolbar-items class=''>
+          <v-btn
+          v-on="on"
+          text
+          class="mr-lg-n4">
+      <v-icon dark>mdi-menu</v-icon>
+    </v-btn>
+    </v-toolbar-items>
 
-    <!-- <v-avatar>
-      <img
-        src="https://cdn.vuetifyjs.com/images/john.jpg"
-        alt="John"
-      >
-    </v-avatar> -->
       </template>
       <v-card>
         <v-list>
           <v-list-item>
-            <v-list-item-avatar>
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-            </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>Ikhide Bright </v-list-item-title>
+              <v-list-item-title><b>Ikhide Bright</b> </v-list-item-title>
               <!-- <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle> -->
             </v-list-item-content>
 
-            <v-list-item-action>
-              <!-- <v-btn
-                :class="fav ? 'red--text' : ''"
-                icon
-                @click="fav = !fav"
-              >
-                <v-icon>mdi-heart</v-icon>
-              </v-btn> -->
-            </v-list-item-action>
           </v-list-item>
         </v-list>
 
@@ -159,7 +150,7 @@ import axios from 'axios'
       item: 0,
       items: [
         { text: 'Manage venue', icon: 'mdi-folder', link: '/dashboard' },
-        { text: 'Add a venue', icon: 'mdi-account-multiple', link: '/propose' },
+        { text: 'Add a venue', icon: 'mdi-clipboard-plus', link: '/propose' },
         { text: 'Account settings', icon: 'mdi-cogs', link: '/settings' },
         { text: 'Log out', icon: 'mdi-power-plug-off', link: '/' }
       ],
@@ -200,7 +191,7 @@ border-bottom: 5px solid green;
 
 @media only screen and (min-width: 600px) {
 /deep/ .v-text-field{
-      width: 2px;
+      width: 0px;
 }
 }
 </style>

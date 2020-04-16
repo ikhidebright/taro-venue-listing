@@ -218,7 +218,7 @@ ul {
 
 .foot i {
     color: white;
-    font-size: 4vmin;
+    font-size: 2vmin;
     font-family: 'Open Sans';
 }
 

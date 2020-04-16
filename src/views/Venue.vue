@@ -15,7 +15,8 @@
         dark
         color='red'
         class="mr-4 transperent caption"
-        :title="liked ? `You already liked ${items[0].name}` : `Like ${items[0].name}`"
+        :title="liked && items[0].likes > 1 ? `You and ${items[0].likes - 1} others like ${items[0].name}` : 
+                liked && items[0].likes < 1 ? `You like ${items[0].name}` : `Like ${items[0].name}`"
         @click="like(items[0])"
       >
         <v-icon>mdi-heart</v-icon> <span class="subheading caption">{{ items[0].likes }}</span>
@@ -61,7 +62,7 @@
     </h1>
 
     <p class="ml-2 mt-1">
-       <router-link :to="`/cities/${items[0].city.replace(/[' ']+/g,'-').toLowerCase()}`" class="li"> {{ items[0].city }}</router-link>, <router-link :to="`/cities/${items[0].state.replace(/[' ']+/g,'-').toLowerCase()}`" class="li"> {{ items[0].state }}</router-link>
+    <v-icon class="mr-2" dense>mdi-map-marker</v-icon>   <router-link :to="`/cities/${items[0].city.replace(/[' ']+/g,'-').toLowerCase()}`" class="li"> {{ items[0].city }}</router-link>, <router-link :to="`/cities/${items[0].state.replace(/[' ']+/g,'-').toLowerCase()}`" class="li"> {{ items[0].state }}</router-link>
     </p>
 
     <v-rating
@@ -92,7 +93,7 @@
 </v-btn>
 
     <v-card-actions>
-      <p class="font-weight-light mr-2">
+      <p class="font-weight-light body-1 mr-2">
       {{ items[0].description }}
         </p>
       <v-spacer></v-spacer>
@@ -174,8 +175,8 @@ data-layout="button_count" data-size="small"><a target="_blank"
     </v-expand-transition>
   </v-card>
   </v-container>
-  <Amenities :items="items"/>
   <GetPrice :items="items"/>
+  <Amenities :items="items" :displayamenities="displayamenities" :amenities="amenities"/>
   <VenueFAQs :items="items"/>
   <Map :items="items"/>
   <CustomersReview :items="items" :reviews="reviews"/>
@@ -261,6 +262,12 @@ export default {
         })
       this.checklike()
       this.view()
+
+      //set amenities
+      this.$store.dispatch({
+          type: 'getAmenities',
+          id: this.$route.params.id
+    })
       }
     },
     computed: {
@@ -270,6 +277,15 @@ export default {
       reviews () {
         return this.$store.state.reviews
       },
+
+      displayamenities () {
+        return this.$store.state.displayamenities
+      },
+
+      amenities () {
+        return this.$store.state.amenities
+      },
+
       activeFab () {
         switch (this.tabs) {
           case 'one': return { class: 'purple', icon: 'account_circle' }
@@ -282,6 +298,12 @@ export default {
     created () {
       this.checklike()
       this.view()
+
+      //set amenities
+      this.$store.dispatch({
+          type: 'getAmenities',
+          id: this.$route.params.id
+    })
     }
 }
 </script>

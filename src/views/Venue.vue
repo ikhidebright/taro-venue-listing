@@ -177,7 +177,7 @@ data-layout="button_count" data-size="small"><a target="_blank"
   </v-container>
   <GetPrice :items="items"/>
   <Amenities :items="items" :displayamenities="displayamenities" :amenities="amenities"/>
-  <VenueFAQs :items="items"/>
+  <VenueFAQs :items="items" :questionsandanswers="questionsandanswers"/>
   <Map :items="items"/>
   <CustomersReview :items="items" :reviews="reviews"/>
   <NearbyVenues :items="items"/>
@@ -268,6 +268,12 @@ export default {
           type: 'getAmenities',
           id: this.$route.params.id
     })
+
+  //set Questions and answers
+    this.$store.dispatch({
+      type: "getQuestionsandanswers",
+      id: this.$route.params.id
+    })
       }
     },
     computed: {
@@ -284,6 +290,10 @@ export default {
 
       amenities () {
         return this.$store.state.amenities
+      },
+
+      questionsandanswers () {
+        return this.$store.state.questionsandanswers
       },
 
       activeFab () {
@@ -303,6 +313,12 @@ export default {
       this.$store.dispatch({
           type: 'getAmenities',
           id: this.$route.params.id
+    })
+
+    //set Questions and answers
+    this.$store.dispatch({
+      type: "getQuestionsandanswers",
+      id: this.$route.params.id
     })
     }
 }

@@ -207,11 +207,24 @@
 
   <br>
   <Addmap :insertedName="insertedName"/>
+
+<br>
+
+<p class="font-weight-bold ml-3">Is this map location correct for your venue</p>
+
+<div class="ml-3">
+  <v-checkbox
+      v-model="checkbox"
+      input-value="checkbox"
+      :label="checkbox? 'Yes, the map location is correct' : 'No, map location is wrong'"
+        ></v-checkbox>
+        </div>
+
  <br>
   <v-col cols="12" sm="6" md="6">
     <v-btn
       color="#001F90" dark
-      @click="e1 = 3"
+      @click="addMap"
     >
      Continue
     </v-btn>
@@ -310,6 +323,7 @@ export default {
     data: () => ({
       e1: 1,
       answer: "",
+      checkbox: false,
       files: [],
       amenity: [],
       venuename: '',
@@ -372,6 +386,16 @@ export default {
           this.answer  = ""
           console.log(res)
         })
+      },
+      addMap () {
+        axios.patch(`${this.$store.state.url}/showmap/${this.insertedId}`, {
+          show_map: this.checkbox
+        }).then((res) => {
+          if (res.status == 200) {
+          this.e1 = 3
+          console.log(res)
+          }
+        })
       }
     },
     created () {},
@@ -383,55 +407,55 @@ export default {
         let x = [
              {
               id: 1,
-              ques: `Does ${this.$store.state.insertvenuename} have Restrooms?`
+              ques: `Does ${this.insertedName} have Restrooms?`
                }, 
              {
                id: 2,
-               ques: `Does ${this.$store.state.insertvenuename} provide power?`
+               ques: `Does ${this.insertedName} provide power?`
                }, 
               {
                 id: 3,
-                ques: `What type of chairs does ${this.$store.state.insertvenuename} provide?`
+                ques: `What type of chairs does ${this.insertedName} provide?`
                 },
               {
                 id: 4,
-                ques: `Is there parking space at ${this.$store.state.insertvenuename}?`
+                ques: `Is there parking space at ${this.insertedName}?`
               },
               {
                 id: 5,
-                ques: `Does ${this.$store.state.insertvenuename} allow external Decorator?`
+                ques: `Does ${this.insertedName} allow external Decorator?`
                 },
               {
                 id: 6,
-                ques: `Does ${this.$store.state.insertvenuename} provide security?`
+                ques: `Does ${this.insertedName} provide security?`
                 },
               {
                 id: 7,
-                ques: `Does ${this.$store.state.insertvenuename} provide projector?`
+                ques: `Does ${this.insertedName} provide projector?`
                 },
               {
                 id: 8,
-                ques: `What type of flooring does ${this.$store.state.insertvenuenamee} have?`
+                ques: `What type of flooring does ${this.insertedName} have?`
               },
               {
                 id: 9, 
-                ques: `What type of tables does ${this.$store.state.insertvenuenamee} Provide?`
+                ques: `What type of tables does ${this.insertedName} Provide?`
                 },
               {
                 id: 10, 
-                ques: `Does ${this.$store.state.insertvenuename} have Drappings?`
+                ques: `Does ${this.insertedName} have Drappings?`
                 },
               {
                 id: 11,
-                ques: `Does ${this.$store.state.insertvenuename} have Chandelier?`
+                ques: `Does ${this.insertedName} have Chandelier?`
                 },
               {
                 id: 12,
-                ques: `Does ${this.$store.state.insertvenuename} have a stage?`
+                ques: `Does ${this.insertedName} have a stage?`
                 },
               {
                 id: 13,
-                ques: `Does ${this.$store.state.insertvenuename} have Changing room?`
+                ques: `Does ${this.insertedName} have Changing room?`
                 },
               {
                 id: 14,

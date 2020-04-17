@@ -35,6 +35,7 @@ font-family: 'Merriweather Sans';
   padding: 5vmin 0 0 0;
   margin: 5vmin 0 5vmin 0;
   border-top: 1px solid #f2f2f2;
+  z-index: 0;
 }
 
 p {
@@ -43,7 +44,6 @@ font-family: 'Open Sans';
 
 .logo {
   font-family: 'Righteous';
-  font-size: 4.5vmin
 }
 
 a {

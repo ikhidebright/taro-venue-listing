@@ -2,7 +2,7 @@
     <div class="dashboard mt-12">
     <v-container>
     <v-row class='mb-1 mt-4'>
-    <div class='headline font-weight-light text-capitalize ml-3'>{{ this.$store.state.user[0].last_name }}'s venues</div>
+    <div class='headline font-weight-light text-capitalize ml-3'>{{ name[0].last_name }}'s venues</div>
     <v-spacer></v-spacer>
    <!-- <v-btn color="#001F90" dark to='/propose' class="mr-3">Add Venue</v-btn> -->
     </v-row>
@@ -38,7 +38,10 @@ export default {
     computed: {
         venues () {
             return this.$store.state.loggedInOwnerVenues
-        }
+        },
+        name () {
+            return this.$store.state.user
+      }
     }
 }
 </script>

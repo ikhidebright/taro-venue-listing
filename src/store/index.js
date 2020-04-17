@@ -10,6 +10,7 @@ export default new Vuex.Store({
   insertvenueid: null,
   insertvenuename: null,
   insertquestionid: null,
+  questionsandanswers: null,
   booking: null,
   user: null,
   loggedInOwnerVenues: null,
@@ -128,13 +129,19 @@ export default new Vuex.Store({
 
     setUser (state, item) {
       state.user = item
-      if(state.user) {
+      if(state.user && state.user != null) {
         state.isLoggedIn = true
+      } else {
+        state.isLoggedIn = false
       }
     },
 
     setLogin (state, item) {
       state.logindetails = item
+    },
+
+    setQuestionsandanswers (state, item) {
+      state.questionsandanswers = item
     },
 
     setQuestionId (state, item) {
@@ -175,7 +182,12 @@ export default new Vuex.Store({
      async getAmenities ({ state, commit }, id) {
       let item = await axios.get(`${state.url}/amenities/${id.id}`)
       commit('setAmenities', item.data.result)
-    }
+    },
+
+    async getQuestionsandanswers ({ state, commit }, id) {
+      let item = await axios.get(`${state.url}/questionsandanswers/${id.id}`)
+      commit('setQuestionsandanswers', item.data.result)
+    } 
   },
   modules: {}
 });

@@ -1,5 +1,5 @@
 <template>
-<div class="innercom mt-5">
+<div class="innercom mt-5" v-if="questionsandanswers.length > 0">
 <v-container>
     <h3 class="subheading">FAQs For {{ items[0].name }}</h3>
     <br>
@@ -15,14 +15,15 @@
       text
       >
       <v-expansion-panel
-        v-for="(item,i) in 5"
-        :key="i"
+        v-for="item in questionsandanswers"
+        :key="item.id"
          max-width="804"
       >
-        <v-expansion-panel-header>Item</v-expansion-panel-header>
+        <v-expansion-panel-header> <b> {{ item.ques }} </b></v-expansion-panel-header>
         <v-expansion-panel-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </v-expansion-panel-content>
+        <br>
+        {{ item.answer }}
+         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
   </v-row>
@@ -34,7 +35,7 @@
 <script>
 export default {
     name: 'VenueFAQs',
-    props: ["items"]
+    props: ["items", "questionsandanswers"]
 }
 </script>
 

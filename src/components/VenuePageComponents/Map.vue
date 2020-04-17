@@ -1,7 +1,7 @@
 <template>
-    <div class="manage">
+    <div class="innercom" v-if="items[0].show_map === 1">
     <v-container>
-    <h3 class="subheading mb-9 mt-9">Map location for {{ items[0].name }}</h3>
+    <h3 class="subheading mb-9 mt-0">Map location for {{ items[0].name }}</h3>
      <v-card 
     max-width="804"
     height="400"

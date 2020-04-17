@@ -11,7 +11,7 @@
   Request Reservation</v-btn>
 
   <v-btn color="#001F90"
-  class="d-lg-none price"
+  class="d-lg-none price mb-n4"
   v-on="on"
   fixed = true
   flat

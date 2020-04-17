@@ -74,7 +74,7 @@
           <v-list-item>
 
             <v-list-item-content>
-              <v-list-item-title><b>Ikhide Bright</b> </v-list-item-title>
+              <v-list-item-title><b>{{ name[0].first_name }} {{ name[0].last_name }}</b> </v-list-item-title>
               <!-- <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle> -->
             </v-list-item-content>
 
@@ -96,7 +96,9 @@
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
 
-            <v-list-item-content>
+            <v-list-item-content 
+            @click="leave(item.text)"
+            >
               <v-list-item-title v-text="item.text"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -152,16 +154,12 @@ import axios from 'axios'
         { text: 'Manage venue', icon: 'mdi-folder', link: '/dashboard' },
         { text: 'Add a venue', icon: 'mdi-clipboard-plus', link: '/propose' },
         { text: 'Account settings', icon: 'mdi-cogs', link: '/settings' },
-        { text: 'Log out', icon: 'mdi-power-plug-off', link: '/' }
+        { text: 'Log out', icon: 'mdi-power-plug-off', link: '/'}
       ],
     }),
     computed: {
-      first_name () {
-        return store.state.user[0].first_name
-      },
-
-      last_name () {
-        return store.state.user[0].last_name
+     name () {
+        return store.state.user
       }
     },
     methods: {
@@ -174,6 +172,14 @@ import axios from 'axios'
       })
           this.$router.push({ path: 'search', query: { q: this.src } })
           this.src = ''
+        }
+      },
+      logout () {
+        this.$store.commit("setUser", null)
+      },
+      leave (x) {
+        if (x === 'Log out') {
+          this.logout()
         }
       }
     }

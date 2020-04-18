@@ -4,17 +4,17 @@
             class="d-flex flex-row justify-space-between ml-lg-3 ml-sm-n9 mb-12 mb-lg-0"
             max-width="1100px"
             flat
-            color="black"
+            color="#08192b"
             tile
     >
 
     <v-card flat
-            color="black"
+            color="#08192b"
             class="foot hidden-sm-and-down">
          <ul>
              <li>
-         <h2>Get More Bookings For Yor Venue</h2></li>
-         <p>List your venue on tora.ng and reach more
+         <h2 class="title">Get More Bookings For Yor Venue</h2></li>
+         <p class="body-2 font-weight-light">List your venue on tora.ng and reach more
 people. It’s free and convinient</p>
            <v-row>
         <v-col cols="12" sm="6">
@@ -23,7 +23,7 @@ people. It’s free and convinient</p>
             single-line
             outlined
             dark
-            color='white'
+            color='#cfd9e0'
           ></v-text-field>
         </v-col>
 
@@ -32,7 +32,7 @@ people. It’s free and convinient</p>
             type="tel"
             background-color="gray"
             label="Phone Number"
-            color="white"
+            color="#cfd9e0"
             dark
             single-line
             outlined
@@ -45,11 +45,11 @@ people. It’s free and convinient</p>
 
 
             <v-card flat
-            color="black"
+            color="#08192b"
             class="foot">
          <ul>
              <li>
-         <h4>Company</h4></li>
+         <h4 class="subtitle-2">Company</h4></li>
              <li>
                  <router-link to='/about' class="li">About </router-link>
              </li>
@@ -79,11 +79,11 @@ people. It’s free and convinient</p>
             </v-card>
          
             <v-card class="foot"
-            color="black"
+            color="#08192b"
             flat>
          <ul>
              <li>
-         <h4>Events</h4></li>
+         <h4 class="subtitle-2">Events</h4></li>
              <li v-for="topevent in topEvents" :key="topevent">
                  <router-link :to="`/event/${topevent.replace(/[' ']+/g,'-').toLowerCase()}`" class="li">{{ topevent }}</router-link>
              </li>
@@ -91,11 +91,11 @@ people. It’s free and convinient</p>
             </v-card>
 
             <v-card class="foot"
-            color="black"
+            color="#08192b"
             flat>
          <ul>
              <li>
-         <h4>Top Cities</h4></li>
+         <h4 class="subtitle-2">Top Cities</h4></li>
              <li v-for="topcity in topCities" :key="topcity" @click="city(topcity)">
                  <router-link :to="`/cities/${topcity.replace(/[' ']+/g,'-').toLowerCase()}`" class="li">{{ topcity }}</router-link>
              </li>
@@ -103,67 +103,67 @@ people. It’s free and convinient</p>
             </v-card>
             </v-card>
 
-        <v-card class="foot ml-9 mt-7"
-            color="black"
+        <v-card class="foot ml-6 mt-n3"
+            color="#08192b"
             flat>
 
             <v-btn
         fab
-        dark
-        small
+        x-small
+        color="#cfd9e0"
         class="mr-4"
         href="http://facebook.com/taro"
         title="Follow us on Facebook"
       >
-        <v-icon>mdi-facebook</v-icon>
+        <v-icon small>mdi-facebook</v-icon>
       </v-btn>
 
 
             <v-btn
         fab
-        dark
-        small
+        x-small
+        color="#cfd9e0"
         class="mr-4"
         href="http://twitter.com/taro"
         title="Follow us on Twitter"
       >
-        <v-icon>mdi-twitter</v-icon>
+        <v-icon small>mdi-twitter</v-icon>
       </v-btn>
 
         <v-btn
         fab
-        dark
-        small
+        x-small
+        color="#cfd9e0"
         class="mr-4"
         href="http://instagram.com/taro"
         title="Follow us on Instagram"
       >
-        <v-icon>mdi-instagram</v-icon>
+        <v-icon small>mdi-instagram</v-icon>
       </v-btn>
 
       <v-btn
         fab
-        dark
-        small
+        x-small
+        color="#cfd9e0"
         class="mr-4"
         mailto="http://facebook.com/taro"
         title="Send us a mail"
       >
-        <v-icon>mdi-email</v-icon>
+        <v-icon small>mdi-email</v-icon>
       </v-btn>
 
       <v-btn
         fab
-        dark
-        small
+        color="#cfd9e0"
+        x-small
         class="mr-4"
         mailto="http://facebook.com/taro"
         title="Reach us via Whatsapp"
       >
-        <v-icon>mdi-whatsapp</v-icon>
+        <v-icon small>mdi-whatsapp</v-icon>
       </v-btn>
 
-         <p class="mt-6 caption mb-12 mb-lg-0 font-weight-light"> Copyright © Taro.ng 2020. All rights reserved</p>
+         <p class="mt-6 mb-12 mb-lg-0 body-2 font-weight-light"> Copyright © Taro.com 2020. All rights reserved</p>
 
             </v-card>
     </div>
@@ -196,18 +196,18 @@ export default {
 width: 100%;
 height: auto;
 box-sizing: border-box;
-background-color: black;
+background-color: #08192b;
 }
 
 ul {
     list-style-type: none;
     color: white;
-    background-color: black;
+    background-color: #08192b;
 }
 
 .foot {
     color: white;
-    background-color: black;
+    background-color: #08192b;
     font-family: 'Open Sans';
 }
 
@@ -217,23 +217,23 @@ ul {
 }
 
 .foot i {
-    color: white;
-    font-size: 2vmin;
+    color: #cfd9e0;
+    font-size: 1vmin;
     font-family: 'Open Sans';
 }
 
 router-link {
-    color: white;
-    background-color: black;
+    color: #cfd9e0;
+    background-color: #08192b;
     font-family: 'Open Sans';
 }
 
 .li {
-color: #888888;
+color: #cfd9e0;
 text-decoration: none;
-background-color: black;
+background-color: #08192b;
 font-family: 'Open Sans';
-font-size: 0.9rem;
+font-size: 0.8rem;
 }
 
 .li:hover {

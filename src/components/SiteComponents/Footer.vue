@@ -103,7 +103,7 @@ people. It’s free and convinient</p>
             </v-card>
             </v-card>
 
-        <v-card class="foot ml-6 mt-n3"
+        <v-card class="foot ml-lg-and-up-9 mt-lg-7 ml-7 mt-n3"
             color="#08192b"
             flat>
 
@@ -163,7 +163,7 @@ people. It’s free and convinient</p>
         <v-icon small>mdi-whatsapp</v-icon>
       </v-btn>
 
-         <p class="mt-6 mb-12 mb-lg-0 body-2 font-weight-light"> Copyright © Taro.com 2020. All rights reserved</p>
+         <p class="mt-6 mb-12 mb-lg-0 copyright"> Copyright © Taro.com 2020. All rights reserved</p>
 
             </v-card>
     </div>
@@ -239,5 +239,13 @@ font-size: 0.8rem;
 .li:hover {
     color: rgb(150, 150, 150);
     text-decoration: underline;
+}
+
+.copyright {
+color: #cfd9e0;
+text-decoration: none;
+background-color: #08192b;
+font-family: 'Open Sans';
+font-size: 0.8rem;
 }
 </style>

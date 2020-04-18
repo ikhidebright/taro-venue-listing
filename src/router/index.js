@@ -23,7 +23,24 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      title: '8000+ Event venues, hotel halls and meeting rooms across Nigeria | taro.com',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'The home page of our example app.'
+        },
+        {
+          property: 'og:description',
+          content: 'The home page of our example app.'
+        }
+      ]
+    },
+    beforeEnter: ((to, from, next) => {
+      document.title = to.meta.title
+      next()
+    })
   },
   {
     path: "/search",

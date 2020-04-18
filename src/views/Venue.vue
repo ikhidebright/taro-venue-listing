@@ -194,6 +194,7 @@ import Map from '@/components/VenuePageComponents/Map.vue'
 import axios from 'axios'
 
 export default {
+  name: "venue",
  data: () => ({
       direction: 'top',
       fab: false,
@@ -223,6 +224,11 @@ export default {
         }).then((res) => {
          console.log(res)
         })
+      },
+      settitle () {
+        // set page title
+      let title = this.items[0].name + ' | Event center in ' + this.items[0].city + ' | taro.com'
+      document.title = title
       },
       checklike () {
          let item = this.items[0].venue_id
@@ -262,7 +268,6 @@ export default {
         })
       this.checklike()
       this.view()
-
       //set amenities
       this.$store.dispatch({
           type: 'getAmenities',
@@ -274,8 +279,9 @@ export default {
       type: "getQuestionsandanswers",
       id: this.$route.params.id
     })
-      }
-    },
+    this.settitle()
+    }
+  },
     computed: {
       items () {
         return this.$store.state.venued
@@ -320,6 +326,10 @@ export default {
       type: "getQuestionsandanswers",
       id: this.$route.params.id
     })
+
+    // set page title
+    let title = this.items[0].name + ' | Event center in ' + this.items[0].city + ' | taro.com'
+      document.title = title
     }
 }
 </script>

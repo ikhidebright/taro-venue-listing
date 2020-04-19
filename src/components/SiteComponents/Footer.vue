@@ -1,8 +1,7 @@
 <template>
     <div class="footer pa-lg-5 pt-5">
-    <v-container fluid>
        <v-card
-            class="d-flex flex-row justify-lg-space-between ml-lg-3 ml-sm-0 mb-12 mb-lg-0"
+            class="d-flex flex-row justify-lg-space-between justify-md-space-between justify-xl-space-between ml-sm-0 mb-12 mb-lg-0"
             max-width="1100px"
             flat
             color="#08192b"
@@ -179,7 +178,6 @@ people. It’s free and convinient</p>
          <p class="mt-6 mb-12 mb-lg-0 copyright"> Copyright © Taro.com 2020. All rights reserved</p>
 
             </v-card>
-            </v-container>
     </div>
 </template>
 

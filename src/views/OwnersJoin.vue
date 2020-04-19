@@ -3,29 +3,54 @@
         <HeroAddVenue />
         <div class="hey">
         <v-container>
-        <v-row>
-        <v-col col="12" lg="3" sm="9">
-     <v-icon>mdi-whatsapp</v-icon>
+      <v-row no-gutters>
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <v-card
+          class="pa-2"
+          flat
+          color="#f1f1f1"
+        >
+    <i class="fas fa-rocket"></i>
+     <h4>Get started quickly</h4>
+<p>Listing your venues on taro.com is fast, easy and free, get started in minutes
+</p>
+        </v-card>
+      </v-col>
+
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <v-card
+          class="pa-2"
+          flat
+          color="#f1f1f1"
+        >
+        
+     <i class="fas fa-check-circle"></i>
      <h4>Get verified requests</h4>
 <p>Join today and get connected to clients that need your services</p>
-</v-col>
+        </v-card>
+      </v-col>
 
-
-<v-col col="12" lg="3" sm="9">
-     <v-icon>mdi-whatsapp</v-icon>
-     <h4>Send price estimates</h4>
-<p>Choose the requests to accept and send price estimates to clients
-</p>
-</v-col>
-
-
-<v-col col="12" lg="3" sm="9">
-<v-icon>mdi-whatsapp</v-icon>
-<h4>Get hired</h4>
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <v-card
+          class="pa-2"
+          flat
+          color="#f1f1f1"
+        >
+<i class="fas fa-chart-pie"></i>
+<h4>Increased Revenue</h4>
 Discuss with clients, finalize negotiations and get hired
-            
-</v-col>
-        </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
          </v-container>
         </div>
         
@@ -55,6 +80,8 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             outlined
             label="First Name"
+            :rules="[() => !!firstname || 'This field is required']"
+            :error-messages="errorMessages"
             required
           ></v-text-field>
         </v-col>
@@ -68,6 +95,8 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             outlined
             label="Last Name"
+            :rules="[() => !!lastname || 'This field is required']"
+            :error-messages="errorMessages"
             required
           ></v-text-field>
         </v-col>
@@ -84,6 +113,7 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             :rules="[rules.email]"
             type="email"
+            :error-messages="errorMessages"
             outlined
             required
           ></v-text-field>
@@ -100,6 +130,8 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             label="Password"
             type="password"
+            :rules="[rules.password]"
+            :error-messages="errorMessages"
             outlined
             required
           ></v-text-field>
@@ -114,6 +146,8 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             label="Confirm password"
             type="password"
+            :rules="[() => confirmpassword == ccpassword || 'Password do not match']"
+            :error-messages="errorMessages"
             outlined
             required
           ></v-text-field>
@@ -127,11 +161,13 @@ spaces, yachts, gallerias and convention centres.</p>
         >
           <v-text-field
             v-model="phone"
-            type="number"
             label="Phone number"
             hint="e.g 08064513824"
             :disabled="loading"
             outlined
+            maxlength="11"
+            counter
+            :rules="[rules.required, rules.counter]"
             required
           ></v-text-field>
         </v-col>
@@ -166,7 +202,9 @@ spaces, yachts, gallerias and convention centres.</p>
       class="bt"
       large
       :loading="loading"
-      :disabled="loading"
+      :disabled="loading || firstname.length < 2 || 
+                 lastname.length < 2 || phone.length < 11 || 
+                 phone.length > 11 || password != confirmpassword"
       color="#001F90"
       @click="register(), loader = 'loading'"
     >
@@ -187,11 +225,16 @@ import HeroAddVenue from '@/components/HeroAddVenue.vue'
 import axios from 'axios'
 
 export default {
-    name: "",
+    name: "OwnersJoin",
     data: () => ({
       loading: false,
+      password: null,
       rules: {
-        email: v => (v || '').match(/@/) || 'Please enter a valid email',
+        counter: value => value.length <= 20 || 'Max 20 characters',
+        email: value => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid e-mail.'
+          },
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
         password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
           'Password must contain an upper case letter, a numeric character, and a special character',
@@ -201,48 +244,9 @@ export default {
       firstname: '',
       lastname: '',
       email: '',
-      password: '',
       phone: '',
-      count: 0,
-    states: [
-"Abia",
-'Abuja',
-"Adamawa",
-'Akwa Ibom',
-'Anambra',
-'Bauchi',
-'Bayelsa',
-'Benue',
-'Borno',
-'Cross River',
-'Delta',
-'Ebonyi',
-'Enugu',
-'Edo',
-'Ekiti',
-'Gombe',
-'Imo',
-'Jigawa',
-'Kaduna',
-'Kano',
-'Katsina',
-'Kebbi',
-'Kogi',
-'Kwara',
-'Lagos',
-'Nasarawa',
-'Niger',
-'Ogun',
-'Ondo',
-'Osun',
-'Oyo',
-'Plateau',
-'Rivers',
-'Sokoto',
-'Taraba',
-'Yobe',
-"Zamfara",
-       ]
+      confirmpassword: '',
+      count: 0
     }),
 
     watch: {
@@ -254,6 +258,10 @@ export default {
           this.count = 5
           }, 10000)
         this.loader = null
+      },
+
+      name () {
+        this.errorMessages = ''
       },
     },
      
@@ -268,7 +276,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          if (res.status == 200 && this.count > 0) {
+          if (res.status === 200 && this.count > 0) {
             let logindetails = {
               email: this.email,
               password: this.password,
@@ -282,11 +290,21 @@ export default {
     },
     components: {
         HeroAddVenue
-    }
+    },
+    computed: {
+      ccpassword () {
+        return this.password
+      },
+    },
 }
 </script>
 
 <style scoped>
+
+i {
+  font-size: 8vmin
+}
+
 .hey {
   background-color: #f1f1f1;
   padding: 1vmin;

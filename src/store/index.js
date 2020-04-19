@@ -41,8 +41,8 @@ export default new Vuex.Store({
 'Television',
 'Writing Board'],
   states: [
-    'Abia',
-    'Abuja',
+'Abia',
+'Abuja',
 'Adamawa',
 'Akwa Ibom',
 'Anambra',

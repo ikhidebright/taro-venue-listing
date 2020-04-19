@@ -1,28 +1,32 @@
 <template>
     <div class="addvenue">
         <HeroAddVenue />
-        <div class="hey">
+        <div class="hey pt-5 pb-5">
         <v-container>
       <v-row no-gutters>
       <v-col
         cols="12"
-        sm="4"
+        sm="3"
+        lg="3"
+        class="mx-auto"
       >
         <v-card
           class="pa-2"
           flat
           color="#f1f1f1"
         >
-    <i class="fas fa-rocket"></i>
-     <h4>Get started quickly</h4>
-<p>Listing your venues on taro.com is fast, easy and free, get started in minutes
+   <div class="text-center"> <i class="fas fa-rocket"></i></div>
+     <h4 class="subtitle-1 font-weight-bold text-center">Get started quickly</h4>
+<p class="body-1 text-center">Listing your venues on taro.com is fast, easy and free, get started in minutes
 </p>
         </v-card>
       </v-col>
 
       <v-col
         cols="12"
-        sm="4"
+        sm="3"    
+        lg="3"    
+        class="mx-auto"
       >
         <v-card
           class="pa-2"
@@ -30,24 +34,26 @@
           color="#f1f1f1"
         >
         
-     <i class="fas fa-check-circle"></i>
-     <h4>Get verified requests</h4>
-<p>Join today and get connected to clients that need your services</p>
+     <div class="text-center"><i class="fas fa-check-circle"></i></div>
+     <h4 class="subtitle-1 font-weight-bold text-center">Get verified requests</h4>
+<p class="body-1 text-center">Join today and get connected to clients that need your services</p>
         </v-card>
       </v-col>
 
       <v-col
         cols="12"
-        sm="4"
+        sm="3"
+        lg="3"
+        class="mx-auto"
       >
         <v-card
           class="pa-2"
           flat
           color="#f1f1f1"
         >
-<i class="fas fa-chart-pie"></i>
-<h4>Increased Revenue</h4>
-Discuss with clients, finalize negotiations and get hired
+<div class="text-center"><i class="fas fa-chart-pie"></i></div>
+<h4 class="subtitle-1 font-weight-bold text-center">Increased Revenue</h4>
+<p class="body-1 text-center">Discuss with clients, finalize negotiations and get hired</p>
         </v-card>
       </v-col>
     </v-row>
@@ -58,7 +64,7 @@ Discuss with clients, finalize negotiations and get hired
      <v-card flat
      max-width="600"
      >
-<p>Taro.ng is a platform where you list venues, event
+<p class="body-1">Taro.ng is a platform where you list venues, event
 centers, halls for rent. With Taro.ng, you get to 
 reach a wider audience and boost your revenue.
 Our platform boost of 100,000+ visitors monthly
@@ -302,7 +308,8 @@ export default {
 <style scoped>
 
 i {
-  font-size: 8vmin
+  font-size: 8vmin;
+  text-align: center;
 }
 
 .hey {

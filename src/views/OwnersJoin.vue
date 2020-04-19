@@ -87,7 +87,6 @@ spaces, yachts, gallerias and convention centres.</p>
             outlined
             label="First Name"
             :rules="[() => !!firstname || 'This field is required']"
-            :error-messages="errorMessages"
             required
           ></v-text-field>
         </v-col>
@@ -102,7 +101,6 @@ spaces, yachts, gallerias and convention centres.</p>
             outlined
             label="Last Name"
             :rules="[() => !!lastname || 'This field is required']"
-            :error-messages="errorMessages"
             required
           ></v-text-field>
         </v-col>
@@ -119,7 +117,6 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             :rules="[rules.email]"
             type="email"
-            :error-messages="errorMessages"
             outlined
             required
           ></v-text-field>
@@ -137,7 +134,6 @@ spaces, yachts, gallerias and convention centres.</p>
             label="Password"
             type="password"
             :rules="[rules.password]"
-            :error-messages="errorMessages"
             outlined
             required
           ></v-text-field>
@@ -153,7 +149,6 @@ spaces, yachts, gallerias and convention centres.</p>
             label="Confirm password"
             type="password"
             :rules="[() => confirmpassword == ccpassword || 'Password do not match']"
-            :error-messages="errorMessages"
             outlined
             required
           ></v-text-field>
@@ -171,6 +166,7 @@ spaces, yachts, gallerias and convention centres.</p>
             hint="e.g 08064513824"
             :disabled="loading"
             outlined
+            type="number"
             maxlength="11"
             counter
             :rules="[rules.required, rules.counter]"

@@ -24,7 +24,7 @@
         outlined
       ></v-text-field>
 
-        <v-toolbar-items class='hidden-sm-and-down'>
+        <v-toolbar-items class='hidden-xs-only'>
 
         <v-divider :inset="inset" vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
 
@@ -38,15 +38,15 @@
          List your venue
         </v-btn>
 
-<v-divider :inset="inset" vertical v-if="this.$store.state.isLoggedIn" class='hidden-sm-and-down'></v-divider>
-          <v-btn text to='/propose' class='hidden-sm-and-down mr-0' v-if="this.$store.state.isLoggedIn">
+<v-divider :inset="inset" vertical v-if="this.$store.state.isLoggedIn" class='hidden-xs-only'></v-divider>
+          <v-btn text to='/propose' class='hidden-xs-only mr-0' v-if="this.$store.state.isLoggedIn">
          Add a venue
         </v-btn>
-        <v-divider :inset="inset" vertical v-if="this.$store.state.isLoggedIn" class='hidden-sm-and-down'></v-divider>
+        <v-divider :inset="inset" vertical v-if="this.$store.state.isLoggedIn" class='hidden-xs-only'></v-divider>
 
       </v-toolbar-items>
 
-       <v-app-bar-nav-icon @click="drawer = true" class='hidden-lg-and-up' v-if="!this.$store.state.isLoggedIn"></v-app-bar-nav-icon>
+       <v-app-bar-nav-icon @click="drawer = true" class='hidden-sm-and-up' v-if="!this.$store.state.isLoggedIn"></v-app-bar-nav-icon>
 
        <v-menu
       v-model="menu"

@@ -1,7 +1,8 @@
 <template>
     <div class="footer pa-lg-5 pt-5">
+    <v-container fluid>
        <v-card
-            class="d-flex flex-row justify-lg-space-between ml-lg-3 ml-sm-n9 mb-12 mb-lg-0"
+            class="d-flex flex-row justify-lg-space-between ml-lg-3 ml-sm-0 mb-12 mb-lg-0"
             max-width="1100px"
             flat
             color="#08192b"
@@ -10,7 +11,7 @@
 
     <v-card flat
             color="#08192b"
-            class="foot hidden-sm-and-down">
+            class="foot hidden-xs-only">
          <ul>
              <li>
          <h2 class="title">Get More Bookings For Yor Venue</h2></li>
@@ -103,7 +104,7 @@ people. It’s free and convinient</p>
             </v-card>
             </v-card>
 
-            <v-card class="foot d-lg-none mb-8 mt-n5"
+            <v-card class="foot d-lg-none d-md-none d-sm-none d-xl-none mb-8 mt-n5"
             color="#08192b"
             flat>
          <ul>
@@ -178,6 +179,7 @@ people. It’s free and convinient</p>
          <p class="mt-6 mb-12 mb-lg-0 copyright"> Copyright © Taro.com 2020. All rights reserved</p>
 
             </v-card>
+            </v-container>
     </div>
 </template>
 

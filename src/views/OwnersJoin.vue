@@ -15,9 +15,9 @@
           flat
           color="#f1f1f1"
         >
-   <div class="text-center"> <i class="fas fa-rocket"></i></div>
+   <div class="text-center ma-4"> <i class="fas fa-rocket"></i></div>
      <h4 class="subtitle-1 font-weight-bold text-center">Get started quickly</h4>
-<p class="body-1 text-center">Listing your venues on taro.com is fast, easy and free, get started in minutes
+<p class="bod text-center">Listing your venues on taro.com is fast, easy and free, get started in minutes
 </p>
         </v-card>
       </v-col>
@@ -34,9 +34,9 @@
           color="#f1f1f1"
         >
         
-     <div class="text-center"><i class="fas fa-check-circle"></i></div>
+     <div class="text-center ma-4"><i class="fas fa-check-circle"></i></div>
      <h4 class="subtitle-1 font-weight-bold text-center">Get verified requests</h4>
-<p class="body-1 text-center">Join today and get connected to clients that need your services</p>
+<p class="bod text-center">Join today and get connected to clients that need your services</p>
         </v-card>
       </v-col>
 
@@ -51,9 +51,9 @@
           flat
           color="#f1f1f1"
         >
-<div class="text-center"><i class="fas fa-chart-pie"></i></div>
+<div class="text-center ma-4"><i class="fas fa-chart-pie"></i></div>
 <h4 class="subtitle-1 font-weight-bold text-center">Increased Revenue</h4>
-<p class="body-1 text-center">Discuss with clients, finalize negotiations and get hired</p>
+<p class="bod text-center">Discuss with clients, finalize negotiations and get hired</p>
         </v-card>
       </v-col>
     </v-row>
@@ -186,10 +186,9 @@ spaces, yachts, gallerias and convention centres.</p>
         color="#001F90"
       >
         <template v-slot:label>
-          I agree to the&nbsp;
-          <a href="#" @click.stop.prevent="dialog = true">Terms of Service</a>
-          &nbsp;and&nbsp;
-          <a href="#" @click.stop.prevent="dialog = true">Privacy Policy</a>*
+          I agree to the
+          <a href="#" @click.stop.prevent="dialog = true" class="mr-2 ml-2">Terms of Service</a> and
+          <a href="#" @click.stop.prevent="dialog = true" class="ml-2">Privacy Policy</a>*
         </template>
       </v-checkbox>
       </v-col>
@@ -206,7 +205,7 @@ spaces, yachts, gallerias and convention centres.</p>
       :loading="loading"
       :disabled="loading || firstname.length < 2 || 
                  lastname.length < 2 || phone.length < 11 || 
-                 phone.length > 11 || password != confirmpassword"
+                 phone.length > 11 || password != confirmpassword || agreement === false"
       color="#001F90"
       @click="register(), loader = 'loading'"
     >
@@ -235,7 +234,7 @@ export default {
         counter: value => value.length <= 20 || 'Max 20 characters',
         email: value => {
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            return pattern.test(value) || 'Invalid e-mail.'
+            return pattern.test(value) || 'Invalid e-mail'
           },
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
         password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
@@ -245,6 +244,7 @@ export default {
       loader: null,
       firstname: '',
       lastname: '',
+      agreement: false,
       email: '',
       phone: '',
       confirmpassword: '',
@@ -289,6 +289,9 @@ export default {
           }
         })
       }
+    },
+    created () {
+        this.rules.email
     },
     components: {
         HeroAddVenue
@@ -354,4 +357,17 @@ i {
   .bt {
     color: white;
   }
+
+  .bod {
+color: #000;
+font-family: 'Open Sans';
+font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 600px) {
+  i {
+  font-size: 16vmin;
+  text-align: center;
+}
+}
 </style>

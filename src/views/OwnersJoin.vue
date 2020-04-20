@@ -3,6 +3,24 @@
         <HeroAddVenue />
         <div class="hey pt-5 pb-5">
         <v-container>
+ 
+    <div class="text">
+      <v-alert
+      :value="alert"
+      color="pink"
+      class="mr-9"
+      dark
+      max-width="900"
+      border="top"
+      icon="mdi-alert-outline"
+      dismissible
+      transition="scroll-y-transition"
+    >
+      {{ message }}
+        </v-alert>
+        </div>
+
+
       <v-row no-gutters>
       <v-col
         cols="12"
@@ -64,7 +82,7 @@
      <v-card flat
      max-width="600"
      >
-<p class="body-1">Taro.ng is a platform where you list venues, event
+<p class="body-1 xs-text-center">Taro.ng is a platform where you list venues, event
 centers, halls for rent. With Taro.ng, you get to 
 reach a wider audience and boost your revenue.
 Our platform boost of 100,000+ visitors monthly
@@ -117,6 +135,7 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             :rules="[rules.email]"
             type="email"
+            :error-messages="emailerror"
             outlined
             required
           ></v-text-field>
@@ -211,7 +230,6 @@ spaces, yachts, gallerias and convention centres.</p>
     >
       Join now!
     </v-btn>
-
   </v-col>
 </v-row>
   </v-form>
@@ -242,13 +260,15 @@ export default {
         required: v => !!v || 'This field is required',
       },
       loader: null,
+      alert: false,
       firstname: '',
       lastname: '',
+      message: '',
       agreement: false,
+      dialog: false,
       email: '',
       phone: '',
-      confirmpassword: '',
-      count: 0
+      confirmpassword: ''
     }),
 
     watch: {
@@ -257,7 +277,6 @@ export default {
         this[l] = !this[l]
         setTimeout(() => {
           this[l] = false
-          this.count = 5
           }, 10000)
         this.loader = null
       },
@@ -268,6 +287,14 @@ export default {
     },
      
     methods: {
+      error () {
+          this.loader = null
+       let x = setInterval (() => {
+          this.alert = false
+          clearInterval(x)
+        }, 5000)
+      },
+
       register () {
         axios.post('http://localhost:8000/join', {
           first_name: this.firstname,
@@ -278,20 +305,29 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          if (res.status === 200 && this.count > 0) {
+          if (res.status === 200 && res.data.success === true) {
             let logindetails = {
               email: this.email,
               password: this.password,
-              suc: true
+              registered: true
             }
             this.$store.commit("setLogin", logindetails)
             this.$router.push('/login')
+          } else {
+            this.message = res.data.message
+            this.error()
+            this.alert = true
+            this.loader = null
+            this.loading = false
           }
+        }).catch(function (error) {
+                this.error()
+                this.message = error
+                this.alert = true
+                this.loader = null
+                this.loading = false
         })
       }
-    },
-    created () {
-        this.rules.email
     },
     components: {
         HeroAddVenue
@@ -307,7 +343,7 @@ export default {
 <style scoped>
 
 i {
-  font-size: 8vmin;
+  font-size: 6vmin;
   text-align: center;
 }
 
@@ -364,10 +400,38 @@ font-family: 'Open Sans';
 font-size: 0.9rem;
 }
 
+/* work around bug on v-dialog not honoring origin="center top" parameter */
+.v-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 40%;
+  margin-top: 5rem;
+}
+
+.text {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* for mobile */
 @media only screen and (max-width: 600px) {
   i {
   font-size: 16vmin;
   text-align: center;
+}
+
+.text {
+  width: 100%;
+  margin: 0;
+}
+
+.v-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 90%;
+  margin-top: 5rem;
 }
 }
 </style>

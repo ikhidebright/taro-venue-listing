@@ -1,31 +1,41 @@
 <template>
-  <div class="login mt-5 mbb-12">
+  <div class="login mt-5 mb-12">
   <br>
   <br>
   <v-container>
-  <v-col cols="12" sm="6" md="6">
- <!-- <v-alert
+   <div class="text">
+      <v-alert
+      :value="false"
       color="green"
+      class="mr-9"
       dark
-      class="pa-5"
-      icon="mdi-firework"
-      dense
+      max-width="900"
+      border="top"
+      icon="mdi-alert-outline"
+      dismissible
+      transition="scroll-y-transition"
     >
-      Registration Succesfull Login your account now to add venues!
-    </v-alert> -->
-
-     <v-alert
-      dark
-      class="pa-5"
-      dense
-      color="red"
-      border="left"
-      v-if="alert"
-    >
-     {{ alert }}
-        <br>
+      Registration Succesfull! Login now to add venues!
         </v-alert>
+        </div>
 
+         <div class="text">
+      <v-alert
+      :value="loginalert"
+      color="pink"
+      class="mr-9"
+      dark
+      max-width="900"
+      border="top"
+      icon="mdi-alert-outline"
+      dismissible
+      transition="scroll-y-transition"
+    >
+      {{ loginerror }}
+        </v-alert>
+        </div>
+
+  <v-col cols="12" sm="6" md="6" class="mt-6">
         </v-col>
         </v-container>
   <v-card
@@ -78,13 +88,21 @@ import axios from 'axios'
       loading: false,
       show2: false,
       checkbox: false,
-      alert: null,
+      loginalert: false,
+      loginerror: null,
       password: '',
       status: '',
       email: '',
       id: ''
     }),
     methods: {
+      loginerrorfunc () {
+       let x = setInterval (() => {
+          this.loginalert = false
+          clearInterval(x)
+        }, 4000)
+      },
+
       login () {
         this.loading = true
         if (this.checkbox) {
@@ -102,12 +120,13 @@ import axios from 'axios'
           email: this.email,
           password: this.password
         }).then((res) => {
-          if (res.status == 201) {
+          if (res.status == 201 && res.data.success === true) {
            console.log(res)
-           this.status = res.status
-           this.$store.commit("setUser", res.data.result)
+           this.status = res
           } else {
-          this.alert = res.data.message
+          this.loginerror = res.data.message
+          this.loginalert = true
+          this.loginerrorfunc()
           this.loading = false
           }
         })
@@ -134,8 +153,9 @@ import axios from 'axios'
         let getOwnerVenues = this.$store.getters.myvenues
         getOwnerVenues.then(x => this.$store.commit("setLoggedinOwnerVenues", x.data.result))
         val && setTimeout(() => {
-          if (this.status == 201) {
+          if (this.status.status === 201 && this.status.data.success === true) {
           this.loading = false
+          this.$store.commit("setUser", this.status.data.result)
           this.$router.push('/dashboard')
           } else {
              this.loading = false
@@ -153,5 +173,35 @@ import axios from 'axios'
 
 i {
   font-size: 12vmin
+}
+
+/* work around bug on v-dialog not honoring origin="center top" parameter */
+.v-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 40%;
+  margin-top: 5rem;
+}
+
+.text {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* for mobile */
+@media only screen and (max-width: 600px) {
+.text {
+  width: 100%;
+  margin: 0;
+}
+
+.v-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 90%;
+  margin-top: 5rem;
+}
 }
 </style>

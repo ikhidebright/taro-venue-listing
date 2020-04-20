@@ -20,7 +20,11 @@ export default new Vuex.Store({
   reviews: null,
   venues: null,
   displayamenities: [],
-  logindetails: null,
+  logindetails: {
+    email: '',
+    password: '',
+    registered: false
+  },
   amenities: [
 'Air Conditioner',
 'Chairs',

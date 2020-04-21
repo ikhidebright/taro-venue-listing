@@ -2,6 +2,21 @@
 <v-container class="mt-9">
 <br>
 <br>
+   <div class="text">
+      <v-alert
+      :value="alert"
+      color="green"
+      class="mr-9"
+      dark
+      max-width="900"
+      border="top"
+      icon="mdi-checkbox-marked-circle-outline"
+      transition="scroll-y-transition"
+    >
+      {{ messagealert }}
+        </v-alert>
+        </div>      
+<br>
 <br>
   <v-stepper v-model="e1" alt-labels text flat>
     <v-stepper-header>
@@ -20,22 +35,19 @@
       <v-stepper-content step="1">
         <div class="manage mt-0">
       <v-container>
+
+
        <v-col cols="12" sm="12" md="9">
       <p class='mt-6 mb-6'>Our platform boost of 100,000+ visitors monthly who are in need of event centers, spaces for meetings, weddings, outdoor occassions and more. Add your venue now and start connecting!</p>
  </v-col>
 
  <v-col cols="12" sm="8" md="8">
-      <v-alert
-      text
-      dense
-      color="teal"
-      icon="mdi-clock-fast"
-      border="left"
-    >
-     <b> New venues are subjected to Review from taro.ng team before approval</b>
-        <br>
-        </v-alert>
-        </v-col>
+      <i color="red">
+     <b> 
+     New venues are subjected to Review from taro.ng team before approval
+     </b>
+      </i>
+      </v-col>
 
       <v-col cols="12" sm="6" md="6">
           <v-text-field
@@ -323,11 +335,13 @@ export default {
     data: () => ({
       e1: 1,
       answer: "",
+      alert: false,
       checkbox: false,
       files: [],
       amenity: [],
       venuename: '',
       venuetype: '',
+      messagealert: '',
       capacity: '',
       price: '',
       street: '',
@@ -337,6 +351,13 @@ export default {
       description: ''
     }),
     methods: {
+      next (x) {
+        setTimeout (() => {
+        this.e1 = x
+        this.alert = false
+        }, 6000)
+      },
+
      addamenity (arr, id) {
       this.$store.getters.addamenities(arr, id)
       },
@@ -362,9 +383,11 @@ export default {
           item.id = res.data.result.insertId
           item.name = this.venuename
           if (res.status == 200) {
-          this.e1 = 2
+          this.alert = true
+          this.messagealert = res.data.message
           this.addamenity(this.amenity, res.data.result.insertId)
           this.$store.commit("setInsertVenue", item)
+          this.next(2)
           console.log(res)
           }
         })
@@ -485,4 +508,34 @@ export default {
 </script>
 
 <style scoped>
+/* work around bug on v-dialog not honoring origin="center top" parameter */
+.v-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 40%;
+  margin-top: 5rem;
+}
+
+.text {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* for mobile */
+@media only screen and (max-width: 600px) {
+
+.text {
+  width: 100%;
+  margin: 0;
+}
+
+.v-alert {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 90%;
+  margin-top: 5rem;
+}
+}
 </style>

@@ -2,7 +2,6 @@
   <div class="login mt-5 mb-12">
   <br>
   <br>
-  <v-container>
    <div class="text">
       <v-alert
       :value="false"
@@ -12,12 +11,12 @@
       max-width="900"
       border="top"
       icon="mdi-alert-outline"
-      dismissible
       transition="scroll-y-transition"
     >
       Registration Succesfull! Login now to add venues!
         </v-alert>
         </div>
+  <v-container>
 
          <div class="text">
       <v-alert
@@ -28,7 +27,6 @@
       max-width="900"
       border="top"
       icon="mdi-alert-outline"
-      dismissible
       transition="scroll-y-transition"
     >
       {{ loginerror }}
@@ -124,6 +122,7 @@ import axios from 'axios'
            console.log(res)
            this.status = res
           } else {
+          this.status = null
           this.loginerror = res.data.message
           this.loginalert = true
           this.loginerrorfunc()
@@ -150,14 +149,15 @@ import axios from 'axios'
   },
   watch: {
       loading (val) {
-        let getOwnerVenues = this.$store.getters.myvenues
-        getOwnerVenues.then(x => this.$store.commit("setLoggedinOwnerVenues", x.data.result))
         val && setTimeout(() => {
           if (this.status.status === 201 && this.status.data.success === true) {
           this.loading = false
           this.$store.commit("setUser", this.status.data.result)
+          let getOwnerVenues = this.$store.getters.myvenues
+          getOwnerVenues.then(x => this.$store.commit("setLoggedinOwnerVenues", x.data.result))
           this.$router.push('/dashboard')
           } else {
+             this.status = null
              this.loading = false
           }
         }, 10000)

@@ -13,7 +13,6 @@
       max-width="900"
       border="top"
       icon="mdi-alert-outline"
-      dismissible
       transition="scroll-y-transition"
     >
       {{ message }}
@@ -287,6 +286,17 @@ export default {
     },
      
     methods: {
+      clearfields () {
+      this.firstname =  ''
+      this.lastname =  ''
+      this.password = ''
+      this.message =  ''
+      this.agreement =  false
+      this.email =  ''
+      this.phone =  ''
+      this.confirmpassword =  ''
+      },
+
       error () {
           this.loader = null
        let x = setInterval (() => {
@@ -313,6 +323,7 @@ export default {
             }
             this.$store.commit("setLogin", logindetails)
             this.$router.push('/login')
+            this.clearfields()
           } else {
             this.message = res.data.message
             this.error()

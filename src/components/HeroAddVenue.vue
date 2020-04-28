@@ -27,6 +27,18 @@ event centers to millions. Make money faster</p>
 <style scoped>
 .word {
 color: white;
+margin: 40% 0 14% 0;
+}
+
+.src {
+  background-color: rgba(0, 0, 0, 0.60);
+  color: #0b0a4e;
+  height: 80vh
+}
+
+@media only screen and (min-width: 600px) {
+  .word {
+color: white;
 margin: 15% 0 14% 0;
 }
 
@@ -34,5 +46,7 @@ margin: 15% 0 14% 0;
   background-color: rgba(0, 0, 0, 0.60);
   color: #0b0a4e;
   height: 80vh
+}
+
 }
 </style>

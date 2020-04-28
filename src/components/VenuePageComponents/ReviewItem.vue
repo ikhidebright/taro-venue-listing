@@ -3,7 +3,7 @@
 <v-col
           v-for="review in reviews"
           :key="review.id"
-          cols="12" sm="12" lg="9"
+           cols="12" sm="12" lg="10"
         >
           <v-card
             color='white'

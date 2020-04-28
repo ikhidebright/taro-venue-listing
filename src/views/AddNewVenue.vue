@@ -2,21 +2,6 @@
 <v-container class="mt-9">
 <br>
 <br>
-   <div class="text">
-      <v-alert
-      :value="alert"
-      color="green"
-      class="mr-9"
-      dark
-      max-width="900"
-      border="top"
-      icon="mdi-checkbox-marked-circle-outline"
-      transition="scroll-y-transition"
-    >
-      {{ messagealert }}
-        </v-alert>
-        </div>      
-<br>
 <br>
   <v-stepper v-model="e1" alt-labels text flat>
     <v-stepper-header>
@@ -109,9 +94,7 @@
             v-model='address'
             outlined
           ></v-text-field>
-          </v-col>
-
-          
+          </v-col>      
 <v-col cols="12" sm="6" md="6">
           <v-row class=''>
           <v-col cols="12" sm="6" md="6">
@@ -123,7 +106,6 @@
           outlined
         ></v-select>
           </v-col>
-
           <v-col cols="12" sm="6" md="6">
           <v-text-field
             label="City"
@@ -134,7 +116,6 @@
           </v-col>
           </v-row>
           </v-col>
-
           <v-col cols="12" md="6">
         <v-textarea
           outlined
@@ -144,10 +125,8 @@
           v-model='description'
           ></v-textarea>
       </v-col>
-
 <v-col cols="12" md="6">
       <p class="body-1 mb-3 mt-n5">Choose amenities</p>
-
       <v-chip-group
         v-model="amenity"
         column
@@ -161,34 +140,21 @@
         </div>
       </v-chip-group>
      </v-col>
-
-
       <v-col cols="12" sm="6" md="6">
     <v-btn
       color="#001F90" dark
       @click="addvenue"
     >
-     Continue
+     Save
     </v-btn>
   </v-col>
 <v-container>  
 </v-container>
 </v-container>
 </div>
-
-      <!--  <v-btn
-          color="primary"
-          @click="e1 = 2"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text>Cancel</v-btn> -->
       </v-stepper-content>
-
       <v-stepper-content step="2">
         <h3 class="subheading mb-5">Now Answer some FAQ's about {{ insertedName }}</h3>
-
           <v-col cols="12" sm="6">
     <v-expansion-panels
       inset
@@ -216,14 +182,10 @@
       </v-expansion-panel>
     </v-expansion-panels> 
   </v-col>
-
   <br>
   <Addmap :insertedName="insertedName"/>
-
 <br>
-
 <p class="font-weight-bold ml-3">Is this map location correct for your venue</p>
-
 <div class="ml-3">
   <v-checkbox
       v-model="checkbox"
@@ -231,7 +193,6 @@
       :label="checkbox? 'Yes, the map location is correct' : 'No, map location is wrong'"
         ></v-checkbox>
         </div>
-
  <br>
   <v-col cols="12" sm="6" md="6">
     <v-btn
@@ -242,49 +203,42 @@
     </v-btn>
   </v-col>
       </v-stepper-content>
-
       <v-stepper-content step="3">
-         <h3 class="subheading mb-5">Add photo Gallery for {{ insertedName }}</h3>
-
-    
-<v-col cols="12" sm="6" md="6">
-      <v-file-input
-    v-model="files"
-    color="#001F90"
-    counter
-    label="Add images"
-    multiple
-    placeholder="Select Image"
-    append-icon="mdi-camera"
-    prepend-icon=""
-    outlined
-    :show-size="1000"
-  >
-    <template v-slot:selection="{ index, text }">
-      <v-chip
-        v-if="index < 2"
-        color="deep-purple accent-4"
-        dark
-        label
-        small
+         <h3 class="subheading mb-5 ml-n1">Add photo Gallery for {{ insertedName }}</h3>
+  <p class="font-weight-bold">Pick a Cover image</p>
+  <p class="text--secondary">Allowed Formats (png, jpg, jpeg)</p>
+  <p class="text--secondary">Image should be below 200kb</p>
+    <v-hover>
+    <template v-slot:default="{ hover }">
+      <v-card
+        class=""
+        max-width="344"
       >
-        {{ text }}
-      </v-chip>
-
-      <span
-        v-else-if="index === 2"
-        class="overline grey--text text--darken-3 mx-2"
-      >
-        +{{ files.length - 2 }} File(s)
-      </span>
+        <v-img :src="cover"></v-img>
+        <v-fade-transition>
+          <v-overlay
+            v-if="hover"
+            absolute
+            color="#036358"
+          >
+            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+          </v-overlay>
+        </v-fade-transition>
+      </v-card>
     </template>
-  </v-file-input>
-    </v-col>
-
-    <v-col cols="12" sm="6">
+  </v-hover>
+  <br>
+  <p class="font-weight-bold">Add a minimum of 3 and maximum of 10 images to {{ insertedName }}'s gallery</p>
+    <v-btn
+      color="#001F90"
+      dark
+    >
+    <input type="file" multiple class="uploadButton" id="files" ref="files" v-on:change="handleFilesUpload()"/>
+    </v-btn>
+   <!-- <v-col cols="12" sm="6">
     <div class="d-flex mb-auto flex-wrap mt-1">
  <div
-        v-for="item in 8" 
+        v-for="item in 2" 
         :key="item.id"
         class="ma-1"
       >
@@ -308,18 +262,21 @@
            </v-img>
      </div>
     </div>
-     </v-col> 
-
+     </v-col> -->
         <br>
-  <v-col cols="12" sm="6" md="6">
+        <v-col cols="12" sm="12" lg="12">
+        <v-row>
+  <v-spacer></v-spacer>
     <v-btn
-      color="#001F90" dark
-      @click="e1 = 1"
+      color="#001F90" 
+      dark
+      tile
+      @click="finish"
     >
-     Submit
+     Finish
     </v-btn>
-  </v-col>
-
+    </v-row>
+    </v-col>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -333,15 +290,16 @@ import Addmap from '@/components/VenuePageComponents/Addmap.vue'
 export default {
     name: 'AddVenue',
     data: () => ({
-      e1: 1,
+      e1: 3,
       answer: "",
-      alert: false,
+      cover: null,
+      overlay: false,
       checkbox: false,
+      file: '',
       files: [],
       amenity: [],
       venuename: '',
       venuetype: '',
-      messagealert: '',
       capacity: '',
       price: '',
       street: '',
@@ -349,12 +307,102 @@ export default {
       address: '',
       state: '',
       description: ''
-    }),
+}),
     methods: {
+    addvenueerrorfunc (message, show) {
+       let item = {
+            errormessagealert: message,
+            erroralert: show
+          }
+          this.$store.commit("setErrorAlert", item)
+      },
+
+      addvenuesuccessfunc (message, show) {
+       let item = {
+            successmessagealert: message,
+            successalert: show
+          }
+          this.$store.commit("setSuccessAlert", item)
+      },
+
+    handleFileUpload(){
+    this.file = this.$refs.file.files[0];
+    if (this.file.type == "image/png" || this.file.type == "image/jpeg" || this.file.type == "image/jpg") {
+    this.submitFile()
+    } else {
+      this.addvenueerrorfunc("invalid file type", true)
+    }
+  },
+
+    handleFilesUpload(){
+    this.files.push(this.$refs.files.files);
+    this.submitFiles()
+  },
+
+  submitFiles () {
+    if (this.files[0].length > 9) {
+      this.addvenueerrorfunc("Files Cannot Exceed 9", true)
+      this.files = []
+    } else {
+      this.files[0].forEach((file) => {
+        let formData = new FormData();
+            formData.append('image', file);
+            formData.append("venue_id", this.insertedId)
+            axios.post(`${this.$store.state.url}/addgallery`,
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then((res) => {
+              if (res.status === 200 && res.data.success === true) {
+                 this.cover = res.data.image
+                 this.addvenuesuccessfunc(res.data.message, true)
+              } else {
+                this.addvenueerrorfunc(res.data.message, true)
+                this.files = null
+              }
+        })
+        .catch((e) => {
+          this.addvenueerrorfunc(e, true)
+          this.files = null
+        });
+      })
+    }
+  },
+
+    submitFile () {
+            let formData = new FormData();
+            formData.append('image', this.file);
+            formData.append("venue_id", this.insertedId)
+            axios.post(`${this.$store.state.url}/addimage`,
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then((res) => {
+              if (res.status === 200 && res.data.success === true) {
+                 this.cover = res.data.image
+                 this.addvenuesuccessfunc(res.data.message, true)
+              } else {
+                this.addvenueerrorfunc(res.data.message, true)
+                this.file = null
+              }
+        })
+        .catch((e) => {
+          this.addvenueerrorfunc(e, true)
+          this.file = null
+        });
+      },
+
       next (x) {
         setTimeout (() => {
         this.e1 = x
         this.alert = false
+        this.erroralert = false
         }, 6000)
       },
 
@@ -390,6 +438,10 @@ export default {
           this.next(2)
           console.log(res)
           }
+        }).catch((err) => {
+          this.erroralert = true
+          this.messagealert = err
+          this.next(1)
         })
       },
       addques (ques) {
@@ -419,13 +471,22 @@ export default {
           console.log(res)
           }
         })
+      },
+      finish () {
+        this.$router.push('/dashboard')
       }
     },
-    created () {},
+    created () {
+      this.cover = 'https://cdn.vuetifyjs.com/images/cards/forest-art.jpg'
+    },
     components: {
       Addmap 
     },
     computed: {
+      coverImage () {
+        return this.cover
+      },
+
       ques () {
         let x = [
              {

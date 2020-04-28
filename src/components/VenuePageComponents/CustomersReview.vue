@@ -11,9 +11,9 @@
 <br>
 <br>
     <v-btn color="#001F90" outlined class="ml-5" v-on="on">Write a Review</v-btn>   </template>
-      <v-card>
+      <v-card  class="pb-5">
         <v-card-title>
-          <span class="headline">Review {{ items[0].name }}</span>
+        <span class="title">Review {{ items[0].name }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -57,28 +57,27 @@
             background-color="orange"
             hover
             size="35"
-            class="mr-2"
+            class="ml-2 mt-n4"
           ></v-rating>
         <v-spacer></v-spacer>
         <v-progress-circular v-if="load && !alert" indeterminate size="40"></v-progress-circular>
             </v-row>
           </v-container>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn 
-        color="red lighten-2"
-        outlined
-        tile
-        @click="dialog = false, load = false">
-        Close
-        </v-btn>
+        <v-card-actions class="mt-n2">
           <v-btn 
         color="#001F90"
-        outlined
-        tile 
+        :disabled="!stars || message.length < 10"
+        class="ml-7 bt"
         @click="review()">
-        Rate
+        Add Review
+        </v-btn>
+          
+          <v-btn 
+        color="red"
+        text
+        @click="dialog = false, load = false,  alert = false">
+        Close
         </v-btn>
         </v-card-actions>
       </v-card>
@@ -118,9 +117,9 @@ export default {
           message: this.message,
           venue_id: this.items[0].venue_id
         }).then((res) => {
-          if(res.status == 200) {
+          if(res.status === 200 && res.data.success === true) {
           this.alert = true
-           this.error = false
+          this.error = false
           this.stars = ''
           this.message = ''
           this.disabled = false
@@ -143,4 +142,7 @@ export default {
 </script>
 
 <style scoped>
+.bt {
+    color: white;
+  }
 </style>

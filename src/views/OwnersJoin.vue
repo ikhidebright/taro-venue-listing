@@ -3,23 +3,6 @@
         <HeroAddVenue />
         <div class="hey pt-5 pb-5">
         <v-container>
- 
-    <div class="text">
-      <v-alert
-      :value="alert"
-      color="pink"
-      class="mr-9"
-      dark
-      max-width="900"
-      border="top"
-      icon="mdi-alert-outline"
-      transition="scroll-y-transition"
-    >
-      {{ message }}
-        </v-alert>
-        </div>
-
-
       <v-row no-gutters>
       <v-col
         cols="12"
@@ -38,7 +21,6 @@
 </p>
         </v-card>
       </v-col>
-
       <v-col
         cols="12"
         sm="3"    
@@ -49,14 +31,12 @@
           class="pa-2"
           flat
           color="#f1f1f1"
-        >
-        
+        >      
      <div class="text-center ma-4"><i class="fas fa-check-circle"></i></div>
      <h4 class="subtitle-1 font-weight-bold text-center">Get verified requests</h4>
 <p class="bod text-center">Join today and get connected to clients that need your services</p>
         </v-card>
       </v-col>
-
       <v-col
         cols="12"
         sm="3"
@@ -75,8 +55,7 @@
       </v-col>
     </v-row>
          </v-container>
-        </div>
-        
+        </div>       
     <v-container>
      <v-card flat
      max-width="600"
@@ -91,7 +70,6 @@ more. We list professional event venues, conference
 centres, hotel halls, gardens, school fields, open 
 spaces, yachts, gallerias and convention centres.</p>
 </v-card>
-
 <v-form v-model="valid">
       <v-row>
         <v-col
@@ -107,7 +85,6 @@ spaces, yachts, gallerias and convention centres.</p>
             required
           ></v-text-field>
         </v-col>
-
         <v-col
           cols="12"
           md="3"
@@ -122,7 +99,6 @@ spaces, yachts, gallerias and convention centres.</p>
           ></v-text-field>
         </v-col>
       </v-row>
-
       <v-row>
         <v-col
           cols="12"
@@ -140,7 +116,6 @@ spaces, yachts, gallerias and convention centres.</p>
           ></v-text-field>
         </v-col>
 </v-row>
-
       <v-row>
         <v-col
           cols="12"
@@ -156,7 +131,6 @@ spaces, yachts, gallerias and convention centres.</p>
             required
           ></v-text-field>
         </v-col>
-
          <v-col
           cols="12"
           md="3"
@@ -172,7 +146,6 @@ spaces, yachts, gallerias and convention centres.</p>
           ></v-text-field>
         </v-col>
       </v-row>
-
       <v-row>
         <v-col
           cols="12"
@@ -192,7 +165,6 @@ spaces, yachts, gallerias and convention centres.</p>
           ></v-text-field>
         </v-col>
 </v-row>
-
 <v-row>
 <v-col
           cols="12"
@@ -211,7 +183,6 @@ spaces, yachts, gallerias and convention centres.</p>
       </v-checkbox>
       </v-col>
       </v-row>
-
  <v-row>
         <v-col
           cols="12"
@@ -259,10 +230,8 @@ export default {
         required: v => !!v || 'This field is required',
       },
       loader: null,
-      alert: false,
       firstname: '',
       lastname: '',
-      message: '',
       agreement: false,
       dialog: false,
       email: '',
@@ -286,6 +255,14 @@ export default {
     },
      
     methods: {
+       joinerrorfunc (message, show) {
+       let item = {
+            errormessagealert: message,
+            erroralert: show
+          }
+          this.$store.commit("setErrorAlert", item)
+      },
+
       clearfields () {
       this.firstname =  ''
       this.lastname =  ''
@@ -295,14 +272,6 @@ export default {
       this.email =  ''
       this.phone =  ''
       this.confirmpassword =  ''
-      },
-
-      error () {
-          this.loader = null
-       let x = setInterval (() => {
-          this.alert = false
-          clearInterval(x)
-        }, 5000)
       },
 
       register () {
@@ -325,16 +294,12 @@ export default {
             this.$router.push('/login')
             this.clearfields()
           } else {
-            this.message = res.data.message
-            this.error()
-            this.alert = true
+            this.joinerrorfunc(res.data.message, true)
             this.loader = null
             this.loading = false
           }
         }).catch(function (error) {
-                this.error()
-                this.message = error
-                this.alert = true
+                this.joinerrorfunc(error, true)
                 this.loader = null
                 this.loading = false
         })

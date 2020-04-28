@@ -5,7 +5,7 @@
     :to="`/venue/${ite.venue_id}-${ite.name.replace(/[' ']+/g,'-').toLowerCase()}`"
   >
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      :src="ite.thumbnail_image"
       height="110px"
     >
     <v-btn

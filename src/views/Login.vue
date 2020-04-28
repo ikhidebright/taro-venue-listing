@@ -1,41 +1,8 @@
 <template>
-  <div class="login mt-5 mb-12">
+  <div class="login mt-12 mb-12">
   <br>
   <br>
-   <div class="text">
-      <v-alert
-      :value="false"
-      color="green"
-      class="mr-9"
-      dark
-      max-width="900"
-      border="top"
-      icon="mdi-alert-outline"
-      transition="scroll-y-transition"
-    >
-      Registration Succesfull! Login now to add venues!
-        </v-alert>
-        </div>
-  <v-container>
-
-         <div class="text">
-      <v-alert
-      :value="loginalert"
-      color="pink"
-      class="mr-9"
-      dark
-      max-width="900"
-      border="top"
-      icon="mdi-alert-outline"
-      transition="scroll-y-transition"
-    >
-      {{ loginerror }}
-        </v-alert>
-        </div>
-
-  <v-col cols="12" sm="6" md="6" class="mt-6">
-        </v-col>
-        </v-container>
+  <br>
   <v-card
     :loading="loading"
     shaped
@@ -48,13 +15,11 @@
       <i class="fas fa-user-circle text-center"></i>
 </div>
       <br>
-
           <v-text-field
             v-model="email"
             label="E-mail"
             outlined
           ></v-text-field>
-
            <v-text-field
             label="Password"
             v-model="password"
@@ -63,13 +28,11 @@
             :type="show2 ? 'text' : 'password'"
             @click:append="show2 = !show2"
           ></v-text-field>
-
           <v-checkbox
       v-model="checkbox"
       input-value="checkbox"
       label="Remember password"
         ></v-checkbox>
-
           <v-btn x-large color="#001F90" dark block @click='login'
           >Login</v-btn>
         </v-col>
@@ -86,7 +49,6 @@ import axios from 'axios'
       loading: false,
       show2: false,
       checkbox: false,
-      loginalert: false,
       loginerror: null,
       password: '',
       status: '',
@@ -94,13 +56,13 @@ import axios from 'axios'
       id: ''
     }),
     methods: {
-      loginerrorfunc () {
-       let x = setInterval (() => {
-          this.loginalert = false
-          clearInterval(x)
-        }, 4000)
+      loginerrorfunc (message, show) {
+       let item = {
+            errormessagealert: message,
+            erroralert: show
+          }
+          this.$store.commit("setErrorAlert", item)
       },
-
       login () {
         this.loading = true
         if (this.checkbox) {
@@ -113,7 +75,6 @@ import axios from 'axios'
           localStorage.removeItem("password")
           this.$store.commit("setLogin", null)
         }
-
         axios.post(`${this.$store.state.url}/login`, {
           email: this.email,
           password: this.password
@@ -123,17 +84,19 @@ import axios from 'axios'
            this.status = res
           } else {
           this.status = null
-          this.loginerror = res.data.message
-          this.loginalert = true
-          this.loginerrorfunc()
           this.loading = false
+          this.loginerrorfunc(res.data.message, true)
           }
+        }).catch ((error) => {
+          this.status = null
+          this.loginerrorfunc(error, true)
+          this.loading = false
         })
       }
     },
     created () {
       if (localStorage.getItem("checkbox")) {
-     let logindetails = {
+       let logindetails = {
        email: localStorage.getItem("email"),
        password: localStorage.getItem("password"),
        checkbox: localStorage.getItem("checkbox")
@@ -145,7 +108,6 @@ import axios from 'axios'
     }
         this.password = this.$store.state.logindetails.password
         this.email = this.$store.state.logindetails.email
-        console.log(this.$store.state.logindetails.email)
   },
   watch: {
       loading (val) {
@@ -173,35 +135,5 @@ import axios from 'axios'
 
 i {
   font-size: 12vmin
-}
-
-/* work around bug on v-dialog not honoring origin="center top" parameter */
-.v-alert {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 40%;
-  margin-top: 5rem;
-}
-
-.text {
-  width: 50%;
-  margin: 0 auto;
-}
-
-/* for mobile */
-@media only screen and (max-width: 600px) {
-.text {
-  width: 100%;
-  margin: 0;
-}
-
-.v-alert {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 90%;
-  margin-top: 5rem;
-}
 }
 </style>

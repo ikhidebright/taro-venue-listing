@@ -7,7 +7,7 @@
     flat = true
   >
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      :src="coverpicture"
       height="60vh"
     > <v-col cols="12" sm="12">
      <v-btn
@@ -42,16 +42,16 @@
 <div class="d-flex mb-auto flex-wrap mt-1">
 <v-slide-group show-arrows>
  <v-slide-item
-        v-for="item in 8" 
+        v-for="item in venuegallery" 
         :key="item.id"
         class="ma-1"
       >
     <v-img
       class='ml-1'
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      :src="item.image"
       height="7vh"
       width='70'
-      @click='changePic()'
+      @click='changePic(item.image)'
     ></v-img>
      </v-slide-item>
     </v-slide-group>
@@ -197,6 +197,7 @@ export default {
   name: "venue",
  data: () => ({
       direction: 'top',
+      coverpicture: null,
       fab: false,
       fling: false,
       hover: false,
@@ -218,6 +219,13 @@ export default {
         Map
     },
     methods: {
+      assignCoverPicture () {
+        this.coverpicture = this.items[0].thumbnail_image
+      },
+
+      changePic (x) {
+        this.coverpicture = x
+      },
       view () {
         axios.patch(`${this.$store.state.url}/view/${this.items[0].venue_id}`, {
           view: this.items[0].views +1
@@ -268,10 +276,17 @@ export default {
         })
       this.checklike()
       this.view()
+      this.assignCoverPicture()
       //set amenities
       this.$store.dispatch({
           type: 'getAmenities',
           id: this.$route.params.id
+    })
+
+    //set gallery
+    this.$store.dispatch({
+      type: "getVenueGallery",
+      id: this.$route.params.id
     })
 
   //set Questions and answers
@@ -302,6 +317,10 @@ export default {
         return this.$store.state.questionsandanswers
       },
 
+      venuegallery () {
+        return this.$store.state.venuegallery
+      },
+
       activeFab () {
         switch (this.tabs) {
           case 'one': return { class: 'purple', icon: 'account_circle' }
@@ -311,14 +330,21 @@ export default {
         }
       },
     },
-    created () {
+    mounted () {
       this.checklike()
       this.view()
+      this.assignCoverPicture()
 
       //set amenities
       this.$store.dispatch({
           type: 'getAmenities',
           id: this.$route.params.id
+    })
+
+     //set gallery
+    this.$store.dispatch({
+      type: "getVenueGallery",
+      id: this.$route.params.id
     })
 
     //set Questions and answers

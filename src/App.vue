@@ -2,6 +2,7 @@
     <v-app>
       <Header />
         <v-content transition="slide-x-transition">
+        <ErrorAlert />
            <keep-alive> <router-view :key="this.$route.name + ($route.params.id || '')"></router-view></keep-alive>
         </v-content>
        <Footer />
@@ -11,12 +12,14 @@
 <script>
 import Header from "@/components/SiteComponents/Header.vue"
 import Footer from "@/components/SiteComponents/Footer.vue"
+import ErrorAlert from "@/components/SiteComponents/ErrorAlert.vue"
 
 export default {
     name: 'App',
     components: {
       Header,
-      Footer
+      Footer,
+      ErrorAlert
     }
 };
 </script>
@@ -49,4 +52,8 @@ font-family: 'Open Sans';
 a {
   text-decoration: none
 }
+
+.bt {
+    color: white;
+  }
 </style>

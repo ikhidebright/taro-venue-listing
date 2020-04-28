@@ -8,9 +8,14 @@ export default new Vuex.Store({
   state: {
   url: 'http://localhost:8000',
   insertvenueid: null,
+  venuegallery: [],
   insertvenuename: null,
   insertquestionid: null,
   questionsandanswers: null,
+  successmessagealert: null,
+  successalert: false,
+  errormessagealert: null,
+  erroralert: false,
   booking: null,
   user: null,
   loggedInOwnerVenues: null,
@@ -43,7 +48,8 @@ export default new Vuex.Store({
 'Stage',
 'Tables',
 'Television',
-'Writing Board'],
+'Writing Board'
+],
   states: [
 'Abia',
 'Abuja',
@@ -131,6 +137,18 @@ export default new Vuex.Store({
       state.loggedInOwnerVenues = item
     },
 
+    // setting the image gallery in venue details pages
+    setVenueGallery (state, item) {
+      state.venuegallery = item
+      let coverImage = {
+        id: state.venued[0].name,
+        image: state.venued[0].thumbnail_image,
+        venue_id: state.venued[0].name
+      }
+      state.venuegallery.unshift(coverImage)
+    },
+
+    // setting a logged in user
     setUser (state, item) {
       state.user = item
       if(state.user && state.user != null) {
@@ -148,12 +166,23 @@ export default new Vuex.Store({
       state.questionsandanswers = item
     },
 
+    // setting question id to use when adding answers
     setQuestionId (state, item) {
       state.insertquestionid = item
     },
 
     setVenueD (state, item) {
       state.venued = item
+    },
+
+    setErrorAlert (state, item) {
+      state.errormessagealert = item.errormessagealert
+      state.erroralert = item.erroralert
+    },
+
+    setSuccessAlert (state, item) {
+      state.successmessagealert = item.successmessagealert
+      state.successalert = item.successalert
     },
 
     setReview (state, item) {
@@ -186,6 +215,11 @@ export default new Vuex.Store({
      async getAmenities ({ state, commit }, id) {
       let item = await axios.get(`${state.url}/amenities/${id.id}`)
       commit('setAmenities', item.data.result)
+    },
+
+    async getVenueGallery ({ state, commit }, id) {
+      let item = await axios.get(`${state.url}/getgallery/${id.id}`)
+      commit('setVenueGallery', item.data.result)
     },
 
     async getQuestionsandanswers ({ state, commit }, id) {

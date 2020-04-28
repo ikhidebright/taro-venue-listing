@@ -59,7 +59,7 @@
       >
         <v-icon>mdi-heart</v-icon> <span class="subheading caption">{{ venue.likes }}</span>
       </v-btn> 
-      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green" @change="changestatus(venue.status)"></v-switch>
+      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green" @change="changestatus(venue)"></v-switch>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -113,8 +113,9 @@ export default {
     },
 
     changestatus (x) {
-          axios.post(`${this.$store.state.url}/status`, {
-            status: !x
+          axios.patch(`${this.$store.state.url}/status`, {
+            status: !x.status,
+            venue_id: x.venue_id
           })
           .then((res) => {
           if (res.status === 200 && res.data.success === true) {

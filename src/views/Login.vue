@@ -147,6 +147,12 @@ import axios from 'axios'
 }
 
 i {
+  font-size: 19vmin
+}
+
+@media only screen and (min-width: 600px) {
+  i {
   font-size: 12vmin
+}
 }
 </style>

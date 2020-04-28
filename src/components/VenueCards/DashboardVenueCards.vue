@@ -24,7 +24,24 @@
                </div>
          </div>
              <v-card-actions>
-              <v-btn text :to="`/manage/${venue.venue_id}-${venue.name.replace(/[' ']+/g,'-').toLowerCase()}`">Manage</v-btn>
+              <v-btn text :to="`/manage/${venue.venue_id}-${venue.name.replace(/[' ']+/g,'-').toLowerCase()}`">Manage</v-btn> 
+              <v-row justify="">
+    <v-dialog v-model="dialog" persistent max-width="290">
+      <template v-slot:activator="{ on }">
+        <v-btn color="pink darken-1" class="ml-4" text v-on="on">Remove</v-btn>
+      </template>
+      <v-card>
+        <v-card-title class="headline">Delete {{ venue.name }}?</v-card-title>
+        <v-card-text color="red">Confirm that you want to delete {{ venue.name }}. This action is irreversible</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red darken-1" text @click="dialog = false">Cancel</v-btn>
+          <v-btn color="green darken-1" text @click='remove(venue.venue_id)'>Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
+              
               <v-spacer></v-spacer>
           <v-btn
         small
@@ -42,7 +59,7 @@
       >
         <v-icon>mdi-heart</v-icon> <span class="subheading caption">{{ venue.likes }}</span>
       </v-btn> 
-      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green"></v-switch>
+      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green" @change="changestatus(venue.status)"></v-switch>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -51,13 +68,64 @@
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
     name: 'VenueCard',
     props: ["venue"],
     data () {
       return {
-        message: false
+        message: false,
+        dialog: false
       }
+    },
+    methods: {
+    addvenueerrorfunc (message, show) {
+       let item = {
+            errormessagealert: message,
+            erroralert: show
+          }
+          this.$store.commit("setErrorAlert", item)
+      },
+
+      addvenuesuccessfunc (message, show) {
+       let item = {
+            successmessagealert: message,
+            successalert: show
+          }
+          this.$store.commit("setSuccessAlert", item)
+      },
+
+      remove (x) {
+          axios.post(`${this.$store.state.url}/deletevenue/${x}`)
+          .then((res) => {
+          if (res.status === 200 && res.data.success === true) {
+            this.dialog = false
+            this.addvenuesuccessfunc(res.data.message, true)
+          } else {
+            this.dialog = false
+            this.addvenueerrorfunc(res.data.message, true)
+          }
+       }).catch((e) => {
+         this.dialog = false
+         this.addvenueerrorfunc(e, true)
+       })
+    },
+
+    changestatus (x) {
+          axios.post(`${this.$store.state.url}/status`, {
+            status: !x
+          })
+          .then((res) => {
+          if (res.status === 200 && res.data.success === true) {
+            this.addvenuesuccessfunc(res.data.message, true)
+          } else {
+            this.addvenueerrorfunc(res.data.message, true)
+          }
+       }).catch((e) => {
+         this.addvenueerrorfunc(e, true)
+       })
+    },
     }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
-  <div class="login mt-12 mb-12">
+  <div class="login mt-9 mb-0 pa-3">
   <br>
   <br>
   <br>
   <v-card
     :loading="loading"
     shaped
-    class="mx-auto my-12 mt-1 mb-12"
+    class="mx-auto my-12 mt-1 mb-9"
     max-width="374"
     sm='flat'
   >
@@ -63,6 +63,16 @@ import axios from 'axios'
           }
           this.$store.commit("setErrorAlert", item)
       },
+
+      registersuccessfunc (message, show) {
+       let item = {
+            successmessagealert: message,
+            successalert: show
+          }
+          this.$store.commit("setSuccessAlert", item)
+      },
+
+
       login () {
         this.loading = true
         if (this.checkbox) {
@@ -94,6 +104,7 @@ import axios from 'axios'
         })
       }
     },
+
     created () {
       if (localStorage.getItem("checkbox")) {
        let logindetails = {
@@ -130,7 +141,9 @@ import axios from 'axios'
 
 <style scoped>
 .login {
-  height: auto
+  height: auto;
+  margin: 0;
+  background-color:#f5f5f5;
 }
 
 i {

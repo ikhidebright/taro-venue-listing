@@ -14,7 +14,7 @@
                 size="125"
                 tile
               >
-                <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
+                <v-img :src="venue.thumbnail_image"></v-img>
               </v-avatar>
              </div>
               <div>

@@ -115,12 +115,35 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: Dashboard
+    component: Dashboard,
+    // beforeEnter: (to, from, next) => {
+    //   if (store.state.isLoggedIn == false) {
+    //     let item = {
+    //       errormessagealert: "Sorry You have to Login first",
+    //       erroralert: true
+    //     }
+    //       store.commit("setErrorAlert", item)
+    //       next('login')
+    //     }
+    //     next()
+    // }
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (to.query.q == "success") {
+        console.log(to)
+          let item = {
+            successmessagealert: "Registration Succesfull Login now!!",
+            successalert: true
+          }
+          store.commit("setSuccessAlert", item)
+          next()
+        }
+        next()
+    }
   },
   {
     path: "/register",

@@ -1,5 +1,5 @@
 <template>
-    <div class="dashboard mt-12">
+    <div class="dashboard mt-8">
     <v-container>
     <v-row class='mb-1 mt-4'>
     <div class='headline font-weight-light text-capitalize ml-3'>{{ name[0].last_name }}'s venues</div>
@@ -48,7 +48,7 @@ export default {
 
 <style scoped>
 .dashboard {
-    background-color: #f1f1f1;
+    background-color:#f5f5f5;
     height: auto;
    padding-bottom: 10vh;
 }

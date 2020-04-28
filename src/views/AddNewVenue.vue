@@ -235,23 +235,23 @@
     >
     <input type="file" multiple class="uploadButton" id="files" ref="files" v-on:change="handleFilesUpload()"/>
     </v-btn>
-   <!-- <v-col cols="12" sm="6">
-    <div class="d-flex mb-auto flex-wrap mt-1">
+    <div class="d-flex mb-auto flex-wrap mt-4">
  <div
-        v-for="item in 2" 
-        :key="item.id"
+        v-for="image in moreimages" 
+        :key="image.image_id"
         class="ma-1"
       >
     <v-img
       class='ml-1'
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      :src="image.image"
       height="14vh"
-      width='140'
+      width='100'
     > 
     <v-col cols="3" sm="3">
             <v-btn fab
         dark
         small
+        @click="deleteMoreImage(image.image_id)"
         color='red'
         class="mb-auto"
         title="delete"
@@ -262,7 +262,6 @@
            </v-img>
      </div>
     </div>
-     </v-col> -->
         <br>
         <v-col cols="12" sm="12" lg="12">
         <v-row>
@@ -271,6 +270,7 @@
       color="#001F90" 
       dark
       tile
+      :disabled="moreimages.length < 3"
       @click="finish"
     >
      Finish
@@ -297,6 +297,7 @@ export default {
       checkbox: false,
       file: '',
       files: [],
+      moreimages: [],
       amenity: [],
       venuename: '',
       venuetype: '',
@@ -309,6 +310,20 @@ export default {
       description: ''
 }),
     methods: {
+    // delete more images 
+    deleteMoreImage (x) {
+       axios.post(`${this.$store.state.url}/deleteimage`, {
+         imageId: x
+       }).then((res) => {
+          if (res.status === 200 && res.data.success === true) {
+            this.moreimages = this.moreimages.filter(item => item.image_id != x)
+            this.addvenuesuccessfunc(res.data.message, true)
+          } else {
+            this.addvenueerrorfunc(res.data.message, true)
+          }
+       })
+    },
+
     addvenueerrorfunc (message, show) {
        let item = {
             errormessagealert: message,
@@ -347,7 +362,7 @@ export default {
       this.files[0].forEach((file) => {
         let formData = new FormData();
             formData.append('image', file);
-            formData.append("venue_id", this.insertedId)
+            formData.append("venue_id", 1)
             axios.post(`${this.$store.state.url}/addgallery`,
                 formData,
                 {
@@ -357,8 +372,15 @@ export default {
               }
             ).then((res) => {
               if (res.status === 200 && res.data.success === true) {
-                 this.cover = res.data.image
-                 this.addvenuesuccessfunc(res.data.message, true)
+                 console.log(res)
+                 let image = {
+                   image_id: res.data.result.insertId,
+                   image: res.data.image
+                 }
+                 this.moreimages.unshift(image)
+                 let numberOfImagesUploaded = this.moreimages.length;
+                 this.addvenuesuccessfunc(`Successfully Added ${numberOfImagesUploaded} Images`, true)
+                 this.files = []
               } else {
                 this.addvenueerrorfunc(res.data.message, true)
                 this.files = null

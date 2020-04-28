@@ -291,7 +291,7 @@ export default {
               registered: true
             }
             this.$store.commit("setLogin", logindetails)
-            this.$router.push('/login')
+            this.$router.push({path: 'login', query: {q: "success"}})
             this.clearfields()
           } else {
             this.joinerrorfunc(res.data.message, true)

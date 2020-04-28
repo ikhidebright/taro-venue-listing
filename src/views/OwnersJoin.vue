@@ -393,7 +393,7 @@ font-size: 0.9rem;
 /* for mobile */
 @media only screen and (max-width: 600px) {
   i {
-  font-size: 16vmin;
+  font-size: 10vmin;
   text-align: center;
 }
 

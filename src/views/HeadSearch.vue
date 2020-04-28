@@ -8,9 +8,10 @@
     <div class="d-flex flex-row mb-1">
   <Sort2 />
   <div>
-    <h1 class="ml-5 mb-2">Your search for "{{ $route.query.q }}"</h1>
+    <h1 class="ml-5 mb-2">Your search for "{{ this.$route.query.q }}"</h1>
     <Sort />
     <div class="d-sm-flex flex-sm-column d-lg-flex flex-lg-row mb-6">
+    <p v-if="items.length < 1" class="subtitle-1 mx-auto mt-12">No results for your search "{{ this.$route.query.q }}"</p>
     <div v-for="item in items" :key="item.id">
     <VenueCard :item="item"/>
     </div>

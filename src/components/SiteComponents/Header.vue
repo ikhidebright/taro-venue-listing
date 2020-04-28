@@ -106,7 +106,7 @@
       </v-list>
       </v-card>
     </v-menu>
-       <v-navigation-drawer
+      <!-- <v-navigation-drawer
       v-model="drawer"
       absolute
       temporary
@@ -135,7 +135,7 @@
 
         </v-list-item-group>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     </v-app-bar>
     <v-divider></v-divider>
     </div>

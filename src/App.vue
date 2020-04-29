@@ -20,6 +20,8 @@ export default {
       Header,
       Footer,
       ErrorAlert
+    },
+    created () {
     }
 };
 </script>

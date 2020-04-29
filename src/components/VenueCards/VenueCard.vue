@@ -7,15 +7,30 @@
     <v-img
       :src="item.thumbnail_image"
       height="130px"
-    > <v-btn
+    > 
+    <v-btn
         small
         dark
-        color='#325567'
+        v-if="item.status == false"
+        color='green'
         class="mr-4 transperent subheading caption"
         :title="`${item.name} is Available`"
       >
       Available
-      </v-btn></v-img>
+      </v-btn>
+
+      <v-btn
+        small
+        dark
+        v-if="item.status == true"
+        color='red'
+        class="mr-4 transperent subheading caption"
+        :title="`${item.name} is Booked`"
+      >
+      Booked
+      </v-btn>
+
+      </v-img>
     <v-card-title>
       {{ item.name }}
     </v-card-title>

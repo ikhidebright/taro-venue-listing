@@ -59,7 +59,7 @@
       >
         <v-icon>mdi-heart</v-icon> <span class="subheading caption">{{ venue.likes }}</span>
       </v-btn> 
-      <v-switch persistent-hint=true :hint="`${message == true? 'Booked' : 'Available'}`" v-model="message" color="green" @change="changestatus(venue)"></v-switch>
+      <v-switch persistent-hint=true :hint="`${venue.status == true? 'Booked' : 'Available'}`" v-model="venue.status" color="green" @change="changestatus(venue)"></v-switch>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -119,6 +119,8 @@ export default {
           })
           .then((res) => {
           if (res.status === 200 && res.data.success === true) {
+            let getOwnerVenues = this.$store.getters.myvenues
+            getOwnerVenues.then(x => this.$store.commit("setLoggedinOwnerVenues", x.data.result))
             this.addvenuesuccessfunc(res.data.message, true)
           } else {
             this.addvenueerrorfunc(res.data.message, true)

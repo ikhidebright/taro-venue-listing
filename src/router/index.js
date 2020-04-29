@@ -116,17 +116,19 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
-    // beforeEnter: (to, from, next) => {
-    //   if (store.state.isLoggedIn == false) {
-    //     let item = {
-    //       errormessagealert: "Sorry You have to Login first",
-    //       erroralert: true
-    //     }
-    //       store.commit("setErrorAlert", item)
-    //       next('login')
-    //     }
-    //     next()
-    // }
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        let item = {
+          errormessagealert: "Sorry You have to Login first",
+          erroralert: true
+        }
+          store.commit("setErrorAlert", item)
+          next('login')
+        }
+        let getOwnerVenues = store.getters.myvenues
+        getOwnerVenues.then(x => store.commit("setLoggedinOwnerVenues", x.data.result))
+        next()
+    }
   },
   {
     path: "/login",

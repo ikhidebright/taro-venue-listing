@@ -31,9 +31,21 @@
           <v-btn
         small
         dark
-        color='#325567'
+        v-if="items[0].status == true"
+        color='red'
         class="mr-4 transperent subheading caption"
-        :title="`${items[0].name} is available`"
+        :title="`${items[0].name} is Booked`"
+      >
+      Booked
+      </v-btn>
+
+       <v-btn
+        small
+        dark
+        v-if="items[0].status == false"
+        color='green'
+        class="mr-4 transperent subheading caption"
+        :title="`${items[0].name} is Available`"
       >
       Available
       </v-btn>
@@ -234,8 +246,7 @@ export default {
         })
       },
       settitle () {
-        // set page title
-      let title = this.items[0].name + ' | Event center in ' + this.items[0].city + ' | taro.com'
+      let title = this.items[0].name + ' | Event center in ' + this.items[0].city + ', ' + this.items[0].state + ' | taro.com'
       document.title = title
       },
       checklike () {
@@ -264,6 +275,11 @@ export default {
     },
     watch: {
       '$route.params.id' () {
+        setTimeout (() => {
+          this.assignCoverPicture()
+          this.checklike()
+          this.settitle()
+        }, 2000)
         axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
         .then((res) => {
           console.log(res)
@@ -354,8 +370,7 @@ export default {
     })
 
     // set page title
-    let title = this.items[0].name + ' | Event center in ' + this.items[0].city + ' | taro.com'
-      document.title = title
+    this.settitle()
     }
 }
 </script>

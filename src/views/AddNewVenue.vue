@@ -199,7 +199,7 @@
       color="#001F90" dark
       @click="addMap"
     >
-     Continue
+     Save
     </v-btn>
   </v-col>
       </v-stepper-content>
@@ -228,7 +228,7 @@
     </template>
   </v-hover>
   <br>
-  <p class="font-weight-bold">Add a minimum of 3 and maximum of 10 images to {{ insertedName }}'s gallery</p>
+  <p class="text--secondary mt-9">Add a minimum of 3 and maximum of 10 images to {{ insertedName }}'s gallery</p>
     <v-btn
       color="#001F90"
       dark
@@ -270,7 +270,7 @@
       color="#001F90" 
       dark
       tile
-      :disabled="moreimages.length < 3"
+      :disabled="moreimages.length < 3 || nocover"
       @click="finish"
     >
      Finish
@@ -290,8 +290,9 @@ import Addmap from '@/components/VenuePageComponents/Addmap.vue'
 export default {
     name: 'AddVenue',
     data: () => ({
-      e1: 3,
+      e1: 1,
       answer: "",
+      nocover: true,
       cover: null,
       overlay: false,
       checkbox: false,
@@ -310,6 +311,10 @@ export default {
       description: ''
 }),
     methods: {
+    scrollToTop() {
+                window.scrollTo(0,0);
+    },
+
     // delete more images 
     deleteMoreImage (x) {
        axios.post(`${this.$store.state.url}/deleteimage`, {
@@ -362,7 +367,7 @@ export default {
       this.files[0].forEach((file) => {
         let formData = new FormData();
             formData.append('image', file);
-            formData.append("venue_id", 1)
+            formData.append("venue_id", this.insertedId)
             axios.post(`${this.$store.state.url}/addgallery`,
                 formData,
                 {
@@ -408,6 +413,7 @@ export default {
             ).then((res) => {
               if (res.status === 200 && res.data.success === true) {
                  this.cover = res.data.image
+                 this.nocover = false
                  this.addvenuesuccessfunc(res.data.message, true)
               } else {
                 this.addvenueerrorfunc(res.data.message, true)
@@ -423,9 +429,8 @@ export default {
       next (x) {
         setTimeout (() => {
         this.e1 = x
-        this.alert = false
-        this.erroralert = false
-        }, 6000)
+        this.scrollToTop()
+        }, 3000)
       },
 
      addamenity (arr, id) {
@@ -452,18 +457,17 @@ export default {
         }).then((res) => {
           item.id = res.data.result.insertId
           item.name = this.venuename
-          if (res.status == 200) {
-          this.alert = true
-          this.messagealert = res.data.message
+          if (res.status === 200 && res.data.success === true) {
+          this.addvenuesuccessfunc(res.data.message, true)
           this.addamenity(this.amenity, res.data.result.insertId)
           this.$store.commit("setInsertVenue", item)
           this.next(2)
           console.log(res)
+          } else {
+            this.addvenueerrorfunc(res.data.message, true)
           }
         }).catch((err) => {
-          this.erroralert = true
-          this.messagealert = err
-          this.next(1)
+          this.addvenueerrorfunc(err, true)
         })
       },
       addques (ques) {
@@ -471,8 +475,14 @@ export default {
           ques: ques,
           venue_id: this.insertedId
         }).then((res) => {
+          if (res.status === 200 && res.data.result.affectedRows > 0) {
           this.$store.commit("setQuestionId", res.data.result.insertId)
           console.log(res)
+          } else {  
+          this.addvenueerrorfunc("Error adding question", true)
+          }
+        }).catch((err) => {
+          this.addvenueerrorfunc(err, true)
         })
       },
         addans () {
@@ -480,18 +490,30 @@ export default {
           answer: this.answer,
           question_id: this.insertedquestionId
         }).then((res) => {
+           if (res.status === 200 && res.data.success === true && res.data.result.affectedRows > 0) {
+          this.addvenuesuccessfunc("Answer saved", true)
           this.answer  = ""
           console.log(res)
+           } else {
+          this.addvenueerrorfunc("Error saving answer", true)
+           }
+        }).catch((err) => {
+          this.addvenueerrorfunc(err, true)
         })
       },
       addMap () {
         axios.patch(`${this.$store.state.url}/showmap/${this.insertedId}`, {
           show_map: this.checkbox
         }).then((res) => {
-          if (res.status == 200) {
-          this.e1 = 3
+          if (res.status === 200 && res.data.result.affectedRows > 0 && res.data.result.changedRows > 0) {
+          this.addvenuesuccessfunc("Map Option saved", true)
+          this.next(3)
           console.log(res)
+          } else {
+          this.addvenueerrorfunc("Error saving Map option", true)
           }
+        }).catch((err) => {
+          this.addvenueerrorfunc(err, true)
         })
       },
       finish () {

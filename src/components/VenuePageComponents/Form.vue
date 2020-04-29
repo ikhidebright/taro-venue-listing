@@ -271,7 +271,7 @@ import axios from 'axios'
     methods: {
       payWithRave () {
          window.getpaidSetup({
-            PBFPubKey: "FLWPUBK_TEST-657128b0c9bc70a7e7ffbc030f57caaf-X",
+            PBFPubKey: process.env.VUE_APP_RAVE,
             customer_email: this.email,
             amount: this.items[0].price/2,
             customer_firstname: this.first_name,

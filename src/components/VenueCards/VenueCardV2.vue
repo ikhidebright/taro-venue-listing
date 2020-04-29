@@ -8,15 +8,29 @@
       :src="ite.thumbnail_image"
       height="110px"
     >
-    <v-btn
+   <v-btn
         small
         dark
-        color='#325567'
+        v-if="ite.status == false"
+        color='green'
         class="mr-4 transperent subheading caption"
-        title="Venue Status"
+        :title="`${ite.name} is Available`"
       >
       Available
-      </v-btn></v-img>
+      </v-btn>
+
+      <v-btn
+        small
+        dark
+        v-if="ite.status == true"
+        color='red'
+        class="mr-4 transperent subheading caption"
+        :title="`${ite.name} is Booked`"
+      >
+      Booked
+      </v-btn>
+      
+      </v-img>
 
     <v-card-title>
     {{ ite.name }}

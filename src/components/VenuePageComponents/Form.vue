@@ -221,6 +221,7 @@
 <script>
 /* eslint-disable no-unused-vars */
 import axios from 'axios'
+import unirest from 'unirest'
 
   export default {
     data: vm => ({
@@ -287,17 +288,48 @@ import axios from 'axios'
             onclose: function() {},
             callback: function(response) {
                 var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
+
                 console.log("This is the response returned after a charge", response);
-                if (
+
+              if (
                     response.tx.chargeResponseCode == "00" ||
                     response.tx.chargeResponseCode == "0"
                 ) {
-                    // redirect to a success page
+
+
+
+ var payload =
+ {
+  "SECKEY": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
+  "txref": response.tx.txRef
+};
+
+var server_url = "https://api.ravepay.com/flwv3-pug/getpaidx/api/v2/verify"; 
+//please make sure to change this to production url when you go live
+
+//make a post request to the server
+unirest.post(server_url)
+      .headers({'Content-Type': 'application/json'})
+      .send(payload)
+      .end(function(response) {
+            console.log("This is the response returned after a charge", response);
+            //check status is success.
+          if (response.body.data.status === "successful" && response.body.data.chargecode == '00') {
+              //check if the amount is same as amount you wanted to charge just to be very sure
+              if (response.body.data.amount === this.items[0].price/2) {
+                  console.log("Payment successful");
+                  //then give value for the payment
+                
+              }
+          }
+      })
+              // redirect to a success page
+                    console.log("Payment successful");
                 } else {
                     // redirect to a failure page.
+                    console.log("Payment failed");
                 }
-
-                window.close(); // use this to close the modal immediately after payment.
+     window.close(); // use this to close the modal immediately after payment.
             }
         });
     },

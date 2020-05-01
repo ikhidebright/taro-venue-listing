@@ -28,6 +28,10 @@
             :type="show2 ? 'text' : 'password'"
             @click:append="show2 = !show2"
           ></v-text-field>
+          <v-row class="mt-n3 mr-1">
+          <v-spacer></v-spacer>
+          <router-link to="/recover">Forgot Password?</router-link>
+          </v-row>
           <v-checkbox
       v-model="checkbox"
       input-value="checkbox"
@@ -37,6 +41,17 @@
           >Login</v-btn>
         </v-col>
     </v-card>
+           <v-card 
+           class="mx-auto my-12 mb-9 mt-n6" 
+           max-width="374"
+           text
+           flat
+           color="#f5f5f5"
+           >
+           <div class="text-center ma-2">
+          Don't have an Account? <router-link to="/owner" class="ml-0.5"> Join as an Owner</router-link>
+          </div>
+          </v-card>
     <br>
   </div>
 </template>

@@ -14,6 +14,7 @@ import Cities from "../views/Cities.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AddNewVenue from "../views/AddNewVenue.vue";
 import HeadSearch from "../views/HeadSearch.vue";
+import Recover from "../views/Recover.vue"
 import axios from 'axios'
 import store from '@/store'
 
@@ -60,6 +61,11 @@ const routes = [
     path: "/propose",
     name: "AddNewVenue",
     component: AddNewVenue
+  },
+  {
+    path: "/recover",
+    name: "Recover",
+    component: Recover
   },
   {
     path: "/privacy",

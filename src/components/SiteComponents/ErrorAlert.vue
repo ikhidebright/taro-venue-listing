@@ -34,6 +34,22 @@
         </v-alert>
         </div>   
         <!--error alert ends--> 
+
+      <!--dissmisable alert starts--> 
+      <div class="text">
+        <v-alert
+      v-model="dismissablealert"
+      border="left"
+      close-text="Close Alert"
+      color="deep-purple accent-4"
+      dark
+      dismissible
+    >
+     {{ dismissablemessage }}
+    </v-alert>
+    </div> 
+    <!--dissmisable alert ends--> 
+
         </v-container>
   </div>
 </template>
@@ -86,6 +102,14 @@ export default {
       },
       erroralert () {
         return this.$store.state.erroralert
+      },
+
+       dismissablealert () {
+        return this.$store.state.dismissablealert
+      },
+
+       dismissablemessage () {
+        return this.$store.state.dismissablemessage
       }
     }
   }

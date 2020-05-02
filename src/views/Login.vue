@@ -2,7 +2,6 @@
   <div class="login mt-9 mb-0 pa-3">
   <br>
   <br>
-  <br>
   <v-card
     :loading="loading"
     shaped

@@ -16,6 +16,8 @@ export default new Vuex.Store({
   successalert: false,
   errormessagealert: null,
   erroralert: false,
+  dismissablealert: false,
+  dismissablemessage: null,
   booking: null,
   user: null,
   loggedInOwnerVenues: null,
@@ -178,6 +180,11 @@ export default new Vuex.Store({
     setErrorAlert (state, item) {
       state.errormessagealert = item.errormessagealert
       state.erroralert = item.erroralert
+    },
+
+    setDismissableAlert (state, item) {
+      state.dismissablealert = item.dismissablealert
+      state.dismissablemessage = item.dismissablemessage
     },
 
     setSuccessAlert (state, item) {

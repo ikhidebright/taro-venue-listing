@@ -13,6 +13,7 @@
         <h2>from over 7,600 halls in Nigeria</h2>
         </div>
       </v-container>
+      <!--
   <div class="src mx-auto">
   <v-form>
     <v-container>
@@ -51,7 +52,7 @@
         </v-row>
     </v-container>
   </v-form>
-  </div>
+  </div> -->
 </template>
     </v-carousel-item>
   </v-carousel>

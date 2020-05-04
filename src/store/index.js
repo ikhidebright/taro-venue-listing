@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-  url: 'http://localhost:8000',
+  url: 'https://venue-app-backend.herokuapp.com',
   insertvenueid: null,
   venuegallery: [],
   insertvenuename: null,

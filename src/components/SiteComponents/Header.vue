@@ -14,7 +14,9 @@
       <v-text-field
         hide-details
         color="#001F90"
-        prepend-inner-icon="search"
+        filled
+        append-icon="search"
+       @click:append="() => (src)"
         label='Search venue, location'
         class='mr-lg-12 mr-2'
         @keyup="search"
@@ -177,8 +179,8 @@ import axios from 'axios'
         { text: 'Log out', icon: 'mdi-power-plug-off', link: '/'}
       ],
       itemsmobile: [
-        { text: 'Login', icon: 'mdi-folder', link: '/login' },
-        { text: 'List your venue', icon: 'mdi-clipboard-plus', link: '/owner' }
+        { text: 'Login', icon: 'mdi-login', link: '/login' },
+        { text: 'List your venue', icon: 'mdi-plus-circle', link: '/owner' }
       ],
     }),
     computed: {
@@ -187,6 +189,10 @@ import axios from 'axios'
       }
     },
     methods: {
+      src () {
+        alert("heuyy")
+      },
+
       search (e) {
         if (e.keyCode === 13) {
           axios.get(`http://localhost:8000/search/${this.src}`)

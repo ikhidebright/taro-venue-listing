@@ -275,7 +275,7 @@ export default {
       },
 
       register () {
-        axios.post('http://localhost:8000/join', {
+        axios.post(`${this.$store.state.url}/join`, {
           first_name: this.firstname,
           last_name: this.lastname,
           email: this.email,

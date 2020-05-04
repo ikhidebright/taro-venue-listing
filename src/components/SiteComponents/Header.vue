@@ -195,7 +195,7 @@ import axios from 'axios'
 
       search (e) {
         if (e.keyCode === 13) {
-          axios.get(`http://localhost:8000/search/${this.src}`)
+          axios.get(`${this.$store.state.url}/search/${this.src}`)
         .then((res) => {
             this.$store.commit('setVenue', res.data.result)
             this.$store.commit('setItem', res.data.result)

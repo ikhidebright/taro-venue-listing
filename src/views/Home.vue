@@ -32,7 +32,7 @@ export default {
   }
  },
  created () {
-   axios.get('http://localhost:8000/venues')
+   axios.get(`${this.$store.state.url}/venues`)
    .then((res) => {
      this.items = res.data.result
    })

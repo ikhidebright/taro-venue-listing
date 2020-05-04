@@ -45,7 +45,7 @@ export default {
 
  created () {
       let id = this.$route.params.name.replace(/[-]+/g," ").toLowerCase()
-      axios.get(`http://localhost:8000/event/${id}`)
+      axios.get(`${this.$store.state.url}/event/${id}`)
       .then((res) => {
         this.items = res.data.result
       })

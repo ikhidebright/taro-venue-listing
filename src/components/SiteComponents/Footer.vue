@@ -194,7 +194,7 @@ export default {
     },
     methods: {
         city (topcity) {
-        axios.get(`http://localhost:8000/places/${topcity}`)
+        axios.get(`${this.$store.state.url}/places/${topcity}`)
         .then((res) => {
             this.$store.commit('setVenue', res.data.result)
             this.$store.commit('setItem', res.data.result)

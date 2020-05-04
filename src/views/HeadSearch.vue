@@ -48,7 +48,7 @@ export default {
 
  created () {
       let id = this.$route.params.name.replace(/[-]+/g," ").toLowerCase()
-      axios.get(`http://localhost:8000/places/${id}`)
+      axios.get(`${this.$store.state.url}/places/${id}`)
         .then((res) => {
             this.$store.commit('setVenue', res.data.result)
             this.$store.commit('setItem', res.data.result)

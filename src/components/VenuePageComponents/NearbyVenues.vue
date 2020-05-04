@@ -34,7 +34,7 @@ export default {
     },
 
     created () {
-      axios.get(`http://localhost:8000/places/${this.items[0].state}`)
+      axios.get(`${this.$store.state.url}/places/${this.items[0].state}`)
       .then((res) => {
         this.item = res.data.result
         console.log(this.item)

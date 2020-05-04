@@ -132,7 +132,7 @@
       </template>
        <div data-href="https://developers.facebook.com/docs/plugins/" 
 data-layout="button_count" data-size="small"><a target="_blank" 
-:href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost:8080${$route.path}&amp;src=sdkpreparse`" class="fb-xfbml-parse-ignore"> 
+:href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftaro.netlify.app${$route.path}&amp;src=sdkpreparse`" class="fb-xfbml-parse-ignore"> 
 <v-btn
         fab
         dark
@@ -144,7 +144,7 @@ data-layout="button_count" data-size="small"><a target="_blank"
 <v-icon>mdi-facebook</v-icon>
 </v-btn></a>
 </div>
-<a :href="`mailto:?subject=Check out ${items[0].name}&amp;body=Check out this site localhost:8080${$route.path}`"
+<a :href="`mailto:?subject=Check out ${items[0].name}&amp;body=Check out this site http://taro.netlify.app/${$route.path}`"
    title="Share by Email">
       <v-btn
         fab
@@ -280,7 +280,7 @@ export default {
           this.checklike()
           this.settitle()
         }, 2000)
-        axios.get(`http://localhost:8000/venues/${this.$route.params.id}`)
+        axios.get(`${this.$store.state.url}/venues/${this.$route.params.id}`)
         .then((res) => {
           console.log(res)
            this.$store.commit('setVenueD', res.data.result)

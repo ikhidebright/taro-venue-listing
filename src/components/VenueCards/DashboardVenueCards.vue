@@ -24,7 +24,7 @@
                </div>
          </div>
              <v-card-actions>
-              <v-btn text :to="`/manage/${venue.venue_id}-${venue.name.replace(/[' ']+/g,'-').toLowerCase()}`">Manage</v-btn> 
+             <!-- <v-btn text :to="`/manage/${venue.venue_id}-${venue.name.replace(/[' ']+/g,'-').toLowerCase()}`">Manage</v-btn> 
               <v-row justify="">
     <v-dialog v-model="dialog" persistent max-width="290">
       <template v-slot:activator="{ on }">
@@ -37,10 +37,10 @@
           <v-spacer></v-spacer>
           <v-btn color="red darken-1" text @click="dialog = false">Cancel</v-btn>
           <v-btn color="green darken-1" text @click='remove(venue.venue_id)'>Ok</v-btn>
-        </v-card-actions>
+        </v-card-actions> 
       </v-card>
     </v-dialog>
-  </v-row>
+  </v-row> -->
               
               <v-spacer></v-spacer>
           <v-btn

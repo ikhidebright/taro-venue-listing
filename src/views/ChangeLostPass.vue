@@ -23,7 +23,7 @@
             outlined
             type='password'
           ></v-text-field>
-          <v-btn x-large color="#001F90" dark block @click='login'
+          <v-btn :disabled="password != cpassword || password === null" class="bt" x-large color="#001F90" block @click='resetpassword'
           >Change Password</v-btn>
         </v-col>
     </v-card>
@@ -37,10 +37,11 @@ import axios from 'axios'
   export default {
     data: () => ({
       loading: false,
-      email: ''
+      password: null,
+      cpassword: null
     }),
-    created () {
-        axios.post(`${this.$store.state.url}/checklostpasstoken/${this.$router.params.id}-${this.$router.params.token}`)
+    mounted () {
+        axios.post(`${this.$store.state.url}/checklostpasstoken/${this.$route.params.id}-${this.$route.params.token}`)
         .then((res) => {
             console.log(res)
         })
@@ -61,11 +62,13 @@ import axios from 'axios'
           this.$store.commit("setSuccessAlert", item)
       },
       resetpassword () {
-        axios.post(`${this.$store.state.url}/login`, {
-          email: this.email,
+        this.loading = true
+        axios.post(`${this.$store.state.url}/resetpasstoken/${this.$route.params.id}-${this.$route.params.token}`, {
           password: this.password
         }).then((res) => {
-          if (res.status == 201 && res.data.success === true) {
+          if (res.status == 200 && res.data.success === true) {
+           this.loading = false
+           this.registersuccessfunc(res.data.message, true)
            console.log(res)
            this.status = res
           } else {
@@ -88,6 +91,10 @@ import axios from 'axios'
   height: auto;
   margin: 0;
   background-color:#f5f5f5;
+}
+
+.bt {
+  color: white
 }
 
 i {

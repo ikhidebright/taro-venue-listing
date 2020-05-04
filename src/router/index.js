@@ -61,7 +61,18 @@ const routes = [
   {
     path: "/propose",
     name: "AddNewVenue",
-    component: AddNewVenue
+    component: AddNewVenue,
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn == false) {
+        let item = {
+          errormessagealert: "Sorry You have to Login first",
+          erroralert: true
+        }
+          store.commit("setErrorAlert", item)
+          next('login')
+        }
+        next()
+    }
   },
   {
     path: "/set/:id-:token",

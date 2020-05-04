@@ -48,6 +48,56 @@
 
        <!--<v-app-bar-nav-icon @click="drawer = true" class='hidden-sm-and-up' v-if="!this.$store.state.isLoggedIn"></v-app-bar-nav-icon>-->
 
+
+<v-menu
+      v-model="menu"
+      :close-on-content-click="true"
+      open-on-click
+      :nudge-width="200"
+      offset-x
+      class="hidden-sm-and-up"
+      transition="scale-transition"
+      v-if="!this.$store.state.isLoggedIn"
+    >
+      <template v-slot:activator="{ on }">
+        <v-toolbar-items class=''>
+          <v-btn
+          v-on="on"
+          text
+          class="mr-lg-n4">
+      <v-icon dark>mdi-menu</v-icon>
+    </v-btn>
+    </v-toolbar-items>
+
+      </template>
+      <v-card>
+        <v-list
+        nav
+        dense
+      >
+        <v-list-item-group v-model="item" color="primary">
+          <v-list-item
+            v-for="(item, i) in itemsmobile"
+            :key="i"
+            :to="item.link"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content 
+            >
+              <v-list-item-title v-text="item.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+      </v-card>
+    </v-menu>
+
+
+
+
        <v-menu
       v-model="menu"
       :close-on-content-click="true"
@@ -125,6 +175,10 @@ import axios from 'axios'
         { text: 'Add a venue', icon: 'mdi-clipboard-plus', link: '/propose' },
         { text: 'Account settings', icon: 'mdi-cogs', link: '/settings' },
         { text: 'Log out', icon: 'mdi-power-plug-off', link: '/'}
+      ],
+      itemsmobile: [
+        { text: 'Login', icon: 'mdi-folder', link: '/login' },
+        { text: 'List your venue', icon: 'mdi-clipboard-plus', link: '/owner' }
       ],
     }),
     computed: {

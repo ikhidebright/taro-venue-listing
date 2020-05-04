@@ -102,7 +102,7 @@ import axios from 'axios'
         axios.post(`${this.$store.state.url}/login`, {
           email: this.email,
           password: this.password
-        }).then((res) => {
+        }, { withCredentials: true }).then((res) => {
           if (res.status == 201 && res.data.success === true) {
            console.log(res)
            this.status = res

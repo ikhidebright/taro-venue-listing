@@ -16,8 +16,8 @@
         color="#001F90"
         filled
         append-icon="search"
-       @click:append="() => (src)"
-        label='Search venue, location'
+       @click:append="alert('heyy')"
+        label='Search venues, location'
         class='mr-lg-12 mr-2'
         @keyup="search"
         dense
@@ -66,7 +66,7 @@
           <v-btn
           v-on="on"
           text
-          class="mr-lg-n4">
+          class="mr-lg-n4 hidden-sm-and-up">
       <v-icon dark>mdi-menu</v-icon>
     </v-btn>
     </v-toolbar-items>

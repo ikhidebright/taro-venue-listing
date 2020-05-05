@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-  url: 'https://cors-anywhere.herokuapp.com/https://venue-app-backend.herokuapp.com',
+  url: 'https://venue-app-backend.herokuapp.com',
   insertvenueid: null,
   venuegallery: [],
   insertvenuename: null,

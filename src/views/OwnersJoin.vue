@@ -281,7 +281,7 @@ export default {
           email: this.email,
           password: this.password,
           phone_number: this.phone
-        }, { crossdomain: true }, { withCredentials: true, credentials: 'include' })
+        })
         .then((res) => {
           console.log(res)
           if (res.status === 200 && res.data.success === true) {

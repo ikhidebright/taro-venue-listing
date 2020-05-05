@@ -159,7 +159,7 @@ const routes = [
     component: Login,
     beforeEnter: (to, from, next) => {
       if (to.query.q == "success") {
-        console.log(to)
+        // console.log(to)
           let item = {
             successmessagealert: "Registration Succesfull Login now!!",
             successalert: true

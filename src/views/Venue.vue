@@ -241,8 +241,8 @@ export default {
       view () {
         axios.patch(`${this.$store.state.url}/view/${this.items[0].venue_id}`, {
           view: this.items[0].views +1
-        }).then((res) => {
-         console.log(res)
+        }).then(() => {
+        //  console.log(res)
         })
       },
       settitle () {
@@ -282,12 +282,12 @@ export default {
         }, 2000)
         axios.get(`${this.$store.state.url}/venues/${this.$route.params.id}`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
            this.$store.commit('setVenueD', res.data.result)
       })
       axios.get(`${this.$store.state.url}/reviews/${this.$route.params.id}`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.$store.commit("setReview", res.data.result)
         })
       this.checklike()

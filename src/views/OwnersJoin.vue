@@ -283,7 +283,7 @@ export default {
           phone_number: this.phone
         })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.status === 200 && res.data.success === true) {
             let logindetails = {
               email: this.email,

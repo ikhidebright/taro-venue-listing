@@ -289,7 +289,7 @@ import unirest from 'unirest'
             callback: function(response) {
                 var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
 
-                console.log("This is the response returned after a charge", response);
+                // console.log("This is the response returned after a charge", response);
 
               if (
                     response.tx.chargeResponseCode == "00" ||
@@ -312,22 +312,22 @@ unirest.post(server_url)
       .headers({'Content-Type': 'application/json'})
       .send(payload)
       .end(function(response) {
-            console.log("This is the response returned after a charge", response);
+            // console.log("This is the response returned after a charge", response);
             //check status is success.
           if (response.body.data.status === "successful" && response.body.data.chargecode == '00') {
               //check if the amount is same as amount you wanted to charge just to be very sure
               if (response.body.data.amount === this.items[0].price/2) {
-                  console.log("Payment successful");
+                  // console.log("Payment successful");
                   //then give value for the payment
                 
               }
           }
       })
               // redirect to a success page
-                    console.log("Payment successful");
+                    // console.log("Payment successful");
                 } else {
                     // redirect to a failure page.
-                    console.log("Payment failed");
+                    // console.log("Payment failed");
                 }
      window.close(); // use this to close the modal immediately after payment.
             }
@@ -370,8 +370,8 @@ unirest.post(server_url)
           event_date: this.dateFormatted,
           event_type: this.event,
           venue_id: this.items[0].venue_id
-          }).then((res) => {
-            console.log(res)
+          }).then(() => {
+            // console.log(res)
           })
         },
 

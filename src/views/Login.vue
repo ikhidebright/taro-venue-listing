@@ -104,7 +104,7 @@ import axios from 'axios'
           password: this.password
         }, { crossdomain: true }, { withCredentials: true, credentials: 'include' }).then((res) => {
           if (res.status == 201 && res.data.success === true) {
-           console.log(res)
+          //  console.log(res)
            this.status = res
           } else {
           this.status = null

@@ -37,7 +37,7 @@ export default {
       axios.get(`${this.$store.state.url}/places/${this.items[0].state}`)
       .then((res) => {
         this.item = res.data.result
-        console.log(this.item)
+        // console.log(this.item)
       })
     }
 }

@@ -42,8 +42,8 @@ import axios from 'axios'
     }),
     mounted () {
         axios.post(`${this.$store.state.url}/checklostpasstoken/${this.$route.params.id}-${this.$route.params.token}`)
-        .then((res) => {
-            console.log(res)
+        .then(() => {
+            // console.log(res)
         })
     },
     methods: {
@@ -69,7 +69,7 @@ import axios from 'axios'
           if (res.status == 200 && res.data.success === true) {
            this.loading = false
            this.registersuccessfunc(res.data.message, true)
-           console.log(res)
+          //  console.log(res)
            this.status = res
           } else {
           this.status = null

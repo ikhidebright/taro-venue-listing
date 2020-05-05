@@ -377,7 +377,7 @@ export default {
               }
             ).then((res) => {
               if (res.status === 200 && res.data.success === true) {
-                 console.log(res)
+                //  console.log(res)
                  let image = {
                    image_id: res.data.result.insertId,
                    image: res.data.image
@@ -462,7 +462,7 @@ export default {
           this.addamenity(this.amenity, res.data.result.insertId)
           this.$store.commit("setInsertVenue", item)
           this.next(2)
-          console.log(res)
+          // console.log(res)
           } else {
             this.addvenueerrorfunc(res.data.message, true)
           }
@@ -477,7 +477,7 @@ export default {
         }).then((res) => {
           if (res.status === 200 && res.data.result.affectedRows > 0) {
           this.$store.commit("setQuestionId", res.data.result.insertId)
-          console.log(res)
+          // console.log(res)
           } else {  
           this.addvenueerrorfunc("Error adding question", true)
           }
@@ -493,7 +493,7 @@ export default {
            if (res.status === 200 && res.data.success === true && res.data.result.affectedRows > 0) {
           this.addvenuesuccessfunc("Answer saved", true)
           this.answer  = ""
-          console.log(res)
+          // console.log(res)
            } else {
           this.addvenueerrorfunc("Error saving answer", true)
            }
@@ -508,7 +508,7 @@ export default {
           if (res.status === 200 && res.data.result.affectedRows > 0 && res.data.result.changedRows > 0) {
           this.addvenuesuccessfunc("Map Option saved", true)
           this.next(3)
-          console.log(res)
+          // console.log(res)
           } else {
           this.addvenueerrorfunc("Error saving Map option", true)
           }

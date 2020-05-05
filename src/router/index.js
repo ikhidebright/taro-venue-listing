@@ -50,7 +50,7 @@ const routes = [
     component: HeadSearch,
     props: (route) => ({ query: route.query.q }),
     beforeEnter: (to, from, next) => {
-      axios.get(`${this.$store.state.url}/search/${to.query.q}`)
+      axios.get(`${store.state.url}/search/${to.query.q}`)
         .then((res) => {
           store.commit('setVenue', res.data.result)
           store.commit('setItem', res.data.result)
@@ -109,7 +109,7 @@ const routes = [
     name: "Venue",
     component: Venue,
     beforeEnter: (to, from, next) => {
-      axios.get(`${this.$store.state.url}/venues/${to.params.id}`)
+      axios.get(`${store.state.url}/venues/${to.params.id}`)
         .then((res) => {
           store.commit('setVenueD', res.data.result)
           next()

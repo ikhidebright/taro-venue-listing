@@ -7,10 +7,17 @@
       transition="fade-transition"
     >
     <template>
-      <v-container>
+      <v-container class="hidden-sm-and-down">
         <div class="word">
         <h1>Find and Book Venues in Nigeria</h1>
         <h2>from over 7,600 halls in Nigeria</h2>
+        </div>
+      </v-container>
+
+      <v-container class="hidden-sm-and-up mt-12">
+        <div class="word mt-12">
+        <h1 class="mt-12">Find and Book Venues in Nigeria</h1>
+        <p class="subtitle-1 font-weight-light">from over 7,600 halls in Nigeria</p>
         </div>
       </v-container>
       <!--

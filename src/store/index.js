@@ -114,7 +114,7 @@ export default new Vuex.Store({
 'Coworking Space',
 'Field'
   ],
-    topCities: ['Lagos', 'Abuja', 'Enugu', 'Kano', 'Port Harcourt'],
+    topCities: ['Lagos', 'Abuja'],
     topEvents: ['Weddings', 'Conferences', 'Meetings', 'Birthdays', 'Engagement Party', 'Parties']
   },
   mutations: {

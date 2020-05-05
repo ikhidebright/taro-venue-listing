@@ -8,7 +8,8 @@ import axios from "axios"
 
 Vue.config.productionTip = false;
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+axios.defaults.withCredentials = true
+axios.defaults.crossdomain = true
 
 new Vue({
   router,

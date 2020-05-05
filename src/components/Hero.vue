@@ -16,8 +16,10 @@
 
       <v-container class="hidden-sm-and-up mt-12">
         <div class="word mt-12">
-        <h1 class="mt-12">Find and Book Venues in Nigeria</h1>
-        <p class="subtitle-1 font-weight-light">from over 7,600 halls in Nigeria</p>
+        <div class="mt-12"></div>
+        <br>
+        <h2 class="mt-12">Find and Book Venues in Nigeria from over 7,600 halls in Nigeria</h2>
+      <!--  <p class="subtitle-1 font-weight-light">from over 7,600 halls in Nigeria</p> -->
         </div>
       </v-container>
       <!--

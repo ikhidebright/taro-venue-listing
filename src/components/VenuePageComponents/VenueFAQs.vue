@@ -19,7 +19,7 @@
         :key="item.id"
          max-width="804"
       >
-        <v-expansion-panel-header> <b> {{ item.ques }} </b></v-expansion-panel-header>
+        <v-expansion-panel-header> {{ item.ques }} </v-expansion-panel-header>
         <v-expansion-panel-content>
         <br>
         {{ item.answer }}

@@ -3,6 +3,7 @@
     <v-carousel-item
       src="https://images.squarespace-cdn.com/content/v1/54174487e4b03dbd0c081bda/1431633576407-9A5VEBMLLTUZOFZQCGJZ/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Nigerian-Wedding-Photographer-43.JPG"
       transition="fade-transition"
+      class="img"
     >
     <template>
 
@@ -31,14 +32,17 @@
           <v-text-field
             label="Venue or Location"
             single-line
+            v-model="venueOrLocation"
             outlined
             append-icon="mdi-crosshairs-gps"
+            @click:append="getUserLocation"
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="3">
           <v-text-field
             type="number"
             label="Number of Guest"
+            v-model="numberOfGuest"
             single-line
             outlined
           ></v-text-field>
@@ -48,6 +52,7 @@
           :items="venuetype"
           label="Event Type"
           single-line
+          v-model="venueType"
           outlined
         ></v-select>
       </v-col>
@@ -70,7 +75,9 @@
             label="Venue or Location"
             single-line
             outlined
+            v-model="venueOrLocation"
             append-icon="mdi-crosshairs-gps"
+            @click:append="getUserLocation"
           ></v-text-field>
         </v-row>
         </v-container>
@@ -80,6 +87,7 @@
           <v-text-field
             type="number"
             label="Number of Guest"
+            v-model="numberOfGuest"
             single-line
             outlined
           ></v-text-field>
@@ -90,20 +98,20 @@
           :items="venuetype"
           label="Event Type"
           single-line
+          v-model="venueType"
           outlined
         ></v-select>
       </v-col>
        </v-row>
        <v-container>
         <v-row class="mt-n9">
-          <v-btn large block color="#001F90" dark>Search venue</v-btn>
+          <v-btn large block color="#ffffff" text outlined>Search venue</v-btn>
           </v-row>
           </v-container>
     </v-container>
           </v-form>
   </div> 
-
-</template>
+  </template>
     </v-carousel-item>
   </v-carousel>
 </template>
@@ -113,9 +121,17 @@
     name: "Hero",
     data () {
       return {
-         venuetype: ['Wedding reception', 'Meeting', 'Training', 'Conference', 'Get Together', 'Product Lunch', 'Corporate Party', 'Wedding Anniversery', 'Engagement Party', 'Birthday Party', 'Class Reunion', 'Brand Promotion', 'Fashion Show', 'Pool Party', 'Award Show', 'Exhibition', 'Bachelor Party', 'Other']
+        venueOrLocation: null,
+        numberOfGuest: null,
+        venueType: null,
+        venuetype: ['Wedding reception', 'Meeting', 'Training', 'Conference', 'Get Together', 'Product Lunch', 'Corporate Party', 'Wedding Anniversery', 'Engagement Party', 'Birthday Party', 'Class Reunion', 'Brand Promotion', 'Fashion Show', 'Pool Party', 'Award Show', 'Exhibition', 'Bachelor Party', 'Other']
       }
     },
+    methods: {
+      getUserLocation () {
+        alert("heyy")
+      }
+    }
   }
 </script>
 
@@ -128,5 +144,9 @@ margin: 10% 0 14% 0;
 .src {
   background-color: rgba(0, 0, 0, 0.61);
   color: #0b0a4e
+}
+
+.img {
+  height: auto;
 }
 </style>

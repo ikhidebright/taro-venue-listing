@@ -1,11 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from 'axios'
+import Api from "@/Services/Event.service"
+/*eslint-disable*/
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+  location: null,
   url: 'https://venue-app-backend.herokuapp.com',
   insertvenueid: null,
   venuegallery: [],
@@ -118,6 +121,11 @@ export default new Vuex.Store({
     topEvents: ['Weddings', 'Conferences', 'Meetings', 'Birthdays', 'Engagement Party', 'Parties']
   },
   mutations: {
+    // set user location
+    setLocation (state, item) {
+      state.location = item
+    },
+
     setVenue (state, item) {
       state.venues = item
     },
@@ -232,7 +240,19 @@ export default new Vuex.Store({
     async getQuestionsandanswers ({ state, commit }, id) {
       let item = await axios.get(`${state.url}/questionsandanswers/${id.id}`)
       commit('setQuestionsandanswers', item.data.result)
-    } 
+    },
+    // error dispatch
+    async setError ({ commit }, payload) {
+      commit("setErrorAlert", {
+        errormessagealert: payload.message,
+        erroralert: payload.show
+      })
+    },
+    // get location
+    async getLocation ({ commit }, payload) {
+      let location = await Api.getLocationFromGoogle(payload.lat, payload.log)
+      console.log(location)
+    }
   },
   modules: {}
 });

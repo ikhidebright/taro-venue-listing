@@ -117,20 +117,69 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
   export default {
     name: "Hero",
     data () {
       return {
-        venueOrLocation: null,
+        venueOrLocation: this.location,
         numberOfGuest: null,
         venueType: null,
         venuetype: ['Wedding reception', 'Meeting', 'Training', 'Conference', 'Get Together', 'Product Lunch', 'Corporate Party', 'Wedding Anniversery', 'Engagement Party', 'Birthday Party', 'Class Reunion', 'Brand Promotion', 'Fashion Show', 'Pool Party', 'Award Show', 'Exhibition', 'Bachelor Party', 'Other']
       }
     },
     methods: {
-      getUserLocation () {
-        alert("heyy")
+      ...mapActions(['getLocation', 'setError']),
+      showPosition (position) {
+        this.getLocation({
+          lat: position.coords.latitude,
+          log: position.coords.longitude
+        })
+      },
+    showError(error) {
+      switch(error.code) {
+    case error.PERMISSION_DENIED:
+      this.setError({
+        message: "You denied the request for Geolocation.",
+        show: true
+      });
+      break;
+    case error.POSITION_UNAVAILABLE:
+      this.setError({
+        message: "Location information is unavailable.",
+        show: true
+      });
+      break;
+    case error.TIMEOUT:
+      this.setError({
+        message: "The request to get your location timed out.",
+        show: true
+      });
+      break;
+    case error.UNKNOWN_ERROR:
+      this.setError({
+        message: "An unknown error occurred.",
+        show: true
+      });
+      break;
+          }
+      },
+     getUserLocation () {
+         if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(this.showPosition, this.showError);
+          } else { 
+              this.setError({
+                 message: "Geolocation is not supported by this browser.",
+                 show: true
+            });
+        }
       }
+    },
+    computed: {
+      ...mapState ({
+        location: 'location'
+      })
     }
   }
 </script>

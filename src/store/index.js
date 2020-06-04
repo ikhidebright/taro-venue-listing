@@ -8,15 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-  location: {
-  city:"Abuja",
-  fullAddress:"1 Umaru Musa Yar'Adua Road, Kwaba, Abuja, Nigeria",
-  number:"1",
-  roadName:"Umaru Musa Yar'Adua Road",
-  state:"Federal Capital Territory",
-  townName:"Kwaba",
-  userZone:"Municipal Area Coun"
-  },
+  location: null,
   url: 'https://venue-app-backend.herokuapp.com',
   insertvenueid: null,
   venuegallery: [],
@@ -265,10 +257,9 @@ export default new Vuex.Store({
         townName: location.data.results[0].address_components[2].long_name,
         city: location.data.results[0].address_components[3].long_name,
         state: location.data.results[0].address_components[5].long_name,
-        userZone: location.data.results[0].address_components[4].long_name,
+        LGA: location.data.results[0].address_components[4].long_name,
         fullAddress: location.data.results[0].formatted_address
       }
-      console.log(location)
       commit("setLocation", userLocation)
     }
   },

@@ -176,9 +176,14 @@ import { mapActions, mapState } from 'vuex'
         }
       }
     },
+    // watch: {
+    //   location () {
+    //     this.venueOrLocation = this.location.fullAddress
+    //   }
+    // },
     computed: {
       ...mapState ({
-        location: 'location'
+        location: 'location.fullAddress'
       })
     }
   }

@@ -8,7 +8,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-  location: null,
+  location: {
+  city:"Abuja",
+  fullAddress:"1 Umaru Musa Yar'Adua Road, Kwaba, Abuja, Nigeria",
+  number:"1",
+  roadName:"Umaru Musa Yar'Adua Road",
+  state:"Federal Capital Territory",
+  townName:"Kwaba",
+  userZone:"Municipal Area Coun"
+  },
   url: 'https://venue-app-backend.herokuapp.com',
   insertvenueid: null,
   venuegallery: [],
@@ -251,7 +259,17 @@ export default new Vuex.Store({
     // get location
     async getLocation ({ commit }, payload) {
       let location = await Api.getLocationFromGoogle(payload.lat, payload.log)
+      let userLocation = {
+        number: location.data.results[0].address_components[0].long_name,
+        roadName: location.data.results[0].address_components[1].long_name,
+        townName: location.data.results[0].address_components[2].long_name,
+        city: location.data.results[0].address_components[3].long_name,
+        state: location.data.results[0].address_components[5].long_name,
+        userZone: location.data.results[0].address_components[4].long_name,
+        fullAddress: location.data.results[0].formatted_address
+      }
       console.log(location)
+      commit("setLocation", userLocation)
     }
   },
   modules: {}

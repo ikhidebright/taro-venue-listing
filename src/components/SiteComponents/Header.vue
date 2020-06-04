@@ -1,8 +1,7 @@
 <template>
 <div>
  <v-app-bar
-      color="#001F90"
-      dark
+      color="#ffffff"
       fixed
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>

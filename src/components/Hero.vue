@@ -1,29 +1,29 @@
 <template>
-  <v-carousel hide-delimiters :show-arrows="false" touchless="true">
+  <v-carousel hide-delimiters :show-arrows="false">
     <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
+      src="https://images.squarespace-cdn.com/content/v1/54174487e4b03dbd0c081bda/1431633576407-9A5VEBMLLTUZOFZQCGJZ/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Nigerian-Wedding-Photographer-43.JPG"
       transition="fade-transition"
     >
     <template>
+
+      <!--hero text desk-->
       <v-container class="hidden-sm-and-down">
         <div class="word">
-        <h1>Find and Book Venues in Nigeria</h1>
-        <h2>from over 7,600 halls in Nigeria</h2>
+        <h1>Book over 350 Venues and Event Centers in Abuja</h1>
         </div>
       </v-container>
 
+
+      <!--hero text mo-->
       <v-container class="hidden-sm-and-up mt-6">
         <div class="word mt-12">
-        <div class="mt-12"></div>
-        <br>
-        <h2 class="mt-12">Find and Book over 7,600 Venues in Nigeria</h2>
-      <!--  <p class="subtitle-1 font-weight-light">from over 7,600 halls in Nigeria</p> -->
+        <h2 class="mt-12">Book over 350 Venues and Event Centers in Abuja</h2>
         </div>
       </v-container>
-      <!--
-  <div class="src mx-auto">
+
+
+      <!-- search bar desktop -->
+  <div class="src mx-auto hidden-sm-and-down">
   <v-form>
     <v-container>
       <v-row>
@@ -35,7 +35,6 @@
             append-icon="mdi-crosshairs-gps"
           ></v-text-field>
         </v-col>
-
         <v-col cols="12" sm="3">
           <v-text-field
             type="number"
@@ -44,7 +43,6 @@
             outlined
           ></v-text-field>
         </v-col>
-        
          <v-col class="d-flex" cols="12" sm="3">
         <v-select
           :items="venuetype"
@@ -53,15 +51,58 @@
           outlined
         ></v-select>
       </v-col>
-
         <v-col cols="12" sm="3">
           <v-btn x-large color="#001F90" dark>Search venue</v-btn>
           </v-col>
-
         </v-row>
     </v-container>
   </v-form>
-  </div> -->
+  </div> 
+
+
+ <!-- search bar mobile -->
+  <div class="src hidden-sm-and-up">
+  <v-form>
+    <v-container>
+      <v-container>
+      <v-row>
+          <v-text-field
+            label="Venue or Location"
+            single-line
+            outlined
+            append-icon="mdi-crosshairs-gps"
+          ></v-text-field>
+        </v-row>
+        </v-container>
+
+        <v-row class="mt-n9">
+        <v-col cols="6">
+          <v-text-field
+            type="number"
+            label="Number of Guest"
+            single-line
+            outlined
+          ></v-text-field>
+        </v-col>
+
+         <v-col class="d-flex" cols="6">
+        <v-select
+          :items="venuetype"
+          label="Event Type"
+          single-line
+          outlined
+        ></v-select>
+      </v-col>
+       </v-row>
+       <v-container>
+        <v-row class="mt-n9">
+          <v-btn large block color="#001F90" dark>Search venue</v-btn>
+          </v-row>
+          </v-container>
+    </v-container>
+          </v-form>
+  </div> 
+
 </template>
     </v-carousel-item>
   </v-carousel>
@@ -69,23 +110,9 @@
 
 <script>
   export default {
+    name: "Hero",
     data () {
       return {
-        name: "Hero",
-        items: [
-          {
-            src: 'https://images.squarespace-cdn.com/content/v1/54174487e4b03dbd0c081bda/1431633576407-9A5VEBMLLTUZOFZQCGJZ/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Nigerian-Wedding-Photographer-43.JPG',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
-        ],
          venuetype: ['Wedding reception', 'Meeting', 'Training', 'Conference', 'Get Together', 'Product Lunch', 'Corporate Party', 'Wedding Anniversery', 'Engagement Party', 'Birthday Party', 'Class Reunion', 'Brand Promotion', 'Fashion Show', 'Pool Party', 'Award Show', 'Exhibition', 'Bachelor Party', 'Other']
       }
     },

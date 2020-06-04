@@ -35,7 +35,7 @@ export default {
    axios.get(`${this.$store.state.url}/venues`)
    .then((res) => {
      this.items = res.data.result
-   })
+   })   
  }
 };
 </script>

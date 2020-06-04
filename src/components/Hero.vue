@@ -123,7 +123,7 @@ import { mapActions, mapState } from 'vuex'
     name: "Hero",
     data () {
       return {
-        venueOrLocation: this.location,
+        venueOrLocation: null,
         numberOfGuest: null,
         venueType: null,
         venuetype: ['Wedding reception', 'Meeting', 'Training', 'Conference', 'Get Together', 'Product Lunch', 'Corporate Party', 'Wedding Anniversery', 'Engagement Party', 'Birthday Party', 'Class Reunion', 'Brand Promotion', 'Fashion Show', 'Pool Party', 'Award Show', 'Exhibition', 'Bachelor Party', 'Other']
@@ -176,14 +176,14 @@ import { mapActions, mapState } from 'vuex'
         }
       }
     },
-    // watch: {
-    //   location () {
-    //     this.venueOrLocation = this.location.fullAddress
-    //   }
-    // },
+    watch: {
+      location () {
+        this.venueOrLocation = this.location.fullAddress
+      }
+    },
     computed: {
       ...mapState ({
-        location: 'location.fullAddress'
+        location: 'location'
       })
     }
   }

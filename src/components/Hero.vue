@@ -105,7 +105,7 @@
        </v-row>
        <v-container>
         <v-row class="mt-n9">
-          <v-btn large block color="#ffffff" text outlined>Search venue</v-btn>
+          <v-btn large block color="#001F90" dark>Search venue</v-btn>
           </v-row>
           </v-container>
     </v-container>

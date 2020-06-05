@@ -77,8 +77,7 @@ import axios from 'axios'
 
 <style scoped>
 .login {
-  background: rgb(241,241,241);
-  background: linear-gradient(172deg, rgba(241,241,241,1) 54%, rgba(216,219,232,1) 76%); 
+  background-color: #f1f1f1;
   min-height: 100vh;
   max-height: auto;
 }

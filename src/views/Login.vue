@@ -5,14 +5,14 @@
   <v-card
     :loading="loading"
     shaped
-    class="mx-auto my-12 mt-1 mb-9"
+    class="mx-auto my-12 mt-6 mb-9"
     max-width="374"
     sm='flat'
   >
       <v-col cols="12" sm="12" md="12">
-<div class="text-center ma-2">
+<!-- <div class="text-center ma-2">
       <i class="fas fa-user-circle text-center"></i>
-</div>
+</div> -->
       <br>
           <v-text-field
             v-model="email"
@@ -155,9 +155,9 @@ import axios from 'axios'
 
 <style scoped>
 .login {
-  height: auto;
-  margin: 0;
-  background-color:#f5f5f5;
+  background-color: #f1f1f1;
+  min-height: 100vh;
+  max-height: auto;
 }
 
 i {

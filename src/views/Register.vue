@@ -74,6 +74,7 @@
           text
           color="primary"
           type="submit"
+          block
         >Register</v-btn>
     </v-container>
   </v-form>

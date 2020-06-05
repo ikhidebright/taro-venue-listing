@@ -197,6 +197,7 @@ spaces, yachts, gallerias and convention centres.</p>
       large
       :loading="loading"
       color="#001F90"
+      block
       @click="register"
     >
       Join now!

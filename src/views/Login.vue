@@ -2,14 +2,12 @@
   <div class="login mt-9 mb-0 pa-3">
   <br>
   <br>
-  <v-card
-    :loading="loading"
-    shaped
+  <v-row
     class="mx-auto my-12 mt-6 mb-4"
     max-width="374"
-    sm='flat'
   >
-      <v-col cols="12" sm="12" md="12">
+      <v-col cols="12" lg="4" sm="4" md="4" class="mx-auto">
+        <h2>Owners login</h2>
       <br>
       <v-form
         ref="form"
@@ -21,7 +19,9 @@
             :rules="emailRules"
             label="Email Address"
             color="#001F90"
+            :disabled="loading"
             type="email"
+            small
             outlined
             required
           ></v-text-field>
@@ -30,6 +30,8 @@
             v-model="password"
             outlined
             required
+            small
+            :disabled="loading"
             :rules="passwordRules"
             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show2 ? 'text' : 'password'"
@@ -44,11 +46,11 @@
       input-value="checkbox"
       label="Remember password"
         ></v-checkbox>
-          <v-btn x-large color="#001F90" dark block @click='login'
+          <v-btn large :loading="loading" color="#001F90" dark block @click='login'
           >Login</v-btn>
           </v-form>
         </v-col>
-          </v-card>
+          </v-row>
            <div class="text-center mt-1">
           Don't have an Account? <router-link to="/owner" class="ml-0.5"> Join as an Owner</router-link>
           </div>
@@ -87,6 +89,7 @@
         if (!this.valid) {
           // error 
         } else {
+          this.loading = true
         }
       },
     },

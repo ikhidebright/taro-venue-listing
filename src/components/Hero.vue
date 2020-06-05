@@ -1,5 +1,5 @@
 <template>
-  <v-carousel hide-delimiters :show-arrows="false" class="pb-n6" height="450">
+  <v-carousel hide-delimiters :show-arrows="false" class="pb-n6" height="455">
     <v-carousel-item
       src="https://images.squarespace-cdn.com/content/v1/54174487e4b03dbd0c081bda/1431633576407-9A5VEBMLLTUZOFZQCGJZ/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Nigerian-Wedding-Photographer-43.JPG"
       transition="fade-transition"
@@ -197,7 +197,8 @@ margin: 10% 0 14% 0;
 
 .src {
   background-color: rgba(0, 0, 0, 0.61);
-  color: #0b0a4e
+  color: #0b0a4e;
+  height: auto;
 }
 
 .img {

@@ -1,5 +1,7 @@
 <template>
     <div class="footer pa-lg-5 pt-5">
+        <v-row>
+        </v-row>
        <v-card
             class="d-flex flex-row justify-lg-space-between justify-md-space-between justify-xl-space-between ml-sm-0 mb-12 mb-lg-0"
             max-width="1100px"
@@ -90,7 +92,7 @@ people. It’s free and convinient</p>
          </ul>
             </v-card>
 
-            <v-card class="foot hidden-sm-and-down"
+            <!-- <v-card class="foot hidden-sm-and-down"
             color="#08192b"
             flat>
          <ul>
@@ -100,10 +102,10 @@ people. It’s free and convinient</p>
                  <router-link :to="`/cities/${topcity.replace(/[' ']+/g,'-').toLowerCase()}`" class="li">{{ topcity }}</router-link>
              </li>
          </ul>
-            </v-card>
+            </v-card> -->
             </v-card>
 
-            <v-card class="foot d-lg-none d-md-none d-sm-none d-xl-none mb-8 mt-n5"
+            <!-- <v-card class="foot d-lg-none d-md-none d-sm-none d-xl-none mb-8 mt-n5"
             color="#08192b"
             flat>
          <ul>
@@ -113,7 +115,7 @@ people. It’s free and convinient</p>
                  <router-link :to="`/cities/${topcity.replace(/[' ']+/g,'-').toLowerCase()}`" class="li">{{ topcity }}</router-link>
              </li>
          </ul>
-            </v-card>
+            </v-card> -->
 
         <v-card class="foot ml-lg-and-up-9 mt-lg-7 ml-7 mt-n3"
             color="#08192b"

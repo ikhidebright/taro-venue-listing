@@ -21,7 +21,7 @@
       >
       <v-text-field
         hide-details
-        color="#f1f1f1"
+        color="#001F90"
         filled
         append-icon="search"
         label='Search venues, location'
@@ -37,11 +37,11 @@
 
       <!-- Bar action buttons-->
        <v-toolbar-items class='hidden-xs-only'>
-        <v-divider inset vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
+        <v-divider vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
         <v-btn text to='/login' v-if="!this.$store.state.isLoggedIn">
           Login
         </v-btn>
-        <v-divider inset vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
+        <v-divider vertical v-if="!this.$store.state.isLoggedIn"></v-divider>
         <v-btn text to='/owner' v-if="!this.$store.state.isLoggedIn" class="mr-n5">
          List your venue
         </v-btn>
@@ -67,19 +67,20 @@
         <v-list-item-group
           v-model="group"
           active-class="deep-purple--text text--accent-4"
+          class='hidden-sm-and-up'
         >
           <v-list-item>
-            <v-list-item-icon>
+            <!-- <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
+            </v-list-item-icon> -->
+            <v-list-item-title>List your venue</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-icon>
+            <!-- <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
+            </v-list-item-icon> -->
+            <v-list-item-title>Login</v-list-item-title>
           </v-list-item>
 
         </v-list-item-group>

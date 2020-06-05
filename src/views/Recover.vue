@@ -1,11 +1,11 @@
 <template>
-  <div class="login mt-9 mb-0 pa-3">
+  <div class="login mt-9 mb-0 pa-3 pt-12">
   <br>
   <br>
   <v-card
     :loading="loading"
     shaped
-    class="mx-auto my-12 mt-1 mb-9"
+    class="mx-auto my-12 mt-12 mb-9"
     max-width="374"
     sm='flat'
   >
@@ -20,17 +20,9 @@
           >Find Account</v-btn>
         </v-col>
     </v-card>
-           <v-card 
-           class="mx-auto my-12 mb-9 mt-n6" 
-           max-width="374"
-           text
-           flat
-           color="#f5f5f5"
-           >
-           <div class="text-center ma-2">
-          I Remeber my password <router-link to="/login" class="ml-0.5">Login</router-link>
+           <div class="text-center ma-2 mt-n3">
+          Don't have an Account? <router-link to="/owner" class="ml-0.5"> Join as an Owner</router-link>
           </div>
-          </v-card>
     <br>
   </div>
 </template>
@@ -85,9 +77,10 @@ import axios from 'axios'
 
 <style scoped>
 .login {
-  height: auto;
-  margin: 0;
-  background-color:#f5f5f5;
+  background: rgb(241,241,241);
+  background: linear-gradient(172deg, rgba(241,241,241,1) 54%, rgba(216,219,232,1) 76%); 
+  min-height: 100vh;
+  max-height: auto;
 }
 
 i {

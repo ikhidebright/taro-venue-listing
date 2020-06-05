@@ -69,18 +69,18 @@
           active-class="deep-purple--text text--accent-4"
           class='hidden-sm-and-up'
         >
-          <v-list-item>
+          <v-list-item to="/owner">
             <!-- <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon> -->
-            <v-list-item-title>List your venue</v-list-item-title>
+            <v-list-item-title>LIST YOUR VENUE</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item to="/login">
             <!-- <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon> -->
-            <v-list-item-title>Login</v-list-item-title>
+            <v-list-item-title>LOGIN</v-list-item-title>
           </v-list-item>
 
         </v-list-item-group>

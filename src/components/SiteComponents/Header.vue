@@ -25,7 +25,7 @@
         filled
         append-icon="search"
         label='Search venues, location'
-        class='mr-lg-12 mr-2'
+        class='mr-lg-12 mr-6 searchBar float-left'
         dense
         v-model='searchValue'
         single-line
@@ -106,3 +106,6 @@
     }
   }
 </script>
+
+<style scoped>
+</style>

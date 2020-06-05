@@ -1,5 +1,5 @@
 <template>
-  <v-carousel hide-delimiters :show-arrows="false" touchless="true">
+  <v-carousel hide-delimiters :show-arrows="false" touchless>
     <v-carousel-item
       src= "../assets/hero2.jpg"
     >

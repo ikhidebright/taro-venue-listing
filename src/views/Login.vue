@@ -5,24 +5,32 @@
   <v-card
     :loading="loading"
     shaped
-    class="mx-auto my-12 mt-6 mb-9"
+    class="mx-auto my-12 mt-6 mb-4"
     max-width="374"
     sm='flat'
   >
       <v-col cols="12" sm="12" md="12">
-<!-- <div class="text-center ma-2">
-      <i class="fas fa-user-circle text-center"></i>
-</div> -->
       <br>
+      <v-form
+        ref="form"
+        v-model="valid"
+        validation
+      >
           <v-text-field
             v-model="email"
-            label="E-mail"
+            :rules="emailRules"
+            label="Email Address"
+            color="#001F90"
+            type="email"
             outlined
+            required
           ></v-text-field>
            <v-text-field
             label="Password"
             v-model="password"
             outlined
+            required
+            :rules="passwordRules"
             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show2 ? 'text' : 'password'"
             @click:append="show2 = !show2"
@@ -38,87 +46,50 @@
         ></v-checkbox>
           <v-btn x-large color="#001F90" dark block @click='login'
           >Login</v-btn>
+          </v-form>
         </v-col>
-    </v-card>
-           <v-card 
-           class="mx-auto my-12 mb-9 mt-n6" 
-           max-width="374"
-           text
-           flat
-           color="#f5f5f5"
-           >
-           <div class="text-center ma-2">
+          </v-card>
+           <div class="text-center mt-1">
           Don't have an Account? <router-link to="/owner" class="ml-0.5"> Join as an Owner</router-link>
           </div>
-          </v-card>
     <br>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+/*eslint-disable*/
 
   export default {
     data: () => ({
       loading: false,
+      valid: false,
       show2: false,
       checkbox: false,
       loginerror: null,
       password: '',
       status: '',
       email: '',
-      id: ''
+      id: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      passwordRules: [
+        v => !!v || 'Password is Required'
+      ]
     }),
     methods: {
-      loginerrorfunc (message, show) {
-       let item = {
-            errormessagealert: message,
-            erroralert: show
-          }
-          this.$store.commit("setErrorAlert", item)
+       validate () {
+        this.$refs.form.validate()
       },
-
-      registersuccessfunc (message, show) {
-       let item = {
-            successmessagealert: message,
-            successalert: show
-          }
-          this.$store.commit("setSuccessAlert", item)
-      },
-
-
       login () {
-        this.loading = true
-        if (this.checkbox) {
-          localStorage.setItem("email", this.email)
-          localStorage.setItem("password", this.password)
-          localStorage.setItem("checkbox", this.checkbox)
+        this.validate()
+        if (!this.valid) {
+          // error 
         } else {
-          localStorage.removeItem("checkbox")
-          localStorage.removeItem("email")
-          localStorage.removeItem("password")
-          this.$store.commit("setLogin", null)
         }
-        axios.post(`${this.$store.state.url}/login`, {
-          email: this.email,
-          password: this.password
-        }, { crossdomain: true }, { withCredentials: true, credentials: 'include' }).then((res) => {
-          if (res.status == 201 && res.data.success === true) {
-          //  console.log(res)
-           this.status = res
-          } else {
-          this.status = null
-          this.loading = false
-          this.loginerrorfunc(res.data.message, true)
-          }
-        }).catch ((error) => {
-          this.status = null
-          this.loginerrorfunc(error, true)
-          this.loading = false
-        })
-      }
+      },
     },
-
     created () {
       if (localStorage.getItem("checkbox")) {
        let logindetails = {

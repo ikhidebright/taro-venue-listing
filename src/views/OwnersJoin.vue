@@ -70,7 +70,11 @@ more. We list professional event venues, conference
 centres, hotel halls, gardens, school fields, open 
 spaces, yachts, gallerias and convention centres.</p>
 </v-card>
-<v-form v-model="valid">
+      <v-form
+        ref="form"
+        v-model="valid"
+        validation
+      >
       <v-row>
         <v-col
           cols="12"
@@ -110,7 +114,6 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             :rules="[rules.email]"
             type="email"
-            :error-messages="emailerror"
             outlined
             required
           ></v-text-field>
@@ -126,7 +129,7 @@ spaces, yachts, gallerias and convention centres.</p>
             :disabled="loading"
             label="Password"
             type="password"
-            :rules="[rules.password]"
+            :rules="rules.passwordRules"
             outlined
             required
           ></v-text-field>
@@ -168,10 +171,11 @@ spaces, yachts, gallerias and convention centres.</p>
 <v-row>
 <v-col
           cols="12"
-          md="6"
+          md="12"
         >
 <v-checkbox
         v-model="agreement"
+        required
         :rules="[rules.required]"
         color="#001F90"
       >
@@ -192,11 +196,8 @@ spaces, yachts, gallerias and convention centres.</p>
       class="bt"
       large
       :loading="loading"
-      :disabled="loading || firstname.length < 2 || 
-                 lastname.length < 2 || phone.length < 11 || 
-                 phone.length > 11 || password != confirmpassword || agreement === false"
       color="#001F90"
-      @click="register(), loader = 'loading'"
+      @click="register"
     >
       Join now!
     </v-btn>
@@ -210,24 +211,29 @@ spaces, yachts, gallerias and convention centres.</p>
 </template>
 
 <script>
+/*eslint-disable*/
 import HeroAddVenue from '@/components/HeroAddVenue.vue'
-import axios from 'axios'
 
 export default {
     name: "OwnersJoin",
     data: () => ({
       loading: false,
+      valid: false,
       password: null,
       rules: {
-        counter: value => value.length <= 20 || 'Max 20 characters',
+        counter: value => value.length === 11 || 'Max 11 characters',
         email: value => {
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             return pattern.test(value) || 'Invalid e-mail'
           },
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
-        password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
-          'Password must contain an upper case letter, a numeric character, and a special character',
+        // password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
+        //   'Password must be a minimum of 8 characters long',
         required: v => !!v || 'This field is required',
+        passwordRules: [
+        v => !!v || 'Password is Required',
+        v => (v || '').length >= 8 || 'Password must be a minimum of 8 characters long'
+      ]
       },
       loader: null,
       firstname: '',
@@ -247,63 +253,20 @@ export default {
           this[l] = false
           }, 10000)
         this.loader = null
-      },
-
-      name () {
-        this.errorMessages = ''
-      },
-    },
-     
-    methods: {
-       joinerrorfunc (message, show) {
-       let item = {
-            errormessagealert: message,
-            erroralert: show
-          }
-          this.$store.commit("setErrorAlert", item)
-      },
-
-      clearfields () {
-      this.firstname =  ''
-      this.lastname =  ''
-      this.password = ''
-      this.message =  ''
-      this.agreement =  false
-      this.email =  ''
-      this.phone =  ''
-      this.confirmpassword =  ''
-      },
-
-      register () {
-        axios.post(`${this.$store.state.url}/join`, {
-          first_name: this.firstname,
-          last_name: this.lastname,
-          email: this.email,
-          password: this.password,
-          phone_number: this.phone
-        })
-        .then((res) => {
-          // console.log(res)
-          if (res.status === 200 && res.data.success === true) {
-            let logindetails = {
-              email: this.email,
-              password: this.password,
-              registered: true
-            }
-            this.$store.commit("setLogin", logindetails)
-            this.$router.push({path: 'login', query: {q: "success"}})
-            this.clearfields()
-          } else {
-            this.joinerrorfunc(res.data.message, true)
-            this.loader = null
-            this.loading = false
-          }
-        }).catch(function (error) {
-                this.joinerrorfunc(error, true)
-                this.loader = null
-                this.loading = false
-        })
       }
+    },
+     methods: {
+       validate () {
+        this.$refs.form.validate()
+      },
+      register () {
+        this.validate()
+        if (!this.valid) {
+          // error 
+        } else {
+          this.loader = 'loading'
+        }
+      },
     },
     components: {
         HeroAddVenue
@@ -317,6 +280,11 @@ export default {
 </script>
 
 <style scoped>
+
+.addvenue {
+  min-height: 100vh;
+  max-height: auto;
+}
 
 i {
   font-size: 6vmin;

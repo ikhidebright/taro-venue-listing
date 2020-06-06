@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import WordSwitch from '../Services/Num'
+
 export default {
   name: 'Terms',
   data () {
@@ -44,7 +46,7 @@ export default {
     }
   },
   mounted () {
-    setInterval(this.setOccupation, 3000)  
+    WordSwitch(['A Developer', 'Fire', 'War', 'the Liquid Metal', 'the Indaboski'], 0, 3000)  
   }
 }
 </script>

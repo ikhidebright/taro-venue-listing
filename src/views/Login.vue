@@ -52,7 +52,7 @@
         </v-col>
           </v-row>
            <div class="text-center mt-1">
-          Don't have an Account? <router-link to="/owner" class="ml-0.5"> Join as an Owner</router-link>
+          Don't have an Account? <router-link to="/owner" class="ml-0.5">Register</router-link>
           </div>
     <br>
   </div>

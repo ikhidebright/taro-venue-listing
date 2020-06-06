@@ -1,76 +1,107 @@
 <template>
-  <div class="login mt-9 mb-0 pa-3 pt-12">
+  <div class="login mt-9 mb-0 pa-3">
   <br>
   <br>
-  <v-card
-    :loading="loading"
-    shaped
-    class="mx-auto my-12 mt-12 mb-9"
+  <v-row
+    class="mx-auto my-12 mt-6 mb-4"
     max-width="374"
-    sm='flat'
   >
-      <v-col cols="12" sm="12" md="12">
+      <v-col cols="12" lg="4" sm="4" md="4" class="mx-auto">
+        <h2>Account Recovery</h2>
       <br>
+      <v-form
+        ref="form"
+        v-model="valid"
+        validation
+      >
           <v-text-field
             v-model="email"
-            label="Enter Account e-mail"
+            :rules="emailRules"
+            label="Email Address"
+            color="#001F90"
+            :disabled="loading"
+            type="email"
+            small
             outlined
+            required
           ></v-text-field>
-          <v-btn x-large color="#001F90" dark block @click='login'
-          >Find Account</v-btn>
+          <v-btn large :loading="loading" color="#001F90" dark block @click='login'
+          >SEND PASSWORD RESET LINK</v-btn>
+          </v-form>
         </v-col>
-    </v-card>
-           <div class="text-center ma-2 mt-n3">
-          Don't have an Account? <router-link to="/owner" class="ml-0.5"> Join as an Owner</router-link>
+          </v-row>
+           <div class="text-center mt-1">
+          Don't have an Account? <router-link to="/owner" class="ml-0.5">Register</router-link>
           </div>
     <br>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+/*eslint-disable*/
 
   export default {
     data: () => ({
       loading: false,
+      valid: false,
+      show2: false,
+      checkbox: false,
+      loginerror: null,
+      password: '',
+      status: '',
       email: '',
+      id: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      passwordRules: [
+        v => !!v || 'Password is Required'
+      ]
     }),
     methods: {
-      loginerrorfunc (message, show) {
-       let item = {
-            errormessagealert: message,
-            erroralert: show
-          }
-          this.$store.commit("setErrorAlert", item)
+       validate () {
+        this.$refs.form.validate()
       },
-
-      emailsentsuccessfunc (message, show) {
-       let item = {
-            dismissablemessage: message,
-            dismissablealert: show
-          }
-          this.$store.commit("setDismissableAlert", item)
-      },
-
       login () {
-        this.loading = true
-        axios.post(`${this.$store.state.url}/recover`, {
-          email: this.email
-        }).then((res) => {
-          if (res.status == 200 && res.data.success === true) {
-            this.loading = false
-            this.email = ''
-            this.emailsentsuccessfunc(res.data.message, true)
+        this.validate()
+        if (!this.valid) {
+          // error 
+        } else {
+          this.loading = true
+        }
+      },
+    },
+    created () {
+      if (localStorage.getItem("checkbox")) {
+       let logindetails = {
+       email: localStorage.getItem("email"),
+       password: localStorage.getItem("password"),
+       checkbox: localStorage.getItem("checkbox")
+     } 
+        this.$store.commit("setLogin", logindetails)
+        this.password = this.$store.state.logindetails.password
+        this.email = this.$store.state.logindetails.email
+        this.checkbox = this.$store.state.logindetails.checkbox
+    }
+        this.password = this.$store.state.logindetails.password
+        this.email = this.$store.state.logindetails.email
+  },
+  watch: {
+      loading (val) {
+        val && setTimeout(() => {
+          if (this.status.status === 201 && this.status.data.success === true) {
+          this.loading = false
+          this.$store.commit("setUser", this.status.data.result)
+          let getOwnerVenues = this.$store.getters.myvenues
+          getOwnerVenues.then(x => this.$store.commit("setLoggedinOwnerVenues", x.data.result))
+          this.$router.push('/dashboard')
           } else {
-          this.loading = false
-          this.loginerrorfunc(res.data.message, true)
+             this.status = null
+             this.loading = false
           }
-        }).catch ((error) => {
-          this.status = null
-          this.loginerrorfunc(error, true)
-          this.loading = false
-        })
-      }
+        }, 10000)
+      },
     },
 }
 </script>
